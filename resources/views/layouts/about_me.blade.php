@@ -10,11 +10,11 @@
         <div class="blog-sidebar-widget blog-bor">
             <h2 class="blog-text-center blog-title"><span>Contact ME</span></h2>
             <p>
-                <a href=""><span class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
-                <a href=""><span class="am-icon-github am-icon-fw blog-icon"></span></a>
-                <a href=""><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
-                <a href=""><span class="am-icon-reddit am-icon-fw blog-icon"></span></a>
-                <a href=""><span class="am-icon-weixin am-icon-fw blog-icon"></span></a>
+                <a href="javascript:;"><span data-am-popover="{content: 'MomentD的 QQ-3484368175' ,trigger: 'hover focus'}" class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
+                <a href="https://github.com/MomentD" target="_blank"><span data-am-popover="{content: 'MomentD的 Github' ,trigger: 'hover focus'}" class="am-icon-github am-icon-fw blog-icon"></span></a>
+                <a href="javascript:;"><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
+                <a href="https://gitee.com/fanrenos" target="_blank"><span data-am-popover="{content: 'MomentD的 码云' ,trigger: 'hover focus'}" class="am-icon-reddit am-icon-fw blog-icon"></span></a>
+                <a href="javascript:;"><span class="am-icon-weixin am-icon-fw blog-icon"></span></a>
             </p>
         </div>
         <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
