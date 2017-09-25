@@ -1,0 +1,6 @@
+.img_showbox{width:60px;height: 60px;border:solid 1px #ececec;margin-right:10px;margin-bottom:10px;float:left;margin-top:10px;position:relative;box-sizing: border-box;overflow: hidden;}
+.img_showbox img{position: absolute;margin:auto;left:50%;top:50%;max-height:100%;margin-left:-50%;margin-top:-30px;width: 100%;}
+input.form_upload_file{display: none;}
+.del_upload_file,.uploading{display: block;width:100%;height:100%;box-sizing:border-box;text-align: center;background-color: rgba(0,0,0,0.5);color:#fff;position: absolute;top:100%;left:0px;padding-top:40%;transition: all 0.5s;cursor: pointer;}
+.uploading{top:0%;opacity: 1;}
+.img_showbox:hover .del_upload_file{top:0%;}
