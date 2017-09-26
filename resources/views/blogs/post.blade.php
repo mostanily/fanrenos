@@ -42,9 +42,9 @@
                     {!! join(', ', $post->tagLinks()) !!}
                 @endif
                 <hr>
-                <a href=""><span class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
-                <a href=""><span class="am-icon-wechat am-icon-fw blog-icon"></span></a>
-                <a href=""><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
+                <a href="javascript:;"><span data-am-popover="{content: 'MomentD的 QQ-3484368175' ,trigger: 'hover focus'}" class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
+                <a href="https://github.com/MomentD" target="_blank"><span data-am-popover="{content: 'MomentD的 Github' ,trigger: 'hover focus'}" class="am-icon-github am-icon-fw blog-icon"></span></a>
+                <a href="javascript:;"><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
             </div>
         </div>
         <hr>
