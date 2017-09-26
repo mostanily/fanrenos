@@ -91,6 +91,7 @@ class LoginController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->website = $request->get('website',NULL);
             $user->password = bcrypt($request->password);
             $user->status = 1;
             $user->confirm_code = str_random(64);

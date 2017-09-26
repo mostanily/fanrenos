@@ -18,8 +18,13 @@
                 </div>
                 <br>
                 <div class="am-input-group am-radius am-animation-slide-left">       
-                    <input type="email" name="email" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱" required/>
+                    <input type="email" name="email" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱请放心填写，不会公布也不会有广告" required/>
                     <span class="am-input-group-label log-icon am-radius"><i class="am-icon-envelope am-icon-sm am-icon-fw"></i></span>
+                </div>
+                <br>
+                <div class="am-input-group am-radius am-animation-slide-left">       
+                    <input type="text" name="website" class="am-radius" data-validation-message="没有可以不填" placeholder="能够留下您的网站更好(*￣︶￣)，请带http前缀"/>
+                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-globe am-icon-sm am-icon-fw"></i></span>
                 </div>
                 <br>
                 <div class="am-input-group am-animation-slide-left log-animation-delay">       
