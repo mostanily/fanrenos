@@ -24,6 +24,7 @@ database目录下的`test.sql`文件（￣︶￣）↗。
 目前存在的问题，后端的 分类管理及文件管理 因为还没想好怎么弄，所以这两个模块还没开发，前端的相册功能还缺少相应的后端相册管理模块，这个还没来得及做，等做完了，再来更新下。
 
 更新下音乐模块部分
+
 [网页音乐播放教程之getid3类音频解析](http://www.fanrenos.com/blog/wang-ye-yin-le-bo-fang-jiao-cheng-zhi-getid3-lei-yin-pin-jie-xi)。
 
 [网页音乐播放教程之获取指定音频文件](http://www.fanrenos.com/blog/wang-ye-yin-le-bo-fang-jiao-cheng-zhi-huo-qu-zhi-ding-yin-pin-wen-jian)
