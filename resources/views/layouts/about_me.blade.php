@@ -34,4 +34,10 @@
                 <li><a href="#">每个人都有一道伤口， 或深或浅，盖上布，以为不存在。</a></li>
             </ul>
         </div>
+        <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>友链</span></h2>
+            <ul class="am-list">
+                <li><a href="http://www.fanrenos.com">凡喵</a></li>
+            </ul>
+        </div>
     </div>

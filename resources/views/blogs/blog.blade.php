@@ -45,6 +45,7 @@
                 <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
                     <span>Post By</span>
                     <span><a href="javascript:;" class="blog-color"> @Mostanily &nbsp;</a></span>
+                    <span data-am-popover="{content: '创作于 {{$post->created_at}}' ,trigger: 'hover focus'}">{{$post->created_at}}</span>
                     @if($post->view_count>0)
                         <span data-am-popover="{content: '浏览' ,trigger: 'hover focus'}" style="margin-left: 20px;"><i class="am-icon-eye"></i> {{$post->view_count}} </span>
                     @endif

@@ -18,7 +18,8 @@
                 <p class="am-article-meta blog-text-center">
                     <span>Post By</span>-
                     <span><a href="javascript:;" class="blog-color">@Mostanily &nbsp;</a></span>-
-                    <span data-am-popover="{content: '发布于 {{$post->published_at}}' ,trigger: 'hover focus'}">On {{ $post->published_at->format('F j, Y') }}</span>
+                    <span data-am-popover="{content: '发布于 {{$post->published_at}}' ,trigger: 'hover focus'}">On {{ $post->published_at->format('F j, Y') }} </span>
+                    <span data-am-popover="{content: '创作于 {{$post->created_at}}' ,trigger: 'hover focus'}">Created on {{$post->created_at}}</span>
                     @if($post->view_count>0)
                         <span data-am-popover="{content: '预览' ,trigger: 'hover focus'}" style="margin-left: 20px;"><i class="am-icon-eye"></i> {{$post->view_count}} </span>
                     @endif
