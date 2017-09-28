@@ -1,11 +1,9 @@
 $(window).load(function() {
-	//loadBG();
 	fPlay();
 });
 $(function() {
 	/*显示歌词部分*/
 	var scrollt = 0;
-	//var tflag = 0; //存放时间和歌词的数组的下标
 	var lytext = new Array(); //放存汉字的歌词 
 	var lytime = new Array(); //存放时间
 	var line = 0;
@@ -131,10 +129,6 @@ $(function() {
 		$(".songPlayer").html(singerName);
 		/*换右侧图片*/
 		$("#canvas1").attr("src",songImage);
-		// $("#canvas1").load(function(){
-		// 	loadBG();
-		// });
-		//setTimeout('loadBG()',100);
 		$(".blur").css("opacity", "0");
 		$(".blur").animate({
 			opacity: "1"
@@ -296,7 +290,6 @@ function show(t, lytext, lytime,scrollh) //显示歌词
 		for (var k = 0; k < lytext.length; k++) {
 			if (lytime[k] <= t && t < lytime[k + 1]) {
 				scrollh = k * 30; //让当前的滚动条的顶部改变一行的高度 
-				//scrollBar(scrollh);
 				div1.innerHTML += "<font color=#f60 style=font-weight:bold>" + lytext[k] + "</font><br>";
 			} else if (t < lytime[lytime.length - 1]){
 				div1.innerHTML += lytext[k] + "<br>";
@@ -319,21 +312,8 @@ function show(t, lytext, lytime,scrollh) //显示歌词
 	if (document.getElementById("lyr").scrollTop >= scrollh + 50){
 		document.getElementById("lyr").scrollTop -= 10;
 	}
-	//scrollBar(scrollh);
 }
-
-// function scrollBar(scrollh) //设置滚动条的滚动 
-// {
-// 	if (document.getElementById("lyr").scrollTop <= scrollh){
-// 		document.getElementById("lyr").scrollTop += 1;
-// 	}
-// 	if (document.getElementById("lyr").scrollTop >= scrollh + 50){
-// 		document.getElementById("lyr").scrollTop -= 1;
-// 	}
-// 	//window.setTimeout("scrollBar()", 10);
-// 	window.setTimeout(scrollBar,10,scrollh);
-// }
-
+//此方法暂时无用，内容已被提出
 function getReady(songIndex,lytext,lytime) //在显示歌词前做好准备工作 
 {
 	var scrollh = 0;
@@ -343,7 +323,7 @@ function getReady(songIndex,lytext,lytime) //在显示歌词前做好准备工�
 		$("#lry").html("本歌暂无歌词！");
 	};
 	var arrly = ly.split("."); //转化成数组
-	//alert(arrly[1]);
+
 	var tflag = 0;
 	for (var i = 0; i < lytext.length; i++) {
 		lytext[i] = "";
@@ -370,50 +350,8 @@ function getReady(songIndex,lytext,lytime) //在显示歌词前做好准备工�
 				tflag++;
 			}
 		}
-		//sToArray(arrly[i],lytext,lytime);
 	}
-	//sortAr(lytime,lytext);
 	//按时间重新排序时间和歌词的数组 
-	var temp = null;
-	var temp1 = null;
-	for (var k = 0; k < lytime.length; k++) {
-		for (var j = 0; j < lytime.length - k; j++) {
-			if (lytime[j] > lytime[j + 1]) {
-				temp = lytime[j];
-				temp1 = lytext[j];
-				lytime[j] = lytime[j + 1];
-				lytext[j] = lytext[j + 1];
-				lytime[j + 1] = temp;
-				lytext[j + 1] = temp1;
-			}
-		}
-	}
-	scrollBar(scrollh);
-}
-
-function sToArray(str) //解析如“[02:02][00:24]没想到是你”的字符串前放入数组
-{
-
-	var left = 0; //"["的个数
-	var leftAr = new Array();
-	for (var k = 0; k < str.length; k++) {
-		if (str.charAt(k) == "[") {
-			leftAr[left] = k;
-			left++;
-		}
-	}
-	if (left != 0) {
-		for (var i = 0; i < leftAr.length; i++) {
-			lytext[tflag] = str.substring(str.lastIndexOf("]") + 1); //放歌词 
-			lytime[tflag] = conSeconds(str.substring(leftAr[i] + 1, leftAr[i] + 6)); //放时间
-			tflag++;
-		}
-	}
-	//alert(str.substring(leftAr[0]+1,leftAr[0]+6)); 
-}
-
-function sortAr() //按时间重新排序时间和歌词的数组 
-{
 	var temp = null;
 	var temp1 = null;
 	for (var k = 0; k < lytime.length; k++) {
