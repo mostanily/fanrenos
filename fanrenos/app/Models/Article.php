@@ -130,12 +130,6 @@ class Article extends Model
         $pinyin = app('pinyin')->get($value,'utf-8');
 
         $this->setUniqueSlug($pinyin, '');
-
-        // if (!config('services.youdao.key') || !config('services.youdao.from')) {
-        //     $this->setUniqueSlug($value, '');
-        // } else {
-        //     $this->attributes['slug'] = translug($value);
-        // }
     }
 
     /**
@@ -146,11 +140,6 @@ class Article extends Model
      */
     public function setUniqueSlug($value, $extra) {
         $slug = str_slug($value.'-'.$extra);
-        // if (static::whereSlug($slug)->exists()) {
-        //     $this->setUniqueSlug($slug, (int) $extra + 1);
-        //     return;
-        // }
-
         $this->attributes['slug'] = $slug;
     }
 
@@ -266,7 +255,8 @@ class Article extends Model
                     }
                     if(in_array($auth_uid, $unlike_user)){
                         $unlike_class = 'am-text-danger';
-                        $unlike_content_class = 'downvoted';//在mydefault.css文件中
+                        //在mydefault.css文件中
+                        $unlike_content_class = 'downvoted';
                     }
 
                     $is_has_comment = '<a class="comment_reply" data-comment="'.$author_name.'" data-comment-name="'.$comment->user->name.'" href="javascript:;" title="回复"><i class="am-icon-mail-reply am-icon-md"></i></a>';

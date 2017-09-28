@@ -8,20 +8,21 @@ use Hash;
 use Validator;
 use App\User;
 use App\Image\ImageRepository;
-//use App\Notifications\FollowedUser;
 use App\Http\Requests;
 
 class UserController extends Controller
 {
     public function __construct($path = 'avatar/')
     {
-        //$this->date = date('Y-m-d', time());
-        $this->upload_path = config('blog.base_size_path') . $path;//显示服务器的本地目录
-        //$this->upload_path = public_path('uploads/'). $path;//本地开发的本地目录，部署到线上时，需要修改
-        //$this->upload_ftp_path = $remote;//需要远程上传才会用到该参数
+        if(isWindows()){
+            $this->upload_path = public_path('uploads/'). $path;
+        }else{
+           $this->upload_path = config('blog.base_size_path') . $path; 
+       }
 
         $this->size = config('img_upload.size');
-        $this->path_size = getSizePath($this->size);//对尺寸数据的一点处理，方法会在文末贴出
+        //对尺寸数据的一点处理
+        $this->path_size = getSizePath($this->size);
 
         $this->user = new User;
     }
@@ -34,7 +35,6 @@ class UserController extends Controller
         if (Auth::check()) {
             return redirect()->to('/user/' . Auth::user()->name);
         }
-
         return redirect()->to('/login');
     }
 
@@ -46,7 +46,7 @@ class UserController extends Controller
     public function showUserInfo($name){
         $user = $this->user->where('name',$name)->first();
 
-        if (!isset($user)) abort(404);
+        if (!isset($user)) {abort(404)};
 
         $comments = $user->comments->take(10);
 
@@ -69,7 +69,7 @@ class UserController extends Controller
     {
         $user = $this->user->where('name',$name)->first();
 
-        if (!isset($user)) abort(404);
+        if (!isset($user)) {abort(404)};
 
         $followings = $user->followings;
 
@@ -92,7 +92,7 @@ class UserController extends Controller
     {
         $user = $this->user->where('name',$name)->first();
 
-        if (!isset($user)) abort(404);
+        if (!isset($user)) {abort(404)};
 
         $comments = $user->comments;
 
@@ -119,8 +119,6 @@ class UserController extends Controller
             Auth::user()->unfollow($id);
         } else {
             Auth::user()->follow($id);
-
-            //$user->notify(new FollowedUser(Auth::user()));//用户被关注时，发个通知邮件给用户（被关注）
         }
 
         return redirect()->back();
@@ -156,10 +154,8 @@ class UserController extends Controller
     public function updateUserProfile(Request $request, $id)
     {
         $input = $request->except(['name', 'email']);
-        //dd($input);
-        $user = $this->user->findOrFail($id);
 
-        //$this->authorize('update', $user);
+        $user = $this->user->findOrFail($id);
 
         $user->update($input);
 

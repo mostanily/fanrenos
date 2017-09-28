@@ -45,7 +45,6 @@ class PostCreateRequest extends FormRequest
             'category_id' => $this->category_id,
             'title' => $this->title,
             'subtitle' => $this->subtitle,
-            //'page_image' => $this->page_image,
             'content' => $this->get('content'),
             'meta_description' => $this->meta_description,
             'is_draft' => (bool)$this->is_draft,

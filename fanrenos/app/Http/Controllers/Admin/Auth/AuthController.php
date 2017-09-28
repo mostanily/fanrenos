@@ -51,7 +51,7 @@ class AuthController extends Controller
     //登录页面验证
     protected function validateLogin(array $data)
     {
-        //dd($data);
+
         return Validator::make($data, [
             'email' => 'required|email|max:255',
             'password' => 'required|min:6',

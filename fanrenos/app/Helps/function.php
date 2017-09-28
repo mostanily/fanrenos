@@ -109,28 +109,19 @@
      */
     function Filter_word( $str,$reply_author,$auth_user_url)
     {
-        //$str = strtolower($str); //待检测字符串
-        //排除laravel关键词
-        // $is_need = false;
-        // if(stripos($str,'laravel')){
-        //     $is_need = true;
-        //     $str = str_replace('laravel','@@@',$str);
-        // }
         //回复型内容，需要给 @author 加个a标签
         //修饰符i表示不区分大小写进行匹配
         $is_need = false;
         if(!empty($reply_author)){
             $str = preg_replace('/'.$reply_author.'/i','<a href="#link-to-user">'.$reply_author.' </a>',$str);
             $is_need = true;
-            //$str = str_replace($reply_author,'<a href="javascript:;">'.$reply_author.'</a>',$str);
         }
         $path = config('blog.mgc');
         $fileArr = config('blog.mgc_txt');
 
         foreach ($fileArr as $file) {
             $fullPath = $path.$file;
-            $word = checkOneFile($fullPath);//每个词库都需要检查一遍
-            //dd($word);
+            $word = checkOneFile($fullPath);
             $str = preg_replace('/'.$word.'/', '***', $str);
         }
 
@@ -151,9 +142,7 @@
             return false;
         }
 
-        $word = preg_replace("/[1,2,3]\r\n|\r\n/i", '|', $words);
-
-        return $word;
+        return preg_replace("/[1,2,3]\r\n|\r\n/i", '|', $words);
     }
 
     /**
@@ -169,7 +158,7 @@
         $new_words = preg_replace("/@+([0-9]{1,2})/",'',$new_words);
         $word = str_replace(array("\n","\r"),".",$new_words);
         $word_arr = array();
-        foreach (explode('.',$word) as $key => $value) {
+        foreach (explode('.',$word) as $value) {
             if(!empty($value)){
                 $word_arr[] = $value;
             }
@@ -184,7 +173,7 @@
      */
     function checkdir($path,$path_size=array()){
         if(!empty($path_size)){
-            foreach ($path_size as $key => $size) {
+            foreach ($path_size as $size) {
                 if(!is_dir($path.$size)){
                     @mkdir($path.$size,0777);
                 }
@@ -228,8 +217,8 @@
      */
     function createRandomString($string){
         $str = $string.mt_rand(100000,999999);
-        $name = mb_substr(md5($str),0,12);
-        return $name;
+
+        return mb_substr(md5($str),0,12);
     }
 
     /**
@@ -255,7 +244,7 @@
             $date_path = $date.'/';
         }
         $size_path = array();
-        foreach ($size as $key => $value) {
+        foreach ($size as $value) {
             $size_path[$value] = $value.'x'.$value.'/'.$date_path;
         }
         return $size_path;
@@ -272,16 +261,14 @@
     function getSqlSizePath($path,$size,$pic_info){
         $new_path = array();
         if(is_array($pic_info)){
-            foreach ($size as $key => $value) {
-                foreach ($pic_info as $k => $v) {
+            foreach ($size as $value) {
+                foreach ($pic_info as $v) {
                     $new_path['local'][] = $path.$value.'x'.$value.'/'.$v;
-                    //$new_path['ftp'][] = $ftp_path.$value.'x'.$value.'/'.$v;
                 }
             }
         }else{
-            foreach ($size as $key => $value) {
+            foreach ($size as $value) {
                 $new_path['local'][] = $path.$value.'x'.$value.'/'.$pic_info;
-                //$new_path['ftp'][] = $ftp_path.$value.'x'.$value.'/'.$pic_info;
             }
         }
         return $new_path;

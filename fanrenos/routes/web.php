@@ -21,7 +21,6 @@ Route::post('/logout', 'Auth\LoginController@logout');
 // 发送密码重置链接路由（邮箱）
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 // 密码重置路由（邮箱）
-//Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 
@@ -54,8 +53,6 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/profile/avatar','UserController@UpdateUserProfileAvatar');
         Route::put('/profile/{id}', 'UserController@updateUserProfile');
         Route::post('/follow/{id}', 'UserController@doFollow');
-        //Route::get('notification', 'UserController@notifications');
-        //Route::post('notification', 'UserController@markAsRead');
     });
 
     Route::group(['prefix' => '{name}'], function () {

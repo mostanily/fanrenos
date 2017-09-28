@@ -162,7 +162,7 @@ class ImageRepository{
      */
     public function deleteFile($filename,$path){
         if(is_array($filename)){
-            foreach ($filename as $key => $value) {
+            foreach ($filename as $value) {
                 $full_path = $path . $value;
                 if (File::exists($full_path)){
                     File::delete( $full_path);
@@ -208,9 +208,6 @@ class ImageRepository{
                         ->resize($new_w_h[0],$new_w_h[1])
                         ->save($upload_path.$v.$filenameExt );
 
-            // if($image){
-            //     $file_name[$k][] = $upload_path.$v.$filenameExt;//保存每个图片路径，用于图片批量上传到服务器
-            // }
         }
         $filename_arr = $filenameExt;//返回的图片信息，用于存入数据库中
         //上传成功，删除最开始的原始图
@@ -227,7 +224,6 @@ class ImageRepository{
                 File::delete($value);
             }
         }
-        //delpic($del_path['ftp']);
         return true;
     }
 }

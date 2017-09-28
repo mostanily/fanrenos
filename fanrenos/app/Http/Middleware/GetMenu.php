@@ -16,7 +16,6 @@ class GetMenu
      */
     public function handle($request, Closure $next)
     {
-        //view()->share('comData',$this->getMenu());
         $request->attributes->set('comData_menu', $this->getMenu());
         return $next($request);
     }
@@ -27,7 +26,8 @@ class GetMenu
      */
     function getMenu()
     {
-        $http_path = \URL::getRequest()->path();//route路由（不包含?后面的参数）
+        //route路由（不包含?后面的参数）
+        $http_path = \URL::getRequest()->path();
         $path_arr = explode('/', $http_path);
         $count = count($path_arr);
         $path = implode('.', $path_arr);
@@ -43,8 +43,6 @@ class GetMenu
                 $is_recycle_route = true;
             }
         }
-        
-        //$route = $request->getRequestUri();//整个路由（仅仅不包含域名）
         
         $side_nav = config('menu');//获取菜单配置文件
         //找出当前路径对应的菜单，并设置active状态

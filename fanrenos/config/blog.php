@@ -1,13 +1,5 @@
 <?php
 return [
-    // 'title' => 'My Blog',
-    // 'posts_per_page' => 5,
-    // 'uploads' => [
-    //     'storage' => 'local',
-    //     'webpath' => '/uploads',
-    // ],
-    // 'page_image' => 't1.jpg',//默认图
-
     'name' => "不惹人嫌的废喵",
     'title' => "凡喵",
     'subtitle' => 'http://fanrenos.com',

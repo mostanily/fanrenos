@@ -60,9 +60,6 @@
             <div id="preloader"> 
                 <img src="{{asset('imgs/ajax-loader_dark.gif')}}" width="32" height="32" align="absmiddle" />加载中...
             </div> 
-            {{-- <div id="arrow_indicator"> 
-                <img src="{{asset('imgs/sw_arrow_indicator.png')}}" width="50" height="50" />
-            </div>  --}}
             <div id="nextimage_tip">点击加载下一张</div> 
         </div>
     </div>

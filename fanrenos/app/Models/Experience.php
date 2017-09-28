@@ -20,8 +20,6 @@ class Experience extends Model
      */
     public function setContentRawAttribute($value)
     {
-        //$markdown = new Markdown();
-
         $this->attributes['content_raw'] = $value;
         $this->attributes['content_html'] = Markdown::convertToHtml($value);
     }

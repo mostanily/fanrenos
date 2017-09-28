@@ -50,7 +50,6 @@ class Tag extends Model
                 'tag' => $tag,
                 'title' => $tag,
                 'meta_description' => '',
-                //'reverse_direction' => false,
             ]);
         }
     }

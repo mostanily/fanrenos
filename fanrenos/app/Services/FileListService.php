@@ -14,8 +14,6 @@ class FileListService
     public function getList($path)
     {
         /* 获取文件列表 */
-        //因文件或图片，不是在同一个项目中，因此不需要public_path函数
-        //$path = public_path()  .'/'. ltrim($this->path,'/');
         $path = isWindows() ? ltrim($path,'/') : $path;
 
         $files = $this->getfiles($path, $this->fileAllowAudio);
@@ -35,11 +33,15 @@ class FileListService
         }
         $new_list = array();
         foreach ($list as $key => $value) {
-            $unified_name = $value['name'];//原统一文件名，音乐名，专辑图片名，歌词名
+            //原统一文件名，音乐名，专辑图片名，歌词名
+            $unified_name = $value['name'];
+
             $audio_pfix = $value['pfix'];
             $image_pfix = '.png';
             $lrc_pfix = '.lrc';
-            $new_unified_name = createRandomString($unified_name);//生成的新的统一名称（主要是为了去掉中文名称）
+
+            //生成的新的统一名称（主要是为了去掉中文名称）
+            $new_unified_name = createRandomString($unified_name);
             $unified_name=iconv('UTF-8','GBK//IGNORE',$unified_name);
 
             //判断每个音乐是否存在对应歌词及图片
@@ -56,7 +58,8 @@ class FileListService
             }
             
             $new_file_name = $new_unified_name.'.'.$audio_pfix;
-            rename($path.$unified_name.'.'.$audio_pfix,$path.$new_file_name);//重命名音乐名称
+            //重命名音乐名称
+            rename($path.$unified_name.'.'.$audio_pfix,$path.$new_file_name);
 
             $new_list[] = ['name'=>$new_file_name,'lrc'=>$lrc,'image'=>$image,'unified_name'=>$new_unified_name];
         }

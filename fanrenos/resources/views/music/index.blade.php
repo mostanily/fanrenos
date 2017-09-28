@@ -119,7 +119,6 @@
                     </div>
                 </div>
                 <div class="vol">
-                    {{-- <a href="#" class="pinBtn"></a> --}}
                     <div class="volm">
                         <div class="volSpeaker"></div>
                         <div class="volControl">

@@ -55,14 +55,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <![endif]-->
 
     {{--dataTabels--}}
-    {{--<link href="/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet">--}}
     <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet">
 
     {{--loding--}}
     <link href="{{asset('/dist/css/load/load.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/upload-img.css')}}" rel="stylesheet">
-    {{-- {!! UEditor::css() !!} --}}
     @yield('css')
 </head>
 <!--
@@ -91,22 +89,7 @@ BODY TAG OPTIONS:
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            {{--<h1>
-              @yield('pageHeader')
-              <small>@yield('pageDesc')</small>
-            </h1>
-            <ol class="breadcrumb">
-              <li><a href="/admin"><i class="fa fa-dashboard"></i> 控制面板</a></li>
-              <li class="active">Here</li>
-            </ol>--}}
-            <h6>
-              {{--  @if(Request::is('admin/log-viewer*'))
-                    仪表盘
-                @else
-                    {!! Breadcrumbs::render(Route::currentRouteName()) !!}
-                @endif--}}
-
-            </h6>
+            <h6></h6>
         </section>
 
         <!-- Main content -->
@@ -294,7 +277,6 @@ BODY TAG OPTIONS:
 <script src="{{asset('/plugins/datatables/dataTables.bootstrap.js')}}"></script>
 <script src="{{asset('/plugins/tokenfield/dist/bootstrap-tokenfield.min.js')}}"></script>
 <script src="{{asset('/dist/js/common.js')}}"></script>
-{{-- {!! UEditor::js() !!} --}}
 <script src="{{asset('js/content.min.js?v=1.0.0')}}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

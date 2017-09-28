@@ -4,7 +4,6 @@
 <div class="container profile">
     <div class="row">
         <div class="col-md-2 col-md-offset-1">
-            {{-- <avatar src="{{ avatar_image($user->avatar,200) }}"></avatar> --}}
             <div class="am-form-group">
                 <img class="avatar" src="{{ asset(avatar_image($user->avatar,200)) }}" width="140"> 
                 <a style="margin-top: 10px;font-size: 14px;" class="am-btn am-btn-success am-round col-md-10" href="{{url('/user/profile/avatar')}}">修改头像</a>

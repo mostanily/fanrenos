@@ -65,9 +65,4 @@
     </div>
 @stop
 @section('js')
-{{-- 暂时不做图标统计 --}}
-<!-- Sparkline -->
-{{-- <script src="{{asset('js/plugins/sparkline/jquery.sparkline.min.js')}}"></script> --}}
-<!-- Peity -->
-{{-- <script src="{{asset('js/plugins/peity/jquery.peity.min.js')}}"></script> --}}
 @stop

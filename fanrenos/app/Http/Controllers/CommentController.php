@@ -44,7 +44,7 @@ class CommentController extends Controller
             'commentable_id' => $request->get('commentable_id'),
             'commentable_type' => 'articles'
         ];
-        //dd($data);
+
         $res = $this->comment->create($data);
 
         $slug = $request->get('commentable_slug');
@@ -119,7 +119,8 @@ class CommentController extends Controller
                     }
                     if(in_array($auth_uid, $unlike_user)){
                         $unlike_class = 'am-text-danger';
-                        $unlike_content_class = 'downvoted';//在mydefault.css文件中
+                        //在mydefault.css文件中
+                        $unlike_content_class = 'downvoted';
                     }
 
                     $is_has_comment = '<a class="comment_reply" data-comment="'.$author_name.'" data-comment-name="'.$comment->user->name.'" href="javascript:;" title="回复"><i class="am-icon-mail-reply am-icon-md"></i></a>';

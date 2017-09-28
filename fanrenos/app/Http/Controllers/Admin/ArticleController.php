@@ -17,8 +17,6 @@ use App\Http\Controllers\Controller;
 class ArticleController extends Controller
 {
     protected $fieldList = [
-        //'user_id' => '',
-        //'last_user_id' => '',
         'category_id' => '',
         'title' => '',
         'subtitle' => '',
@@ -38,7 +36,6 @@ class ArticleController extends Controller
         $this->date = date('Y-m-d', time());
         $this->path = $path;
         $this->upload_path = config('blog.base_size_path') . $path.$this->date.'/';
-        //$this->call_back_path = config('blog.uploads.webpath').'/'.$path.$this->date.'/';
         $this->del_path = config('blog.base_size_path') . $path;
         $this->article = new Article;
     }
@@ -157,7 +154,7 @@ class ArticleController extends Controller
                 $fields['tags'][] = $v['tag'];
             }
         }
-        //dd($fields['tags']);
+
         $all_tag = Tag::pluck('tag');
         $all_category = Category::all();
         $data = array();
@@ -182,7 +179,7 @@ class ArticleController extends Controller
         $post = $this->article->findOrFail($id);
 
         $request_data = $request->postFillData();
-        $old_page_image = $post->page_image;//old图片
+        $old_page_image = $post->page_image;
         if($request->hasFile('page_image')){
 
             $img = $request->file('page_image');
@@ -224,7 +221,7 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $post = $this->article->findOrFail($id);
-        //$post->tags()->detach();
+
         $post->delete();
 
         return redirect()

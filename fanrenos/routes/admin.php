@@ -58,7 +58,6 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     Route::get('/music/deal_image',['as'=>'dashboard.music.deal_image','uses'=>'MusicController@dealMusicImage']);//批量处理专辑封面图中的大图
     Route::resource('music', 'MusicController', ['names' => ['destroy'=>'dashboard.link.destroy']]);
 
-    //Route::get('/discussion/index', ['as' => 'dashboard.discussion.index', 'uses' => 'AdminController@index']);
     Route::get('/file/index', ['as' => 'dashboard.file.index', 'uses' => 'AdminController@index']);
     Route::get('/category/index', ['as' => 'dashboard.category.index', 'uses' => 'AdminController@index']);
     Route::get('/category/create', ['as' => 'dashboard.category.create', 'uses' => 'AdminController@index']);

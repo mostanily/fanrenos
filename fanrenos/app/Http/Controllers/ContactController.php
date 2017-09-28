@@ -9,9 +9,6 @@ use App\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
-    // function index(){
-    //     return view('blogs.contact');
-    // }
     /**
      * 显示表单
      *

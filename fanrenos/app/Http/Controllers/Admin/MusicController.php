@@ -14,11 +14,13 @@ class MusicController extends Controller
 {
     public function __construct($path='songs/')
     {
-        $this->path_new = storage_path('app/public').'/'.$path;//读取新的音乐文件，新文件上传位置
+        //读取新的音乐文件，新文件上传位置
+        $this->path_new = storage_path('app/public').'/'.$path;
+        //播放资源存放路径
         if(isWindows()){
-            $this->path_play = public_path().config('blog.uploads.webpath').'/'.$path;//播放资源存放路径 
+            $this->path_play = public_path().config('blog.uploads.webpath').'/'.$path; 
         }else{
-            $this->path_play = config('blog.base_size_path').$path;//播放资源存放路径 
+            $this->path_play = config('blog.base_size_path').$path;
         }
         
         $this->music = new Music();
@@ -43,17 +45,6 @@ class MusicController extends Controller
     public function recycle_index(){
         $music = $this->music->onlyTrashed()->get();
         return view('admin.music.recycle_index',['musics'=>$music]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -115,7 +106,7 @@ class MusicController extends Controller
         $music_data = array();
         $time = date('Y-m-d H:i:s',time());
         if(!empty($music_info)){
-            foreach ($music_info as $key => $value) {
+            foreach ($music_info as $value) {
                 $music_data[] = array(
                     'name' => $value['music_name'],
                     'title' => $value['music_title'],

@@ -56,7 +56,6 @@ class LoginController extends Controller
 
             if (Auth::guard()->attempt(['email'=>$request->email, 'password'=>$request->password],$remember)) {
                 return redirect()->intended('/');
-                //return Redirect::to('/')->withSuccess('登录成功！');     //login success, redirect to admin
             } else {
                 return back()->withErrors('账号或密码错误')->withInput();
             }
@@ -67,7 +66,6 @@ class LoginController extends Controller
     //登录页面验证
     protected function validateLogin(array $data)
     {
-        //dd($data);
         return Validator::make($data, [
             'email' => 'required|email|max:255',
             'password' => 'required|min:6',
@@ -135,8 +133,7 @@ class LoginController extends Controller
         $request->session()->flush();
 
         $request->session()->regenerate();
-
-        //return Redirect::to('/')->with('message','你现在已经退出登录了!');
+        
         return redirect()->intended('/');
     }
 }
