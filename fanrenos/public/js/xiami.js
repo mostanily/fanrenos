@@ -71,9 +71,11 @@ $(function() {
 				for (var h = 0; h < leftAr.length; h++) {
 					var lr = str.substring(str.lastIndexOf("]") + 1);
 					var ti = conSeconds(str.substring(leftAr[h] + 1, leftAr[h] + 6));
-					lytext[tflag] = lr; //放歌词 
-					lytime[tflag] = ti; //放时间
-					tflag++;
+					if(lr!=''){
+						lytext[tflag] = lr; //放歌词
+						lytime[tflag] = ti; //放时间
+						tflag++;
+					}
 				}
 			}
 		}
@@ -283,18 +285,30 @@ function getLy(songIndex) //取得歌词
 
 function show(t, lytext, lytime,scrollh) //显示歌词 
 {
+	var len = $('#lyr').width();
 	var div1 = document.getElementById("lyr"); //取得层
 	document.getElementById("lyr").innerHTML = " "; //每次调用清空以前的一次 
 	if (t < lytime[lytime.length - 1]) //先舍弃数组的最后一个
 	{
 		for (var k = 0; k < lytext.length; k++) {
+			//让当前的滚动条的顶部改变一行的高度 
 			if (lytime[k] <= t && t < lytime[k + 1]) {
-				scrollh = k * 30; //让当前的滚动条的顶部改变一行的高度 
+				if(parseInt(lytext[k].length)*12>len){
+					if(len==140){
+						$('#lyr').css({'height':'275px'});
+						scrollh = k * 55;
+					}else{
+						$('#lyr').css({'height':'225px'});
+						scrollh = k * 45;
+					}
+				}else{
+					$('#lyr').css({'height':'149px'});
+					scrollh = k * 30;
+				}
 				div1.innerHTML += "<font color=#f60 style=font-weight:bold>" + lytext[k] + "</font><br>";
 			} else if (t < lytime[lytime.length - 1]){
 				div1.innerHTML += lytext[k] + "<br>";
 			} //数组的最后一个要舍弃
-				
 		}
 	} else //加上数组的最后一个
 	{
@@ -306,11 +320,11 @@ function show(t, lytext, lytime,scrollh) //显示歌词
 	//写在这边，保证当前歌词处于中间位置
 	//快进滚动速度
 	if (document.getElementById("lyr").scrollTop <= scrollh){
-		document.getElementById("lyr").scrollTop += 10;
+		document.getElementById("lyr").scrollTop += 15;
 	}
 	//回退滚动速度
 	if (document.getElementById("lyr").scrollTop >= scrollh + 50){
-		document.getElementById("lyr").scrollTop -= 10;
+		document.getElementById("lyr").scrollTop -= 15;
 	}
 }
 //此方法暂时无用，内容已被提出

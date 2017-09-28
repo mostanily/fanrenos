@@ -157,11 +157,24 @@
         $new_words = preg_replace("/\./", '@', $words);
         $new_words = preg_replace("/@+([0-9]{1,2})/",'',$new_words);
         $word = str_replace(array("\n","\r"),".",$new_words);
+
         $word_arr = array();
-        foreach (explode('.',$word) as $value) {
-            if(!empty($value)){
-                $word_arr[] = $value;
+        $lrc_time = array();
+        //处理带有翻译的歌词
+        foreach (explode('.',$word) as $key => $value) {
+            //截取歌词中的时间
+            $time = mb_substr($value,1,5);
+            //匹配时间，将时间相同的歌词及翻译歌词放在一起
+            if(in_array($time, $lrc_time)){
+                $k = array_keys($lrc_time,$time);
+                $word_arr[$k[0]] = $word_arr[$k[0]].'-----'.preg_replace("/\[+([0-9]{1,2})+:+([0-9]{1,2})\]/",'',$value);
+            }else{
+                if(preg_match('/\[+([0-9]{1,2})+:+([0-9]{1,2})\]/', $value)){
+                    $lrc_time[$key] = $time;
+                }
+                $word_arr[$key] = $value;
             }
+            
         }
         return implode('.',$word_arr);
     }
