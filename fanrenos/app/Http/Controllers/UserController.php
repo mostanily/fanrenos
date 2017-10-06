@@ -46,7 +46,7 @@ class UserController extends Controller
     public function showUserInfo($name){
         $user = $this->user->where('name',$name)->first();
 
-        if (!isset($user)) {abort(404)};
+        if (!isset($user)) {abort(404);}
 
         $comments = $user->comments->take(10);
 
@@ -69,7 +69,7 @@ class UserController extends Controller
     {
         $user = $this->user->where('name',$name)->first();
 
-        if (!isset($user)) {abort(404)};
+        if (!isset($user)) {abort(404);}
 
         $followings = $user->followings;
 
@@ -92,7 +92,7 @@ class UserController extends Controller
     {
         $user = $this->user->where('name',$name)->first();
 
-        if (!isset($user)) {abort(404)};
+        if (!isset($user)) {abort(404);}
 
         $comments = $user->comments;
 
@@ -131,7 +131,7 @@ class UserController extends Controller
      */
     public function showUserProfile()
     {
-        if (!\Auth::id()) abort(404);
+        if (!\Auth::id()) {abort(404);}
 
         $user = $this->user->findOrFail(\Auth::id());
 
@@ -167,7 +167,7 @@ class UserController extends Controller
      * @return [type] [description]
      */
     public function showUserProfileAvatar(){
-        if (!\Auth::id()) abort(404);
+        if (!\Auth::id()) {abort(404);}
 
         $user = $this->user->findOrFail(\Auth::id());
 

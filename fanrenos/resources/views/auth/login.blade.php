@@ -47,7 +47,7 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        <p><strong>注意</strong> 如果你是误操作或出于好奇而点击出现此弹窗的，又没想过更换网站密码的，请关闭窗口即可。<br>如果你确定需要修改网站密码，请在下面的表单，填写上你<b>注册时填写的邮箱</b>，并保证你填写的邮箱确实<b>能接受到邮件</b>才可以进行邮箱重置密码操作。<br>如果你的注册邮箱不能使用，可以到个人面板修改好能用的邮箱后再来进行密码重置操作！<br>如果你确实不记得密码，且注册邮箱已经不能使用，请使用网站的“Contact/联系我”链接，<a href="{{url('contact')}}" target="_blank">传送门</a>；说明来由且留下有关账号的一些信息，本人收到后，将会重置你的账号密码，并将密码通过邮箱回复给你。</p>
+                        <p><strong>注意</strong> 如果你是误操作或出于好奇而点击出现此弹窗的，又没想过更换网站密码的，请关闭窗口即可。<br>如果你确定需要修改网站密码，请在下面的表单，填写上你<b>注册时填写的邮箱</b>，并保证你填写的邮箱确实<b>能接受到邮件</b>才可以进行邮箱重置密码操作。<br>如果你确实不记得密码，且注册邮箱已经不能使用，请使用网站的“Contact/联系我”链接，<a href="{{url('contact')}}" target="_blank">传送门</a>；说明来由且留下有关账号的一些信息，本人收到后，将会重置你的账号密码，并将密码通过邮箱回复给你。</p>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label>邮箱</label> 
                             <input type="email" placeholder="请输入您的注册Email" class="form-control" name="email" value="{{ old('email') }}" required="">
