@@ -27,6 +27,7 @@ class CommentController extends Controller
             $max_raw = mb_substr($raw['raw'],0,50).'......';
             $comments[$key]->content_max_raw = $max_raw;
             $comments[$key]->content_raw = $raw['raw'];
+            $comments[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
         }
         return view('admin.comment.index',['comments'=>$comments,'soft'=>$soft]);
     }

@@ -72,21 +72,6 @@ return [
             ],
         ],
     ],
-    // [
-    //     'TitleNav' => '讨论管理',
-    //     'model' => 'discussion',
-    //     'route' => '',
-    //     'isActive' => false,
-    //     'icon' => 'fa-question-circle',
-    //     'subTitleNav' => [
-    //         [
-    //             'name' => '讨论列表',
-    //             'route' => 'dashboard.discussion.index',
-    //             'route_alias' => 'dashboard/discussion/index',
-    //             'isActive' => false,
-    //         ],
-    //     ],
-    // ],
     [
         'TitleNav' => '评论管理',
         'model' => 'comment',
@@ -170,6 +155,21 @@ return [
                 'name' => '音乐列表',
                 'route' => 'dashboard.music.index',
                 'route_alias' => 'dashboard/music/index',
+                'isActive' => false,
+            ],
+        ],
+    ],
+    [
+        'TitleNav' => '相册管理',
+        'model' => 'album',
+        'route' => '',
+        'isActive' => false,
+        'icon' => 'fa-picture-o',
+        'subTitleNav' => [
+            [
+                'name' => '相册列表',
+                'route' => 'dashboard.album.index',
+                'route_alias' => 'dashboard/album/index',
                 'isActive' => false,
             ],
         ],

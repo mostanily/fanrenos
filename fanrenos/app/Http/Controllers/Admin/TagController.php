@@ -31,6 +31,9 @@ class TagController extends Controller
     {
         $soft = $this->tag->onlyTrashed()->count();
         $tags = $this->tag->all();
+        foreach ($tags as $key => $value) {
+            $tags[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
+        }
         return view('admin.tags.index',['tags'=>$tags,'soft'=>$soft]);
     }
 

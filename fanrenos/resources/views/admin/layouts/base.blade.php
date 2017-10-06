@@ -392,6 +392,17 @@ BODY TAG OPTIONS:
             $(this).addClass('is-checked');
         }
     });
+    //批量删除(只针对存在软删除的model)
+    function batchDel(model){
+        var id = getSelect();
+        if(!id){
+            myalert('没有进行任何选择！');
+        }else{
+            var u = "{{url('dashboard/batch_delete')}}"+'/'+model;
+            var data = 'pid='+id;
+            myalert('确定需要批量删除么？','make-sure',u,data);
+        }
+    }
 
     $('.close-myalert').click(function(){
         $('#MyalertModal>.modal-dialog>.modal-content>.modal-body').children('p').html("");
@@ -400,7 +411,8 @@ BODY TAG OPTIONS:
 
     // 预览图片
     function preview_image(path) {
-        $("#preview-image").attr("src", path);
+        $("#preview-image").prop("src", '');
+        $("#preview-image").prop("src", path);
         $("#modal-image-view").modal("show");
     }
 

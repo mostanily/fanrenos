@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Link;
 use App\Models\Music;
+use App\Models\Album;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -24,7 +25,8 @@ class AdminController extends Controller
         $this->comment = new Comment;
         $this->link = new Link;
         $this->music = new Music;
-        $this->models = array('user','article','tag','comment','link','music');//存在软删除的模型
+        $this->album = new Album;
+        $this->models = array('user','article','tag','comment','link','music','album');//存在软删除模型
     }
 
     public function index()
@@ -57,5 +59,22 @@ class AdminController extends Controller
 
         return redirect('/dashboard/'.$handle.'/index')
                         ->withSuccess("恢复成功");
+    }
+
+    /**
+     * 批量删除（只针对存在软删除的model）
+     * @param  [type] $model [description]
+     * @return [type]        [description]
+     */
+    public function batch_delete(Request $request,$model){
+        if(!in_array($model, $this->models)){
+            return redirect()->back()->withErrors('不存在的模型，请检查');
+        }
+        $pid = $request->get('pid');
+        $id_arr = explode(',', $pid);
+
+        $this->$model->destroy($id_arr);
+
+        return response()->json(['status'=>'success']);
     }
 }

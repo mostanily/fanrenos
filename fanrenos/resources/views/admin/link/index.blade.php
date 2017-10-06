@@ -22,9 +22,14 @@
             <div class="panel-heading">
                 <h3 class="panel-title">友链列表</h3>
             </div>
+            <div class="text-left">
+                <button type="button" class="btn btn-info btn-sm" id="all_select" style="margin-bottom: 5px;">全选</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="batchDel('link')" style="margin: 0px 0px 5px 5px;">批量删除</button>
+            </div>
             <table id="posts-table" class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th data-sortable="false" class="hidden-sm"></th>
                     <th style="text-align: center;">ID</th>
                     <th>网站名称</th>
                     <th>友链链接</th>
@@ -34,6 +39,7 @@
             <tbody>
             @foreach ($links as $link)
                 <tr>
+                    <td>{!!$link->select_input!!}</td>
                     <td style="text-align: center;">{{ $link->id }}</td>
                     <td>{{ $link->name }}</td>
                     <td>{{ $link->link}}</td>
@@ -80,7 +86,7 @@
                     "sSortDescending": ": 以降序排列此列"
                 }
             },
-            order: [[1, "desc"]]
+            order: [[2, "desc"]]
         });
     });
     </script>

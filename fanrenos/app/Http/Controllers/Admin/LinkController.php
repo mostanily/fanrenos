@@ -34,6 +34,9 @@ class LinkController extends Controller
     {
         $soft = $this->link->withoutGlobalScopes()->onlyTrashed()->count();
         $link = $this->link->all();
+        foreach ($link as $key => $value) {
+            $link[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
+        }
         return view('admin.link.index',['links'=>$link,'soft'=>$soft]);
     }
 

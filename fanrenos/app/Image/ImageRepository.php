@@ -216,6 +216,56 @@ class ImageRepository{
         return $filename_arr;
     }
 
+    /**
+     * 上传带尺寸图，批量上传
+     * @param  [type] $all_photo   [description]
+     * @param  [type] $upload_path [description]
+     * @param  [type] $path_size   [description]
+     * @return [type]              [description]
+     */
+    public function uploadWithSize($all_photo,$upload_path,$path_size){
+        $filename_arr = array();
+        foreach ($all_photo as $photo) {
+            $originalName = $photo->getClientOriginalName();
+            //取得图片的后缀
+            $pfix = $photo->getClientOriginalExtension();
+
+            $originalNameWithoutExt = substr($originalName, 0, strlen($originalName) - 4);
+            $filename = sanitize($originalNameWithoutExt);
+            //自定义图片名称（路径随意选择一个尺寸即可，每个尺寸下的图片名称都是一样的）
+            $pic_name = createUniqueFilename($upload_path.'150x150/',$filename,$pfix);
+
+            $filenameExt = $pic_name .'.'.$pfix;
+
+            //原图（等上传完毕，会删除此图），最终只会保留3套
+            $original_pic = Image::make( $photo )->save($upload_path.'normal_'.$filenameExt);
+
+            $origi_w = $original_pic->width();
+            $origi_h = $original_pic->height();
+            $mime = $original_pic->mime();
+
+            foreach ($path_size as $k => $v) {
+                $new_w_h = getNewPicWH($k,$k,$origi_w,$origi_h);
+                $image = Image::make($original_pic)
+                            ->resize($new_w_h[0],$new_w_h[1])
+                            ->save($upload_path.$v.$filenameExt );
+
+            }
+            $filename_arr[] = array('name'=>$filenameExt,'mime'=>$mime);//返回的图片信息，用于存入数据库中
+            //上传成功，删除最开始的原始图
+            unlink($upload_path.'normal_'.$filenameExt);//删除原始图
+        }
+        
+        return $filename_arr;
+    }
+
+    /**
+     * 删除带尺寸的图
+     * @param  [type] $path      [description]
+     * @param  [type] $file_info [description]
+     * @param  [type] $size      [description]
+     * @return [type]            [description]
+     */
     public function deleteWithSize($path, $file_info,$size){
         //套图删除
         $del_path = getSqlSizePath($path,$size,$file_info);

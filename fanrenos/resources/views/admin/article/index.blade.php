@@ -22,9 +22,14 @@
             <div class="panel-heading">
                 <h3 class="panel-title">文章列表</h3>
             </div>
+            <div class="text-left">
+                <button type="button" class="btn btn-info btn-sm" id="all_select" style="margin-bottom: 5px;">全选</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="batchDel('article')" style="margin: 0px 0px 5px 5px;">批量删除</button>
+            </div>
             <table id="posts-table" class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th data-sortable="false" class="hidden-sm"></th>
                     <th style="text-align: center;">文章ID</th>
                     <th>发布时间</th>
                     <th>标题</th>
@@ -35,6 +40,7 @@
             <tbody>
             @foreach ($articles as $post)
                 <tr>
+                    <td>{!!$post->select_input!!}</td>
                     <td style="text-align: center;">{{ $post->id }}</td>
                     <td data-order="{{ $post->published_at->timestamp }}">
                         {{ $post->published_at->format('j-M-y g:ia') }}
@@ -87,7 +93,7 @@
                     "sSortDescending": ": 以降序排列此列"
                 }
             },
-            order: [[0, "desc"]]
+            order: [[1, "desc"]]
         });
     });
     </script>

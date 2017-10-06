@@ -31,9 +31,14 @@
             <div class="panel-heading">
                 <h3 class="panel-title">音乐列表</h3>
             </div>
+            <div class="text-left">
+                <button type="button" class="btn btn-info btn-sm" id="all_select" style="margin-bottom: 5px;">全选</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="batchDel('music')" style="margin: 0px 0px 5px 5px;">批量删除</button>
+            </div>
             <table id="posts-table" class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th data-sortable="false" class="hidden-sm"></th>
                     <th style="text-align: center;">ID</th>
                     <th>音乐名称</th>
                     <th>演唱者</th>
@@ -47,6 +52,7 @@
             <tbody>
             @foreach ($musics as $music)
                 <tr>
+                    <td>{!!$music->select_input!!}</td>
                     <td style="text-align: center;">{{ $music->id }}</td>
                     <td>{{ $music->title }}</td>
                     <td>{{ $music->artist}}</td>
@@ -228,7 +234,7 @@
                     "sSortDescending": ": 以降序排列此列"
                 }
             },
-            order: [[2, "desc"]]
+            order: [[3, "desc"]]
         });
 
         $(document).on('click','.delMusic',function(){

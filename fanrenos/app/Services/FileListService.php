@@ -114,7 +114,7 @@ class FileListService
             //过大的图片进行压缩修改
             $new_w_h = getNewPicWH($w,$h,$img_width,$img_height);
             $re = Image::make($img_full_path)->resize($new_w_h[0],$new_w_h[1])->save();
-            $has_deal_list[] = $value['name'].'.'.$value['pfix']; 
+            $has_deal_list[] = $value['name'].'.'.$value['pfix'];
         }
         if(!empty($has_deal_list)){
             return true;
@@ -123,12 +123,71 @@ class FileListService
     }
 
     /**
+     * 处理相册的图片
+     * @param  [type] $path     [description]
+     * @return [type]           [description]
+     */
+    public function getAlbum($path){
+        /* 获取文件列表 */
+        $path = isWindows() ? ltrim($path,'/') : $path;
+
+        $files = $this->getfiles($path, $this->fileAllowImage);
+
+        if (!count($files)) {
+            return [
+                "state" => "no match file",
+                "list" => array(),
+                "total" => count($files)
+            ];
+        }
+
+        /* 获取指定范围的列表 */
+        $len = count($files);
+        for ($i = $len - 1, $list = array(); $i < $len && $i >= 0; $i--){
+            $list[] = $files[$i];
+        }
+        
+        $new_list = array();
+        foreach ($list as $key => $value) {
+            //原统一文件名
+            $unified_name = $value['name'];
+
+            $pfix = $value['pfix'];
+
+            //生成的新的统一名称（主要是为了去掉中文名称）
+            $new_unified_name = createRandomString($unified_name);
+            $unified_name=iconv('UTF-8','GBK//IGNORE',$unified_name);
+            
+            $new_file_name = $new_unified_name.'.'.$pfix;
+            $img_full_path = $path.$new_file_name;
+            //重命名名称
+            rename($path.$unified_name.'.'.$pfix,$img_full_path);
+
+            $img_info = Image::make($img_full_path);
+            $mime = $img_info->mime();
+            $width = $img_info->width();
+            $height = $img_info->height();
+
+            $new_list[] = ['name'=>$new_file_name,'mime'=>$mime,'w'=>$width,'h'=>$height];
+        }
+
+        /* 返回数据 */
+        $result = [
+            "state" => "SUCCESS",
+            "list" => $new_list,
+            "total" => count($files)
+        ];
+
+        return $result;
+    }
+
+    /**
      * 遍历获取目录下的指定类型的文件
      * @param $path
      * @param array $files
      * @return array
      */
-    protected function  getfiles($path, $fileAllowAudio, &$files = array())
+    protected function getfiles($path, $fileAllowAudio, &$files = array())
     {
         if (!is_dir($path)) {
             return null;

@@ -15,6 +15,19 @@
     }
 
     /**
+     * 通用尺寸图地址处理
+     * @param  [type] $img  [description]
+     * @param  [type] $size [description]
+     * @return [type]       [description]
+     */
+    function page_image_size($img,$size,$model){
+        
+        $new_img_url = config('img_upload.base_size_path').$model.'/'.$size.'x'.$size.'/'.$img;
+
+        return asset($new_img_url);
+    }
+
+    /**
      * 登陆用户的个人中心url
      * @param  [type] $auth_name [description]
      * @return [type]            [description]

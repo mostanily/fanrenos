@@ -21,31 +21,13 @@
                         </h1> 
                         <p>支持鼠标向左移动显示侧边栏</p> 
                         <div id="toolbar"></div> 
-                        <div class="clear"></div> 
-                        <a href="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_lucernarium.jpg')}}" class="thumb_link"> 
-                            <span class="selected"></span> 
-                            <img src="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_lucernarium_thumb.jpg')}}" title="Supremus Lucernarium" alt="Supremus Lucernarium" class="thumb" />
-                        </a>
-                        <a href="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk.jpg')}}" class="thumb_link"> 
-                            <span class="selected"></span> 
-                            <img src="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk_thumb.jpg')}}" title="Supremus Lucernarium" alt="Supremus Lucernarium" class="thumb" />
-                        </a>
-                        <a href="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk.jpg')}}" class="thumb_link> 
-                            <span class="selected"></span> 
-                            <img src="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk_thumb.jpg')}}" title="Supremus Lucernarium" alt="Supremus Lucernarium" class="thumb" />
-                        </a>
-                        <a href="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk.jpg')}}" class="thumb_link> 
-                            <span class="selected"></span> 
-                            <img src="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk_thumb.jpg')}}" title="Supremus Lucernarium" alt="Supremus Lucernarium" class="thumb" />
-                        </a>
-                        <a href="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk.jpg')}}" class="thumb_link> 
-                            <span class="selected"></span> 
-                            <img src="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk_thumb.jpg')}}" title="Supremus Lucernarium" alt="Supremus Lucernarium" class="thumb" />
-                        </a>
-                        <a href="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk.jpg')}}" class="thumb_link> 
-                            <span class="selected"></span> 
-                            <img src="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_dk_thumb.jpg')}}" title="Supremus Lucernarium" alt="Supremus Lucernarium" class="thumb" />
-                        </a>
+                        <div class="clear"></div>
+                        @foreach($albums as $album)
+                            <a href="{{ page_image_size($album->name,1200,'albums')}}" class="thumb_link>
+                                <span class="selected"></span> 
+                                <img src="{{ page_image_size($album->name,150,'albums')}}" title="Supremus Lucernarium" alt="Supremus Lucernarium" class="thumb" />
+                            </a>
+                        @endforeach
                         <p class="clear"></p> 
                         <p>&nbsp;</p> 
                     </div> 
@@ -56,7 +38,7 @@
             </div> 
         </div> 
         <div id="bg"> 
-            <img src="{{asset('imgs/space/Universe_and_planets_digital_art_wallpaper_lucernarium.jpg')}}" title="Supremus Lucernarium" id="bgimg" /> 
+            <img src="{{ page_image_size($albums[0]->name,1200,'albums')}}" title="Supremus Lucernarium" id="bgimg" /> 
             <div id="preloader"> 
                 <img src="{{asset('imgs/ajax-loader_dark.gif')}}" width="32" height="32" align="absmiddle" />加载中...
             </div> 

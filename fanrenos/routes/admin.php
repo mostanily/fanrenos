@@ -13,6 +13,8 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     });
     Route::get('/home', ['as' => 'dashboard.home', 'uses' => 'AdminController@index']);
     Route::get('/recovery/{handle}/{id}','AdminController@recycle_normal');//恢复被软删除的信息
+    Route::post('/batch_delete/{model}','AdminController@batch_delete');//批量删除(如果为软删除，则为软删除)
+
     Route::get('/system', ['as' => 'dashboard.system', 'uses' => 'SystemController@getSystemInfo']);
     //菜单管理
     //用户管理
@@ -56,7 +58,15 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     Route::post('/music/lrc_upload/{id}',['as'=>'dashboard.music.lrc_upload','uses'=>'MusicController@lrcUpload']);//上传音乐歌词
     Route::post('/music/store_one',['as'=>'dashboard.music.store_one','uses'=>'MusicController@musicStore']);//上传单曲
     Route::get('/music/deal_image',['as'=>'dashboard.music.deal_image','uses'=>'MusicController@dealMusicImage']);//批量处理专辑封面图中的大图
-    Route::resource('music', 'MusicController', ['names' => ['destroy'=>'dashboard.link.destroy']]);
+    Route::resource('music', 'MusicController', ['names' => ['destroy'=>'dashboard.music.destroy']]);
+
+    //相册管理
+    Route::get('/album/index',['as' => 'dashboard.album.index', 'uses' => 'AlbumController@index']);
+    Route::get('/album/recycle/index', ['as' => 'dashboard.album_recycle.index', 'uses' => 'AlbumController@recycle_index']);//回收站
+    Route::post('/album/real_delete/{id}',['as' => 'dashboard.real_delete.index', 'uses' => 'AlbumController@real_delete']);//彻底删除
+    Route::get('/album/update_info',['as'=>'dashboard.album.update_info','uses'=>'AlbumController@uploadAlbum']);
+    Route::post('/album/update_info',['as'=>'dashboard.album.update_info','uses'=>'AlbumController@uploadAlbum']);
+    Route::resource('album', 'AlbumController', ['names' => ['destroy'=>'dashboard.album.destroy']]);
 
     Route::get('/file/index', ['as' => 'dashboard.file.index', 'uses' => 'AdminController@index']);
     Route::get('/category/index', ['as' => 'dashboard.category.index', 'uses' => 'AdminController@index']);

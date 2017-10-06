@@ -24,6 +24,7 @@
                 <table id="tags-table" class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th style="text-align: center;">ID</th>
                             <th>标签</th>
                             <th>标题</th>
                             <th class="hidden-md">主要描述</th>
@@ -33,6 +34,7 @@
                     <tbody>
                     @foreach ($tags as $tag)
                         <tr>
+                            <td style="text-align: center;">{{ $tag->id }}</td>
                             <td>{{ $tag->tag }}</td>
                             <td>{{ $tag->title }}</td>
                             <td class="hidden-md">{{ $tag->meta_description }}</td>

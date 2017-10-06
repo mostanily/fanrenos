@@ -22,9 +22,14 @@
             <div class="panel-heading">
                 <h3 class="panel-title">评论列表</h3>
             </div>
+            <div class="text-left">
+                <button type="button" class="btn btn-info btn-sm" id="all_select" style="margin-bottom: 5px;">全选</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="batchDel('comment')" style="margin: 0px 0px 5px 5px;">批量删除</button>
+            </div>
             <table id="posts-table" class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th data-sortable="false" class="hidden-sm"></th>
                     <th style="text-align: center;">评论ID</th>
                     <th>评论内容</th>
                     <th>文章标题</th>
@@ -36,6 +41,7 @@
             <tbody>
             @foreach ($comments as $comment)
                 <tr>
+                    <td>{!!$comment->select_input!!}</td>
                     <td style="text-align: center;">{{ $comment->id }}</td>
                     <td data-container="body" title="{{ $comment->content_raw }}">{{ $comment->content_max_raw }}</td>
                     <td>{{ $comment->article->title }}</td>
@@ -87,7 +93,7 @@
                     "sSortDescending": ": 以降序排列此列"
                 }
             },
-            order: [[4, "desc"]]
+            order: [[5, "desc"]]
         });
     });
     </script>

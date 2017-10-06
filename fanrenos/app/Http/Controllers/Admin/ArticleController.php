@@ -48,6 +48,9 @@ class ArticleController extends Controller
     {
         $soft = $this->article->withoutGlobalScopes()->onlyTrashed()->count();
         $article = $this->article->all();
+        foreach ($article as $key => $value) {
+            $article[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
+        }
         return view('admin.article.index',['articles'=>$article,'soft'=>$soft]);
     }
 

@@ -27,6 +27,11 @@
 <link rel="stylesheet" href="{{asset('css/amazeui.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/app_amaze.css')}}">
 <!-- //animation-effect -->
+<style type="text/css">
+    @media only screen and (max-width: 640px) {
+        #modal-form>.modal-dialog{margin: 0 auto;margin-top: 50px;max-width: 320px;}
+    }
+</style>
 @yield('css')
 </head>
 <body id="blog">

@@ -35,6 +35,9 @@ class MusicController extends Controller
     {
         $soft = $this->music->onlyTrashed()->count();
         $music = $this->music->all();
+        foreach ($music as $key => $value) {
+            $music[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
+        }
         return view('admin.music.index',['musics'=>$music,'soft'=>$soft]);
     }
 
@@ -240,7 +243,7 @@ class MusicController extends Controller
     }
 
     /**
-     * 彻底删除友链
+     * 彻底删除
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
