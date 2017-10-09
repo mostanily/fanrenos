@@ -31,9 +31,7 @@ Route::get('/home', function(){
     return redirect('/');
 });
 
-Route::get('/', function () {
-    return redirect('/blog');
-});
+Route::get('/','HomeController@index');
 Route::get('/experience','HomeController@showPersonerExperience');
 
 Route::group(['prefix' => 'blog'], function () {

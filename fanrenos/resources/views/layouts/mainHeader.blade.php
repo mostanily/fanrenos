@@ -5,8 +5,8 @@
 <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
     <ul class="am-nav am-nav-pills am-topbar-nav nav navbar-nav">
-        <li><a href="{{url('/')}}">{{ config('blog.name') }}</a></li>
-        <li class="{{active_class(if_uri('blog'),'am-active')}}"><a href="{{url('/')}}">首页</a></li>
+        <li><a>{{ config('blog.name') }}</a></li>
+        <li class="{{active_class(if_uri(['/','blog']),'am-active')}}"><a href="{{url('/')}}">首页</a></li>
         <li class="{{active_class(if_uri('music'),'am-active')}}"><a href="{{url('music')}}">音乐欣赏</a></li>
         <li class="{{active_class(if_uri('album'),'am-active')}}"><a href="{{url('album')}}">相册壁纸</a></li>
         <li class="{{active_class(if_uri('contact'),'am-active')}}"><a href="{{url('contact')}}">联系我</a></li>

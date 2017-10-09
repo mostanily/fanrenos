@@ -10,7 +10,7 @@ return [
     'index_banner_def_image' => 'b1.jpg',
     'index_post_def_image' => 'no_default.jpg',
     'music_def_logo' => 'def_music.png',
-    'posts_per_page' => 10,
+    'posts_per_page' => 20,
     'uploads' => [
         'storage' => 'local',
         'webpath' => '/uploads',
