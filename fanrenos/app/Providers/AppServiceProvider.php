@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use DB;
+use App\Models\Article;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,8 +25,11 @@ class AppServiceProvider extends ServiceProvider
                     ->orderBy('a_num','desc')
                     ->get();
 
+            $latest_articles = Article::orderBy('created_at','desc')->limit(10)->get();
+
             $view_data = [
                 'allTag'=>$allTag,
+                'latestArticle' =>$latest_articles,
             ];
 
             $view->with($view_data);

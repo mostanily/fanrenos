@@ -18,6 +18,14 @@
             </p>
         </div>
         <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+            <h2 class="blog-title"><span>最新文章</span></h2>
+            <ul class="am-list">
+                @foreach($latestArticle as $article)
+                    <li style="overflow: hidden;max-height: 45px;"><a href="{{url('blog')}}/{{$article->slug}}" title="{{$article->title}}" target="_blank">{{$article->title}}</a></li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
             <h2 class="blog-title"><span>TAG cloud</span></h2>
             <div class="am-u-sm-12 blog-clear-padding">
                 @foreach($allTag as $tags)
