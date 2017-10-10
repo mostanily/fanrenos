@@ -27,9 +27,12 @@ class AppServiceProvider extends ServiceProvider
 
             $latest_articles = Article::orderBy('created_at','desc')->limit(10)->get();
 
+            $hot_articles = Article::orderBy('view_count','desc')->limit(10)->get();
+
             $view_data = [
-                'allTag'=>$allTag,
-                'latestArticle' =>$latest_articles,
+                'allTag' => $allTag,
+                'latestArticle' => $latest_articles,
+                'hotArticle' => $hot_articles
             ];
 
             $view->with($view_data);
