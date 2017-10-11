@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\CommentThumb;
 use App\Http\Requests;
 use Auth;
+use Cache;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 
@@ -21,7 +22,7 @@ class CommentController extends Controller
     }
 
     /**
-     * 评论内容
+     * 保存评论内容
      * @param  Request $request [description]
      * @return [type]           [description]
      */
@@ -62,11 +63,15 @@ class CommentController extends Controller
     public function showMoreComment(Request $request){
         $slug = $request->get('blogSlug');
 
-        $article = $this->article->with(['tags','comments'])->whereSlug($slug)->firstOrFail();
-        $raw = json_decode($article->content,true);
-        $max_raw = mb_substr($raw['raw'],0,300).'......';
-        $article->content_raw = $max_raw;
-        $article->page_image = empty($article->page_image) ? '' : $this->path.$article->page_image;
+        $article = Cache::remember(getCacheRememberKey(), config('blog.cache_time.default'), function () use($slug) {
+            $article = $this->article->with(['tags','comments'])->whereSlug($slug)->firstOrFail();
+            $raw = json_decode($article->content,true);
+            $max_raw = mb_substr($raw['raw'],0,300).'......';
+            $article->content_raw = $max_raw;
+            $article->page_image = empty($article->page_image) ? '' : $path.$article->page_image;
+
+            return $article;
+        });
 
         //回复的内容
         $comments = $article->comments()->with(['user','thumbs'])->orderBy('created_at','asc')->paginate(20);
@@ -100,7 +105,7 @@ class CommentController extends Controller
                     $unlike_class = '';
                     $like_user = [];
                     $unlike_user = [];
-                    
+                        
                     foreach ($thumbs as $k => $thumb) {
                         $status = $thumb->status;
                         $thumb_user_id = $thumb->user_id;
@@ -143,8 +148,8 @@ class CommentController extends Controller
                 $comments[$key]->unlike_content_class = $unlike_content_class;
             }
         }
-        
-        $data = [
+            
+        $commentData = [
             'title' => config('blog.title'),
             'subtitle' => config('blog.subtitle'),
             'post' => $article,
@@ -156,7 +161,7 @@ class CommentController extends Controller
             'blogSlug' =>$slug,
         ];
 
-        return view('blogs.comment', $data);
+        return view('blogs.comment', $commentData);
     }
 
     /**

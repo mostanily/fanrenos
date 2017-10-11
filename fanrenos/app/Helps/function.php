@@ -386,3 +386,17 @@
             return sprintf("%.{$decimals}f", $bytes/pow(1024, $floor)).@$size[$floor];
         }
     }
+
+    /**
+     * 返回一个路由的加密字符串，用于缓存的key
+     * @return [type] [description]
+     */
+    function getCacheRememberKey(){
+        $url = request()->url();
+        $queryParams = request()->query();
+        ksort($queryParams);
+        $queryString = http_build_query($queryParams);
+        $fullUrl = "{$url}?{$queryString}";
+        //以每个访问的路由作为缓存的KEY
+        return sha1($fullUrl);
+    }

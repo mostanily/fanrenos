@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactMeRequest;
 use Illuminate\Support\Facades\Mail;

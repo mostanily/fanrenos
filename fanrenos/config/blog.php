@@ -11,6 +11,10 @@ return [
     'index_post_def_image' => 'no_default.jpg',
     'music_def_logo' => 'def_music.png',
     'posts_per_page' => 20,
+    'cache_time' => [
+        'default' => 60,
+        'extra' => 30,
+    ],//页面缓存时间，单位，分钟
     'uploads' => [
         'storage' => 'local',
         'webpath' => '/uploads',
