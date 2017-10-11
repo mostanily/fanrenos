@@ -110,10 +110,11 @@ class HomeController extends Controller
     public function showPost(Request $request,$slug)
     {
         $tag = $request->get('tag');
+        
+        DB::table('articles')->whereSlug($slug)->increment('view_count');
 
         $postData = Cache::remember(getCacheRememberKey(), config('blog.cache_time.default'), function () use ($tag,$slug) {
-            DB::table('articles')->whereSlug($slug)->increment('view_count');
-
+            
             $post = Article::with(['tags','comments'])->whereSlug($slug)->firstOrFail();
             $post->page_image = empty($post->page_image) ? '' : $this->path.$post->page_image;
             $content = json_decode($post->content,true);
