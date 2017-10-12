@@ -37,10 +37,16 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $today_s = date('Y-m-d 00:00:00',time());
+        $today_e = date('Y-m-d 23:59:59',time());
         $data['user_count'] = $this->user->all()->count();
         $data['article_count'] = $this->article->all()->count();
         $data['comment_count'] = $this->comment->all()->count();
         $data['view_count'] = $this->article->all()->sum('view_count');
+        $data['all_visitor_count'] = $this->visitor->all()->sum('clicks');
+        $data['today_visitor_count'] = $this->visitor->where('created_at','>',$today_s)->orWhere(function($query) use ($today_s,$today_e){
+            $query->where('updated_at','<',$today_e)->where('updated_at','>',$today_s);
+        })->sum('clicks');
         return view('admin.home.index',$data);
     }
 
