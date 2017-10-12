@@ -66,7 +66,7 @@
                                     <h3 class="panel-title">网站访客信息</h3>
                                 </div>
                                 <div class="text-right" style="margin: 3px 0 5px 0;">
-                                    <h5>今日访客：<span style="color: #fd9426;">{{$today_visitor_count}}</span>人；网站总访客：<span style="color: red;">{{$all_visitor_count}}</span>人</h5>
+                                    <h5>今日访客量：<span style="color: #fd9426;">{{$today_visitor_count}}</span>次；网站总访客量：<span style="color: red;">{{$all_visitor_count}}</span>次</h5>
                                 </div>
                                 <div class="example">
                                     <table data-toggle="table" data-url="{{url('dashboard/visitor')}}" data-height="400" data-mobile-responsive="true" data-pagination="true">
