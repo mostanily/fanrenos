@@ -400,3 +400,20 @@
         //以每个访问的路由作为缓存的KEY
         return sha1($fullUrl);
     }
+
+    /**
+     * 根据ip获取对应的国家城市等信息(淘宝ip库)
+     * @param  [type] $ip [description]
+     * @return [type]     [description]
+     */
+    function getcposition($ip){
+ 
+        $res1 = file_get_contents("http://ip.taobao.com/service/getIpInfo.php?ip=$ip");
+        $res1 = json_decode($res1,true);
+
+       if ($res1[ "code"]==0){
+            return $res1['data']["country"].$res1['data'][ "region"].$res1['data']["city"]."_".$res1['data'][ "isp"];
+        }else{
+            return "未知";
+        } 
+    }

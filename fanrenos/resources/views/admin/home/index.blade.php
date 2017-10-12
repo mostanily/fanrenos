@@ -32,7 +32,7 @@
                                           <i class="fa fa-eye" aria-hidden="true"></i>
                                             <div class="ca-content">
                                                 <h4 class="ca-main one">{{number_format($view_count)}}</h4>
-                                                <h3 class="ca-sub one">访问数</h3>
+                                                <h3 class="ca-sub one">文章访问数</h3>
                                             </div>
                                         </a>
                                     </li>
@@ -59,6 +59,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="ibox-content">
+                        <div class="row row-lg">
+                            <div class="col-sm-10">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">网站访客信息</h3>
+                                </div>
+                                <div class="example">
+                                    <table data-toggle="table" data-url="{{url('dashboard/visitor')}}" data-height="400" data-mobile-responsive="true" data-pagination="true">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="ip" data-halign="center" data-align="center">IP地址</th>
+                                                <th data-field="country" data-halign="center" data-align="center">访客地址</th>
+                                                <th data-field="clicks" data-halign="center" data-align="center" data-sortable="true">访问次数</th>
+                                                <th data-field="created_at" data-halign="center" data-align="center" data-sortable="true">初次访问时间</th>
+                                                <th data-field="updated_at" data-halign="center" data-align="center" data-sortable="true">最新访问时间</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Link;
 use App\Models\Music;
 use App\Models\Album;
+use App\Models\Visitor;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,9 +27,14 @@ class AdminController extends Controller
         $this->link = new Link;
         $this->music = new Music;
         $this->album = new Album;
+        $this->visitor = new Visitor;
         $this->models = array('user','article','tag','comment','link','music','album');//存在软删除模型
     }
 
+    /**
+     * 首页
+     * @return [type] [description]
+     */
     public function index()
     {
         $data['user_count'] = $this->user->all()->count();
@@ -36,6 +42,15 @@ class AdminController extends Controller
         $data['comment_count'] = $this->comment->all()->count();
         $data['view_count'] = $this->article->all()->sum('view_count');
         return view('admin.home.index',$data);
+    }
+
+    /**
+     * 访客记录
+     * @return [type] [description]
+     */
+    public function getVisitor(){
+        $visitor = $this->visitor->orderBy('updated_at','desc')->get()->toArray();
+        return response()->json($visitor);
     }
 
     /**

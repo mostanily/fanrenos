@@ -12,6 +12,7 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
         return redirect('/dashboard/home');
     });
     Route::get('/home', ['as' => 'dashboard.home', 'uses' => 'AdminController@index']);
+    Route::get('/visitor', 'AdminController@getVisitor');
     Route::get('/recovery/{handle}/{id}','AdminController@recycle_normal');//恢复被软删除的信息
     Route::post('/batch_delete/{model}','AdminController@batch_delete');//批量删除(如果为软删除，则为软删除)
 

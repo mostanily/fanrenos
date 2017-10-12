@@ -29,6 +29,6 @@
                 </ul>
             </p>
         </div>
-    </div>    
-    <div class="blog-text-center">Copyright © {{ config('blog.author') }} 2017. <a href="{{config('blog.subtitle')}}">{{config('blog.subtitle')}}</a> Made with love <a href="{{url('/')}}">{{config('blog.name')}}</a></div>    
+    </div>
+    <div class="blog-text-center">Copyright © {{ config('blog.author') }} 2017. <a href="{{config('blog.subtitle')}}">{{config('blog.subtitle')}}</a> Made with love <a href="{{url('/')}}">{{config('blog.name')}}</a><br><a href="http://webscan.360.cn/index/checkwebsite/url/www.fanrenos.com" name="b2499ba2411b04498798829c2deb02d3" >360网站安全检测平台</a></div>
   </footer>

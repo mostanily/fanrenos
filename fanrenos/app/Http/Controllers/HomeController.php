@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Experience;
+use App\Models\Visitor;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -17,6 +18,7 @@ class HomeController extends Controller
     {
         $this->path = $path;
     }
+
     /**
      * Show the application dashboard.
      *
@@ -24,6 +26,22 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        //本地ip不需要保存
+        $ip = $request->getClientIp();
+
+        if($ip != '::1') {
+            if($this->hasIp($ip)){
+                Visitor::whereIp($ip)->increment('clicks');
+            }else{
+                $data = [
+                    'ip'            => $ip,
+                    'clicks'        => 1,
+                    'country'       => getcposition($ip)
+                ];
+                Visitor::firstOrCreate( $data );
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $tag_key = $request->get('tag');
 
         $postData = Cache::remember(getCacheRememberKey(), config('blog.cache_time.default'), function () use ($tag_key) {
@@ -127,6 +145,16 @@ class HomeController extends Controller
 
         
         return view('blogs.post', $postData);
+    }
+
+    /**
+     * 是否存在ip
+     * @param  [type]  $ip [description]
+     * @return boolean     [description]
+     */
+    public function hasIp($ip)
+    {
+        return Visitor::whereIp($ip)->count() ? true : false;
     }
 
     /**
