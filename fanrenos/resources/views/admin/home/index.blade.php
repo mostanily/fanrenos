@@ -3,6 +3,10 @@
 @section('title','控制面板')
 @section('css')
 <link href="{{asset('css/style_grid.css')}}" rel="stylesheet" type="text/css" media="all" />
+<style type="text/css">
+    .btn-default{background-color: #f4f4f4;color: #444;border-color: #ddd;}
+    .btn-outline{color: inherit;background-color: transparent;}
+</style>
 @endsection
 
 @section('content')
@@ -69,7 +73,7 @@
                                     <h5>今日访客量：<span style="color: #fd9426;">{{$today_visitor_count}}</span>次；网站总访客量：<span style="color: red;">{{$all_visitor_count}}</span>次</h5>
                                 </div>
                                 <div class="example">
-                                    <table data-toggle="table" data-url="{{url('dashboard/visitor')}}" data-height="400" data-mobile-responsive="true" data-pagination="true">
+                                    <table id="exampleTableEvents" data-toggle="table" data-height="540" data-mobile-responsive="true">
                                         <thead>
                                             <tr>
                                                 <th data-field="ip" data-halign="center" data-align="center">IP地址</th>
@@ -91,4 +95,25 @@
     </div>
 @stop
 @section('js')
+<script type="text/javascript">
+! function(e, t, o) {
+    "use strict";
+    ! function() {
+        o("#exampleTableEvents").bootstrapTable({
+            url: "{{url('dashboard/visitor')}}",
+            search: !0,
+            pagination: !0,
+            showRefresh: !0,
+            showToggle: !0,
+            showColumns: !0,
+            iconSize: "outline",
+            icons: {
+                refresh: "glyphicon-repeat",
+                toggle: "glyphicon-list-alt",
+                columns: "glyphicon-list"
+            }
+        });
+    }()
+}(document, window, jQuery)
+</script>
 @stop
