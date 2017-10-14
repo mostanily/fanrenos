@@ -28,14 +28,15 @@ class HomeController extends Controller
     {
         //本地ip不需要保存
         $ip = $request->getClientIp();
-
         if($ip != '::1') {
             if($this->hasIp($ip)){
                 Visitor::whereIp($ip)->increment('clicks');
+                Visitor::whereIp($ip)->increment('today_clicks');
             }else{
                 $data = [
                     'ip'            => $ip,
                     'clicks'        => 1,
+                    'today_clicks'  => 1,
                     'country'       => getcposition($ip)
                 ];
                 Visitor::firstOrCreate( $data );

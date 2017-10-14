@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2017-10-12 19:46:37
+-- Generation Time: 2017-10-14 08:58:21
 -- 服务器版本： 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -313,6 +313,7 @@ CREATE TABLE `visitors` (
   `ip` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `clicks` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `today_clicks` int(10) UNSIGNED NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

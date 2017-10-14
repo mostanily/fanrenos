@@ -46,7 +46,7 @@ class AdminController extends Controller
         $data['all_visitor_count'] = $this->visitor->all()->sum('clicks');
         $data['today_visitor_count'] = $this->visitor->where('created_at','>',$today_s)->orWhere(function($query) use ($today_s,$today_e){
             $query->where('updated_at','<',$today_e)->where('updated_at','>',$today_s);
-        })->sum('clicks');
+        })->sum('today_clicks');
         return view('admin.home.index',$data);
     }
 
@@ -55,7 +55,11 @@ class AdminController extends Controller
      * @return [type] [description]
      */
     public function getVisitor(){
-        $visitor = $this->visitor->orderBy('updated_at','desc')->get()->toArray();
+        $today_s = date('Y-m-d 00:00:00',time());
+        $today_e = date('Y-m-d 23:59:59',time());
+        $visitor = $this->visitor->where('created_at','>',$today_s)->orWhere(function($query) use ($today_s,$today_e){
+            $query->where('updated_at','<',$today_e)->where('updated_at','>',$today_s);
+        })->orderBy('updated_at','desc')->get()->toArray();
         return response()->json($visitor);
     }
 

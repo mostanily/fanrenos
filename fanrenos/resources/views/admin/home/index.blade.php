@@ -78,7 +78,8 @@
                                             <tr>
                                                 <th data-field="ip" data-halign="center" data-align="center">IP地址</th>
                                                 <th data-field="country" data-halign="center" data-align="center">访客地址</th>
-                                                <th data-field="clicks" data-halign="center" data-align="center" data-sortable="true">访问次数</th>
+                                                <th data-field="clicks" data-halign="center" data-align="center" data-sortable="true">总访问次数</th>
+                                                <th data-field="today_clicks" data-halign="center" data-align="center" data-sortable="true">当天访问次数</th>
                                                 <th data-field="created_at" data-halign="center" data-align="center" data-sortable="true">初次访问时间</th>
                                                 <th data-field="updated_at" data-halign="center" data-align="center" data-sortable="true">最新访问时间</th>
                                             </tr>
