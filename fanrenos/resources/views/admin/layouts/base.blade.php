@@ -259,7 +259,7 @@ BODY TAG OPTIONS:
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.2.3 -->
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 {{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> --}}
 <script src="{{asset('/plugins/iCheck/icheck.min.js')}}"></script>
 

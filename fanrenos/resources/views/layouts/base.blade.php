@@ -111,9 +111,9 @@
 
 <!-- jQuery 2.2.3 -->
 <!-- Bootstrap 3.3.6 -->
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-{{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-<script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script> --}}
+{{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+{{-- <script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {{-- <script src="{{asset('/markdown/highlight.pack.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
