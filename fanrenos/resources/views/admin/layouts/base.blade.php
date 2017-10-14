@@ -14,13 +14,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="shortcut icon" type="image/ico" href="{{asset('favicon.ico')}}">
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="{{asset('/bootstrap/css/bootstrap.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('/bootstrap/css/bootstrap.min.css')}}"> --}}
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('/libs/font-awesome/4.5.0/css/font-awesome.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{asset('/libs/ionicons/2.0.1/css/ionicons.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('/dist/css/AdminLTE.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('/dist/css/AdminLTE.min.css')}}"> --}}
+    <link href="https://cdn.bootcss.com/admin-lte/2.4.2/css/AdminLTE.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('layui/css/layui.css')}}">
 
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -30,20 +32,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{asset('/dist/css/skins/skin-blue.min.css')}}">
 
     <!--bootstrap-select-->
-    <link href="{{asset('plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.min.css" rel="stylesheet">
+    {{-- <link href="{{asset('plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet"> --}}
 
 
     <!-- iCheck -->
-    <link href="{{asset('plugins/iCheck/flat/grey.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/flat/red.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/flat/green.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('plugins/iCheck/flat/grey.css')}}" rel="stylesheet">
     <link href="{{asset('plugins/iCheck/flat/blue.css')}}" rel="stylesheet">
     <link href="{{asset('plugins/iCheck/flat/yellow.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/flat/purple.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/iCheck/flat/purple.css')}}" rel="stylesheet"> --}}
+    <link href="{{asset('plugins/iCheck/flat/red.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/iCheck/flat/green.css')}}" rel="stylesheet">
     <link href="{{asset('plugins/iCheck/all.css')}}" rel="stylesheet">
     <link href="{{asset('css/animate.min.css')}}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/jquery-tags-input/jquery.tagsinput.css')}}" />
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('plugins/jquery-tags-input/jquery.tagsinput.css')}}" /> --}}
+    <link href="https://cdn.bootcss.com/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
 
@@ -56,7 +60,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     {{--dataTabels--}}
-    <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet"> --}}
+    <link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
     {{--loding--}}
     <link href="{{asset('/dist/css/load/load.css')}}" rel="stylesheet">
@@ -254,20 +259,25 @@ BODY TAG OPTIONS:
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.2.3 -->
-<script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+{{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> --}}
 <script src="{{asset('/plugins/iCheck/icheck.min.js')}}"></script>
 
 <!--bootstrap-select-->
-<script src="{{asset('/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+<script src="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.min.js"></script>
+{{-- <script src="{{asset('/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script> --}}
 
-<script src="{{asset('js/jquery.isotope.js')}}"></script>
+{{-- <script src="{{asset('js/jquery.isotope.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/jquery.isotope/3.0.4/isotope.pkgd.min.js"></script>
 
 <!--tags input-->
-<script src="{{asset('plugins/jquery-tags-input/jquery.tagsinput.js')}}"></script>
+{{-- <script src="{{asset('plugins/jquery-tags-input/jquery.tagsinput.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
 <script src="{{asset('js/tagsinput-init.js')}}"></script>
 
 <!-- Bootstrap 3.3.6 -->
-<script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script>
+{{-- <script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('/dist/js/app.min.js')}}"></script>
 
@@ -281,10 +291,11 @@ BODY TAG OPTIONS:
 
 <!-- dataTables -->
 <script src="{{asset('/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('/plugins/datatables/dataTables.bootstrap.js')}}"></script>
+{{-- <script src="{{asset('/plugins/datatables/dataTables.bootstrap.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="{{asset('/plugins/tokenfield/dist/bootstrap-tokenfield.min.js')}}"></script>
 <script src="{{asset('/dist/js/common.js')}}"></script>
-<script src="{{asset('js/content.min.js?v=1.0.0')}}"></script>
+<script src="{{asset('js/content.min.js')}}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the

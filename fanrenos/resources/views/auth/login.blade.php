@@ -63,5 +63,4 @@
     </div>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{ asset('/plugins/layer/layer.min.js') }}"></script>
 @stop

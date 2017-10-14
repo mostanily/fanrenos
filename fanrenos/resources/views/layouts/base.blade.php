@@ -20,10 +20,12 @@
 <link rel="apple-touch-icon-precomposed" href="{{asset('favicon.ico')}}">
 <meta name="msapplication-TileImage" content="{{asset('favicon.ico')}}">
 <meta name="msapplication-TileColor" content="#0e90d2">
-<link href="{{asset('css/bootstrap.min.css')}}" rel='stylesheet' type='text/css' />
+{{-- <link href="{{asset('css/bootstrap.min.css')}}" rel='stylesheet' type='text/css' /> --}}
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('layui/css/layui.css')}}">
 <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{asset('/markdown/styles/monokai-sublime.css')}}">
+{{-- <link rel="stylesheet" href="{{asset('/markdown/styles/monokai-sublime.css')}}"> --}}
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css">
 <link rel="stylesheet" href="{{asset('css/amazeui.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/app_amaze.css')}}">
 <!-- //animation-effect -->
@@ -54,11 +56,11 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label>邮箱：</label>
-                                <input type="email" name="email" placeholder="请输入邮箱" class="form-control">
+                                <input type="email" name="email" placeholder="请输入邮箱" class="form-control" required="">
                             </div>
                             <div class="form-group">
                                 <label>密码：</label>
-                                <input type="password" name="password" placeholder="请输入密码" class="form-control">
+                                <input type="password" name="password" placeholder="请输入密码" class="form-control" required="">
                             </div>
                             <div>
                                 <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>登录</strong>
@@ -109,16 +111,20 @@
 
 <!-- jQuery 2.2.3 -->
 <!-- Bootstrap 3.3.6 -->
-<script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>  
-<script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('/markdown/highlight.pack.js')}}"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+{{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{{-- <script src="{{asset('/markdown/highlight.pack.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<script src="{{asset('js/amazeui.min.js')}}"></script>
+{{-- <script src="{{asset('js/amazeui.min.js')}}"></script> --}}
+<script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="{{asset('js/amazeui.ie8polyfill.min.js')}}"></script>
+<script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
 $(function(){
