@@ -28,8 +28,8 @@ class CommentController extends Controller
      */
     public function index(Request $request){
         $content = $request->get('content');
-        if(empty($content) || mb_strlen($content)<10){
-            return redirect()->back()->withErrors('评论内容不能为空或者内容少于10个字符！');
+        if(!Auth::check() || empty($content) || mb_strlen($content)<10){
+            return redirect()->back()->withErrors('未登录或评论内容不能为空或者内容少于10个字符！');
         }
         $reply_author = $request->get('comment_reply_author',NULL);
         $reply_author_name = $request->get('comment_reply_author_name',NULL);

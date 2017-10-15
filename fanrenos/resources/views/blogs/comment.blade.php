@@ -36,7 +36,7 @@
         @if ($post->comments->count())
             <h3 class="blog-comment">最新回复</h3>
             <ul class="am-comments-list am-comments-list-flip">
-                @foreach($comments as $key => $comment)
+                @foreach($comments as $k => $comment)
                     <li class="am-comment {{$comment->li_class}}">
                         <a href="{{$comment->user_url}}"><img alt="{{$comment->author_name}}" src="{{$comment->avatar}}" class="am-comment-avatar" width="48" height="48" /></a>
                         <div class="am-comment-main">
@@ -45,7 +45,7 @@
                                     <i class="am-icon-user"></i>
                                     <a href="{{$comment->user_url}}" class="am-comment-author">{{$comment->author_name}}</a>
                                     评论于 <time title="{{$comment->date_time}}">{{$comment->created_at}}</time>
-                                    <a href="#reply" class="reply-floor">#{{($key+1)}}</a>
+                                    <a href="#reply" class="reply-floor">#{{($k+1)}}</a>
                                 </div>
                                 <div class="am-comment-actions">
                                     {!!$comment->is_has_love.$comment->is_has_del.$comment->is_has_comment!!}
