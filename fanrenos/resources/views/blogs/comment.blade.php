@@ -134,12 +134,14 @@ $('.comment_del').click(function(){
 });
 
 var thumb_url = "{{url('/blog/comment/thumb')}}";
+//点赞
+var thumb_url = "{{url('/blog/comment/thumb')}}";
 $('.comment_like').click(function(){
     var e = $(this);
     var id = e.attr('data-comment');
     var num = 0;
-    if(e.find('big')){
-        var num = Number(e.find('big').text());
+    if(e.find('.like_t')){
+        num = Number(e.find('.like_t').text());
     }
     var thumb_type = 'thumbLike'
     if(e.children('i').hasClass('am-text-success')){
@@ -147,25 +149,33 @@ $('.comment_like').click(function(){
         thumb_type = 'thumbLikeOver';
         var new_num = num-1;
         if(new_num<=0){
-            e.find('big').remove();
+            e.find('.like_t').remove();
         }else{
-            e.find('big').html(new_num);
+            e.find('.like_t').html(new_num);
         }
         e.children('i').removeClass('am-text-success');
     }else{
         //即添加赞
         var new_num = num+1;
         if(new_num==1){
-            e.append('<big style="margin-left:3px;">1</big>');
+            e.append('<big class="like_t" style="margin-left:3px;">1</big>');
         }else{
-            e.find('big').html(new_num);
+            e.find('.like_t').html(new_num);
         }
         e.children('i').addClass('am-text-success');
     }
     var old_unlike = false;
+    var old_unlike_num = 0;
     if(e.next('.comment_unlike').children('i').hasClass('am-text-danger')){
         e.next('.comment_unlike').children('i').removeClass('am-text-danger');
         e.parents('header').next('div').removeClass('downvoted');
+        //同时也需要对不喜欢的数量进行递减
+        old_unlike_num = Number(e.next('.comment_unlike').find('.unlike_t').text());
+        if(old_unlike_num-1==0){
+            e.next('.comment_unlike').find('.unlike_t').remove();
+        }else{
+            e.next('.comment_unlike').find('.unlike_t').html(old_unlike_num-1);
+        }
         old_unlike = true;
     }
     var data='id='+id+'&thumb_type='+thumb_type;
@@ -183,22 +193,27 @@ $('.comment_like').click(function(){
                 if(handle=='Likecreate'){
                     //用户操作前是没有点赞的，所以要进行回退操作，回复原样
                     if(num==0){
-                        e.find('big').remove();
+                        e.find('.like_t').remove();
                     }else{
-                        e.find('big').html(num);
+                        e.find('.like_t').html(num);
                     }
                     e.children('i').removeClass('am-text-success');
                     if(old_unlike){
                         e.next('.comment_unlike').children('i').addClass('am-text-danger');
                         e.parents('header').next('div').addClass('downvoted');
+                        if(old_unlike_num==1){
+                            e.next('.comment_unlike').append('<big class="unlike_t" style="margin-left:3px;">1</big>');
+                        }else{
+                            e.next('.comment_unlike').find('.unlike_t').html(old_unlike_num);
+                        }
                     }
                     
                 }else if(handle=='Likedelete'){
                     //用户操作前是有点赞的
                     if(num==1){
-                        e.append('<big style="margin-left:3px;">1</big>');
+                        e.append('<big class="like_t" style="margin-left:3px;">1</big>');
                     }else{
-                        e.find('big').html(num);
+                        e.find('.like_t').html(num);
                     }
                     e.children('i').addClass('am-text-success');
                 }
@@ -209,34 +224,51 @@ $('.comment_like').click(function(){
     });
 });
 
+//鄙视
 $('.comment_unlike').click(function(){
     var e = $(this);
     var id = e.attr('data-comment');
 
     var thumb_type = 'thumbUnLike';
+    var unlike_num = 0;
+    if(e.find('.unlike_t')){
+        unlike_num = Number(e.find('.unlike_t').text());
+    }
     if(e.children('i').hasClass('am-text-danger')){
         //即取消不喜欢
         thumb_type = 'thumbUnLikeOver';
+        var new_unlike_num = unlike_num-1;
+        if(new_unlike_num<=0){
+            e.find('.unlike_t').remove();
+        }else{
+            e.find('.unlike_t').html(new_unlike_num);
+        }
         e.children('i').removeClass('am-text-danger');
         e.parents('header').next('div').removeClass('downvoted');
     }else{
         //即添加不喜欢
+        var new_unlike_num = unlike_num+1;
+        if(new_unlike_num==1){
+            e.append('<big class="unlike_t" style="margin-left:3px;">1</big>');
+        }else{
+            e.find('.unlike_t').html(new_unlike_num);
+        }
         e.children('i').addClass('am-text-danger');
         e.parents('header').next('div').addClass('downvoted');
     }
     var old_like = false;
     var num = 0;
-    if(e.prev('.comment_like').find('big')){
-        num = Number(e.prev('.comment_like').find('big').text());
+    if(e.prev('.comment_like').find('.like_t')){
+        num = Number(e.prev('.comment_like').find('.like_t').text());
     }
     if(e.prev('.comment_like').children('i').hasClass('am-text-success')){
         e.prev('.comment_like').children('i').removeClass('am-text-success');
         if(num!=0){
             var new_num = num-1;
             if(new_num==0){
-                e.prev('.comment_like').find('big').remove();
+                e.prev('.comment_like').find('.like_t').remove();
             }else{
-                e.prev('.comment_like').find('big').html(new_num);
+                e.prev('.comment_like').find('.like_t').html(new_num);
             }
         }
         old_unlike = true;
@@ -261,14 +293,19 @@ $('.comment_unlike').click(function(){
                     if(old_like){
                         e.prev('.comment_like').children('i').addClass('am-text-success');
                         if(num==1){
-                            e.prev('.comment_like').find('big').html('<big style="margin-left:3px;">1</big>');
+                            e.prev('.comment_like').find('.like_t').html('<big class="like_t" style="margin-left:3px;">1</big>');
                         }else{
-                            e.prev('.comment_like').find('big').html(num+1);
+                            e.prev('.comment_like').find('.like_t').html(num+1);
                         }
                     }
                     
                 }else if(handle=='UnLikedelete'){
                     //用户操作前是有不喜欢的
+                    if(unlike_num==1){
+                        e.append('<big class="unlike_t" style="margin-left:3px;">1</big>');
+                    }else{
+                        e.find('.unlike_t').html(unlike_num);
+                    }
                     e.children('i').addClass('am-text-danger');
                     e.parents('header').next('div').addClass('downvoted');
                 }

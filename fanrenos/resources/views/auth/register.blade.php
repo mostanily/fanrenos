@@ -13,7 +13,7 @@
             <form class="am-form" role="form" method="POST" action="{{ url('/register') }}">
                 {{ csrf_field() }}
                 <div class="am-input-group am-radius am-animation-slide-left">       
-                    <input type="text" name="name" class="am-radius" data-validation-message="用户名" placeholder="用户名" required/>
+                    <input type="text" name="name" class="am-radius" data-validation-message="用户名" placeholder="用户名，不支持中文" title="支持英文及数字，3到15个字符" pattern="^[0-9a-zA_Z]{3,15}$" required/>
                     <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>
                 </div>
                 <br>

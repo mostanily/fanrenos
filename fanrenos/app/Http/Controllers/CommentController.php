@@ -96,7 +96,8 @@ class CommentController extends Controller
                 if(!Auth::guest()){
                     //每个评论的点赞信息
                     $thumbs = $comment->thumbs()->get();
-                    $thumb_num = '';
+                    $like_thumb_num = '';
+                    $unlike_thumb_num = '';
                     $like_class = '';
                     $unlike_class = '';
                     $like_user = [];
@@ -112,7 +113,11 @@ class CommentController extends Controller
                         }
                     }
                     if(count($like_user)>0){
-                        $thumb_num = '<big style="margin-left:3px;">'.count($like_user).'</big>';
+                        $like_thumb_num = '<big class="like_t" style="margin-left:3px;">'.count($like_user).'</big>';
+                    }
+
+                    if(count($unlike_user)>0){
+                        $unlike_thumb_num = '<big class="unlike_t" style="margin-left:3px;">'.count($unlike_user).'</big>';
                     }
 
                     if(in_array($auth_uid, $like_user)){
@@ -128,7 +133,7 @@ class CommentController extends Controller
                     if($comment->user_id==$auth_uid){
                         $is_has_del = '<a class="comment_del" data-comment="'.$comment->id.'" href="javascript:;" title="删除"><i class="am-icon-trash am-icon-md"></i></a>';
                     }else{
-                        $is_has_love = '<a class="comment_like" data-comment="'.$comment->id.'" href="javascript:;" title="喜欢"><i class="am-icon-smile-o am-icon-md '.$like_class.'"></i>'.$thumb_num.'</a><a class="comment_unlike" data-comment="'.$comment->id.'" href="javascript:;" title="讨厌"><i class="am-icon-frown-o am-icon-md '.$unlike_class.'"></i></a>';
+                        $is_has_love = '<a class="comment_like" data-comment="'.$comment->id.'" href="javascript:;" title="喜欢"><i class="am-icon-smile-o am-icon-md '.$like_class.'"></i>'.$like_thumb_num.'</a><a class="comment_unlike" data-comment="'.$comment->id.'" href="javascript:;" title="讨厌"><i class="am-icon-frown-o am-icon-md '.$unlike_class.'"></i>'.$unlike_thumb_num.'</a>';
                     }
                 }
                 $content = json_decode($comment->content,true);
