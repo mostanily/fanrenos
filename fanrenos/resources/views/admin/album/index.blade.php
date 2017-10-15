@@ -51,7 +51,7 @@
                     <td style="text-align: center;">{{ $album->id }}</td>
                     <td>{{ $album->name }}</td>
                     <td>{{ $album->mime }}</td>
-                    <td><img src="{{ page_image_size($album->name,150,'albums')}}" onclick="preview_image('{{ page_image_size($album->name,1200,'albums') }}')"></td>
+                    <td><img src="{{ page_image_size($album->name,150,'albums')}}" onclick="preview_image('{{ page_image_size($album->name,1000,'albums') }}')"></td>
                     <td>{{ $album->updated_at }}</td>
                     <td>
                         <a href="javascript:;" data-id="{{$album->id}}" data-toggle="modal" data-target="#modal-delete" class="btn btn-xs btn-danger delBtn">

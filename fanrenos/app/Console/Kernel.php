@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function()
         {
             DB::table('visitors')->update(['today_clicks'=>0]);
-        })->everyMinute();
+        })->daily();
     }
 
     /**
