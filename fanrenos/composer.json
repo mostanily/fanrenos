@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "MomentD/fanrenos",
+    "description": "凡喵，个人站点，laravel博客",
+    "keywords": ["blog", "laravel","fanrenos"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -50,5 +50,11 @@
     },
     "config": {
         "preferred-install": "dist"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
     }
 }
