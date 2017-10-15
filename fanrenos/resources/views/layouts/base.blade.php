@@ -11,6 +11,7 @@
 <meta name="_token" content="{{ csrf_token() }}"/>
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="baidu-site-verification" content="fcPchwAded" />
 <link rel="icon" type="image/ico" href="{{asset('favicon.ico')}}">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" sizes="192x192" href="{{asset('favicon.ico')}}">
@@ -35,6 +36,15 @@
     }
 </style>
 @yield('css')
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e53f041994830ce53d57fb718e5d98a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 <body id="blog">
 @include('layouts.mainHeader')
@@ -147,6 +157,8 @@ $(function(){
     });
 });
 
+$('#modal-image-view').css({"min-width":"50%","left": "40%","top":"20%"});
+
 $('.del_sure').click(function(){
     var url = $('#url').val();
     var data = $('#data').val();
@@ -192,5 +204,19 @@ function toJump(url,target){
 }
 </script>
 @yield('js')
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 </body>
 </html>

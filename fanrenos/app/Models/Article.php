@@ -202,7 +202,7 @@ class Article extends Model
         $ul_e = '</ul><hr><p style="text-align: center;"><a href="'.url('/blog/more_comment?blogSlug='.$this->slug).'" target="_blank">点击查看更多评论>></a></p>';
         $li_comment = '';
         $comments = $this->comments()->with(['user','thumbs'])->orderBy('created_at','asc')->limit(10)->get();
-        $return = '';
+        $return = '还没有任何评论哦！赶快来抢个沙发啦！';
         //当前登陆用户的id
         if(!Auth::guest()){
             $auth_uid = Auth::user()->id;
@@ -290,7 +290,6 @@ class Article extends Model
             }
             $return = $ul_s.$li_comment.$ul_e;
         }
-        
         return $return;
     }
 

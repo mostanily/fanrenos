@@ -2,7 +2,12 @@
     'title' => $post->title.'|所有评论',
     'meta_description' => $post->meta_description ?: config('blog.description'),
 ])
-
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('css/sinaFaceAndEffec.css')}}" />
+<style type="text/css">
+    .face-icon{margin-right: 8px;cursor: pointer;}
+</style>
+@stop
 @section('content')
 <div class="am-g am-g-fixed blog-fixed">
     <div class="am-u-md-12 am-u-sm-12">
@@ -71,10 +76,10 @@
                     <textarea class="comment_content" rows="7" placeholder="一字千金" name="content"></textarea>
                 </div>
                 @if (Auth::guest())
-                    <p><a data-toggle="modal" class="btn btn-default" href="#modal-form" title="登陆后才能评论，点击登陆">登陆后评论</a>
+                    <p><span class="face-icon" title="添加表情" ><i class="am-icon-smile-o am-icon-md"></i></span><a data-toggle="modal" class="btn btn-default" href="#modal-form" title="登陆后才能评论，点击登陆">登陆后评论</a>
                     </p>
                 @else
-                    <p><button type="button" class="btn btn-primary comment_btn" title="登陆后才能评论">发表评论</button></p>
+                    <p><span class="face-icon" title="添加表情" ><i class="am-icon-smile-o am-icon-md"></i></span><button type="button" class="btn btn-primary comment_btn" title="登陆后才能评论">发表评论</button></p>
                 @endif
             </fieldset>
         </form>
@@ -84,7 +89,10 @@
 
 @stop
 @section('js')
-<script type="text/javascript" src="{{ asset('/plugins/layer/layer.min.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ asset('/plugins/layer/layer.min.js') }}"></script> --}}
+<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/sinaFaceAndEffec.js')}}"></script>
 <script type="text/javascript">
 @if (count($errors) > 0)
     var error = "{{$errors->first()}}";
@@ -98,6 +106,16 @@
         content: '<p style="margin:0px;font-size:18px;text-align:center;">'+error+'</p>',
     });
 @endif
+
+// 绑定表情
+$('.face-icon').SinaEmotion($('.comment_content'));
+//表情解析
+window.onload = function(){
+    $('li.am-comment').each(function(){
+        var inputText = $(this).find('.am-comment-bd').html();
+        $(this).find('.am-comment-bd').html(AnalyticEmotion(inputText));
+    });
+}
 
 $('.comment_reply').click(function(){
     var at = $(this).attr('data-comment');

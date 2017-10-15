@@ -28,7 +28,15 @@
     .log-footer,.log-footer a{color: #fff;}
     .log-footer a:hover{color: #10D4AF;}
 </style>
-<!-- //animation-effect -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e53f041994830ce53d57fb718e5d98a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 <body>
     <header>

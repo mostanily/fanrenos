@@ -3,7 +3,10 @@
     'meta_description' => $post->meta_description ?: config('blog.description'),
 ])
 @section('css')
-
+<link rel="stylesheet" type="text/css" href="{{asset('css/sinaFaceAndEffec.css')}}" />
+<style type="text/css">
+    .face-icon{margin-right: 8px;cursor: pointer;}
+</style>
 @stop
 @section('content')
 <!-- content srart -->
@@ -86,14 +89,9 @@
                 @endif
             @endif
         </ul>
-        @if ($post->comments->count())
-            <hr>
-            <h3 class="blog-comment">最新回复</h3>
-            {!!  $post->commentList() !!}
-        @else
-            <hr>
-            <p>还没有任何评论哦！赶快来抢个沙发啦！</p>
-        @endif
+        <h3 class="blog-comment">最新回复</h3>
+        <hr>
+        {!!  $post->commentList() !!}
         <hr>
         <form class="am-form am-g" id="comment-form" action="javascript:;" method="POST">
             {{ csrf_field() }}
@@ -108,10 +106,10 @@
                     <textarea class="comment_content" rows="7" placeholder="一字千金" name="content"></textarea>
                 </div>
                 @if (Auth::guest())
-                    <p><a data-toggle="modal" class="btn btn-default" href="#modal-form" title="登陆后才能评论，点击登陆">登陆后评论</a>
+                    <p><span class="face-icon" title="添加表情" ><i class="am-icon-smile-o am-icon-md"></i></span><a data-toggle="modal" class="btn btn-default" href="#modal-form" title="登陆后才能评论，点击登陆">登陆后评论</a>
                     </p>
                 @else
-                    <p><button type="button" class="btn btn-primary comment_btn" title="登陆后才能评论">发表评论</button></p>
+                    <p><span class="face-icon" title="添加表情" ><i class="am-icon-smile-o am-icon-md"></i></span><button type="button" class="btn btn-primary comment_btn" title="登陆后才能评论">发表评论</button></p>
                 @endif
             </fieldset>
         </form>
@@ -121,7 +119,10 @@
 @stop
 
 @section('js')
-<script type="text/javascript" src="{{ asset('/plugins/layer/layer.min.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ asset('/plugins/layer/layer.min.js') }}"></script> --}}
+<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/sinaFaceAndEffec.js')}}"></script>
 <script type="text/javascript">
 @if (count($errors) > 0)
     var error = "{{$errors->first()}}";
@@ -135,6 +136,15 @@
         content: '<p style="margin:0px;font-size:18px;text-align:center;">'+error+'</p>',
     });
 @endif
+
+// 绑定表情
+$('.face-icon').SinaEmotion($('.comment_content'));
+window.onload = function(){
+    $('li.am-comment').each(function(){
+        var inputText = $(this).find('.am-comment-bd').html();
+        $(this).find('.am-comment-bd').html(AnalyticEmotion(inputText));
+    });
+}
 
 $(document).ready(function() {  
     //为超链接加上target='_blank'属性  

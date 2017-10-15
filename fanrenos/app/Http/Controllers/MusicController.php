@@ -22,7 +22,7 @@ class MusicController extends Controller
     public function index(){
 
         $musicData = Cache::remember(getCacheRememberKey(), config('blog.cache_time.default'), function () {
-            $music = $this->music->orderBy('artist','asc')->paginate(16);
+            $music = $this->music->orderBy('updated_at','desc')->orderBy('artist','asc')->paginate(16);
             $max = count($music);
             foreach ($music as $key => $value) {
                 if($key==0){

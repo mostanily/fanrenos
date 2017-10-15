@@ -62,16 +62,12 @@ class CommentController extends Controller
      */
     public function showMoreComment(Request $request){
         $slug = $request->get('blogSlug');
-
-        $article = Cache::remember(getCacheRememberKey(), config('blog.cache_time.default'), function () use($slug) {
-            $article = $this->article->with(['tags','comments'])->whereSlug($slug)->firstOrFail();
-            $raw = json_decode($article->content,true);
-            $max_raw = mb_substr($raw['raw'],0,300).'......';
-            $article->content_raw = $max_raw;
-            $article->page_image = empty($article->page_image) ? '' : $path.$article->page_image;
-
-            return $article;
-        });
+        
+        $article = $this->article->with(['tags','comments'])->whereSlug($slug)->firstOrFail();
+        $raw = json_decode($article->content,true);
+        $max_raw = mb_substr($raw['raw'],0,300).'......';
+        $article->content_raw = $max_raw;
+        $article->page_image = empty($article->page_image) ? '' : $this->path.$article->page_image;
 
         //回复的内容
         $comments = $article->comments()->with(['user','thumbs'])->orderBy('created_at','asc')->paginate(20);
@@ -187,8 +183,8 @@ class CommentController extends Controller
                 foreach ($ids as $key => $value) {
                     $id_arr[] = $value->id;
                 }
+               $this->thumb->destroy($id_arr); 
             }
-            $this->thumb->destroy($id_arr);
             $comment->delete();
             $response = ['status'=>'success'];
         }else{

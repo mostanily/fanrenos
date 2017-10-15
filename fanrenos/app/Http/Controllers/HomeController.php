@@ -134,7 +134,7 @@ class HomeController extends Controller
 
         $postData = Cache::remember(getCacheRememberKey(), config('blog.cache_time.default'), function () use ($tag,$slug) {
             
-            $post = Article::with(['tags','comments'])->whereSlug($slug)->firstOrFail();
+            $post = Article::with(['tags'])->whereSlug($slug)->firstOrFail();
             $post->page_image = empty($post->page_image) ? '' : $this->path.$post->page_image;
             $content = json_decode($post->content,true);
             $post->content_html = $content['html'];
@@ -144,7 +144,6 @@ class HomeController extends Controller
             return ['post' => $post,'tag' => $tag];
         });
 
-        
         return view('blogs.post', $postData);
     }
 
