@@ -72,7 +72,7 @@
                 @endif
             @else
                 @if ($post->newerPost($tag))
-                    <li class="am-pagination-prev">
+                    <li class="am-pagination-next">
                         <a href="{!! $post->newerPost($tag)->url($tag) !!}">
                             <i class="fa fa-long-arrow-left fa-lg"></i>
                             {{$post->newerPost($tag)->title}}{{ $tag ? '--'.$tag->tag : '' }}
@@ -80,7 +80,7 @@
                     </li>
                 @endif
                 @if ($post->olderPost($tag))
-                    <li class="am-pagination-next">
+                    <li class="am-pagination-prev">
                         <a href="{!! $post->olderPost($tag)->url($tag) !!}">
                             {{$post->olderPost($tag)->title}}{{ $tag ? '--'.$tag->tag : '' }}
                             <i class="fa fa-long-arrow-right"></i>

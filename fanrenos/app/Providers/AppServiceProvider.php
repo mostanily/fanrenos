@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use DB;
 use App\Models\Article;
+use App\Models\Link;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,10 +30,13 @@ class AppServiceProvider extends ServiceProvider
 
             $hot_articles = Article::orderBy('view_count','desc')->limit(10)->get();
 
+            $links = Link::orderBy('created_at','asc')->get();
+
             $view_data = [
                 'allTag' => $allTag,
                 'latestArticle' => $latest_articles,
-                'hotArticle' => $hot_articles
+                'hotArticle' => $hot_articles,
+                'links' => $links,
             ];
 
             $view->with($view_data);

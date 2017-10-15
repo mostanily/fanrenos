@@ -53,7 +53,9 @@
         <div class="blog-sidebar-widget blog-bor">
             <h2 class="blog-title"><span>友链</span></h2>
             <ul class="am-list">
-                <li><a href="http://www.fanrenos.com">凡喵</a></li>
+                @foreach($links as $link)
+                    <li><a href="{{$link->link}}">{{$link->name}}</a></li>
+                @endforeach
             </ul>
         </div>
     </div>
