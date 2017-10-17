@@ -422,6 +422,14 @@ BODY TAG OPTIONS:
         }
     }
 
+    function chcheClear(){
+        $.get("{{url('dashboard/clear/cache')}}",function(msg){
+            if(msg.status=='success'){
+                mydialog('缓存清除成功！');
+            }
+        });
+    }
+
     $('.close-myalert').click(function(){
         $('#MyalertModal>.modal-dialog>.modal-content>.modal-body').children('p').html("");
         $('#MyalertModal').modal('hide');

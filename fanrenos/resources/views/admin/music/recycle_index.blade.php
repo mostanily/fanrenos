@@ -22,39 +22,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title">已经删除音乐列表</h3>
             </div>
-            <table id="posts-table" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th style="text-align: center;">ID</th>
-                    <th>音乐名称</th>
-                    <th>演唱者</th>
-                    <th>文件类型</th>
-                    <th>文件大小</th>
-                    <th>播放时长</th>
-                    <th data-sortable="false">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach ($musics as $music)
-                <tr>
-                    <td style="text-align: center;">{{ $music->id }}</td>
-                    <td>{{ $music->title }}</td>
-                    <td>{{ $music->artist}}</td>
-                    <td>{{ $music->mime_type }}</td>
-                    <td>{{ $music->size}}</td>
-                    <td>{{ $music->play_time }}</td>
-                    <td>
-                        <a href="javascript:;" class="btn btn-xs btn-info" onclick="recoveryDel('music',{{$music->id}})">
-                            <i class="fa fa-hand-o-right"></i> 恢复
-                        </a>
-                        <a href="javascript:;" attr="{{$music->id}}" class="btn btn-xs btn-danger realDel">
-                            <i class="fa fa-trash"></i> 彻底删除
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-            </table>
+            <table id="normal-table"></table>
         </div>
     </div>
 </div>
@@ -88,43 +56,92 @@
 @stop
 
 @section('js')
-    <script>
-        $(document).on('click',".realDel",function () {
-            var id = $(this).attr('attr');
-            var d_u = "{{url('/dashboard/music/real_delete')}}"+'/'+id;
-            $('.lead').text('确认要彻底删除此音乐么？');
-            $('.deleteForm').attr('action', d_u);
-            $("#modal-delete").modal();
-        });
+<script>
+$(document).on('click', ".realDel", function() {
+    var id = $(this).attr('attr');
+    var d_u = "{{url('/dashboard/music/real_delete')}}" + '/' + id;
+    $('.lead').text('确认要彻底删除此音乐么？');
+    $('.deleteForm').attr('action', d_u);
+    $("#modal-delete").modal();
+});
 
-        $(function() {
-        $("#posts-table").DataTable({
-            language: {
-                "sProcessing": "处理中...",
-                "sLengthMenu": "显示 _MENU_ 项结果",
-                "sZeroRecords": "没有匹配结果",
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                "sInfoPostFix": "",
-                "sSearch": "搜索:",
-                "sUrl": "",
-                "sEmptyTable": "表中数据为空",
-                "sLoadingRecords": "载入中...",
-                "sInfoThousands": ",",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "上页",
-                    "sNext": "下页",
-                    "sLast": "末页"
-                },
-                "oAria": {
-                    "sSortAscending": ": 以升序排列此列",
-                    "sSortDescending": ": 以降序排列此列"
-                }
-            },
-            order: [[3, "desc"]]
-        });
+$(function() {
+    initTable();
+});
+function initTable() {
+    var requestUrl = "{{url('dashboard/music/recycle_index_table')}}";
+    var $table = $('#normal-table');
+    $table.bootstrapTable({
+        url: requestUrl,
+        method: 'get', //请求方式（*）
+        striped: true, //是否显示行间隔色  
+        cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）  
+        pagination: true, //是否显示分页（*）
+        sortOrder: "asc", //排序方式  
+        pageNumber: 1, //初始化加载第一页，默认第一页
+        pageSize: 20, //每页的记录行数（*）
+        pageList: [10, 20, 50, 100], //可供选择的每页的行数（*）  
+        search: true,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+        showColumns: true,     //是否显示所有的列  
+        showRefresh: true,     //是否显示刷新按钮  
+        minimumCountColumns: 2, //最少允许的列数  
+        clickToSelect: true, //是否启用点击选中行  
+        uniqueId: "id", //每一行的唯一标识，一般为主键列  
+        showToggle: true, //是否显示详细视图和列表视图的切换按钮  
+        columns: [ {
+            title: 'ID',
+            field: 'id',
+            visible: false,
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '音乐名称',
+            field: 'title',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '演唱者',
+            field: 'artist',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '文件类型',
+            field: 'mime_type',
+            align: 'center',
+            valign: 'middle'
+        }, {
+            title: '文件大小',
+            field: 'size',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '播放时长',
+            field: 'play_time',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '上传时间',
+            field: 'created_at',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '操作',
+            field: '#',
+            align: 'center',
+            valign: 'middle',
+            formatter: function(value, row, index) {
+                var d = '<a href="javascript:;" attr="'+row.id+'" class="btn btn-xs btn-danger realDel"><i class="fa fa-trash"></i> 彻底删除</a>';
+                var up = '<a href="javascript:;" class="btn btn-xs btn-info" onclick="recoveryDel(\'music\','+row.id+')"><i class="fa fa-hand-o-right"></i> 恢复</a>';
+                return up + d;
+            }
+        }]
     });
-    </script>
+}
+</script>
 @stop

@@ -11,6 +11,7 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     Route::get('/index', function () {
         return redirect('/dashboard/home');
     });
+    Route::get('/clear/cache','AdminController@cacheClear');
     Route::get('/home', ['as' => 'dashboard.home', 'uses' => 'AdminController@index']);
     Route::get('/visitor', 'AdminController@getVisitor');
     Route::get('/recovery/{handle}/{id}','AdminController@recycle_normal');//恢复被软删除的信息
@@ -26,6 +27,8 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     //文章管理
     Route::get('/article/index', ['as' => 'dashboard.article.index', 'uses' => 'ArticleController@index']);
     Route::get('/article/recycle/index', ['as' => 'dashboard.article_recycle.index', 'uses' => 'ArticleController@recycle_index']);//回收站
+    Route::get('/article/index_table','ArticleController@indexTable');
+    Route::get('/article/recycle_index_table','ArticleController@recycle_indexTable');
     Route::post('/article/real_delete/{id}',['as' => 'dashboard.real_delete.index', 'uses' => 'ArticleController@real_delete']);//彻底删除文章
     Route::resource('article', 'ArticleController', ['names' => ['edit'=>'dashboard.article.edit','update' => 'dashboard.article.edit','create'=>'dashboard.article.create', 'store' => 'dashboard.article.create','destroy'=>'dashboard.article.destroy']]);
 
@@ -52,6 +55,8 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     
     //音乐管理
     Route::get('/music/index',['as' => 'dashboard.music.index', 'uses' => 'MusicController@index']);
+    Route::get('/music/index_table','MusicController@indexTable');
+    Route::get('/music/recycle_index_table','MusicController@recycle_indexTable');
     Route::get('/music/recycle/index', ['as' => 'dashboard.music_recycle.index', 'uses' => 'MusicController@recycle_index']);//回收站
     Route::post('/music/real_delete/{id}',['as' => 'dashboard.real_delete.index', 'uses' => 'MusicController@real_delete']);//彻底删除
     Route::get('/music/update_info',['as'=>'dashboard.music.update_info','uses'=>'MusicController@uploadMusic']);//更新新的音乐文件
@@ -64,6 +69,8 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     //相册管理
     Route::get('/album/index',['as' => 'dashboard.album.index', 'uses' => 'AlbumController@index']);
     Route::get('/album/recycle/index', ['as' => 'dashboard.album_recycle.index', 'uses' => 'AlbumController@recycle_index']);//回收站
+    Route::get('/album/index_table','AlbumController@indexTable');
+    Route::get('/album/recycle_index_table','AlbumController@recycle_indexTable');
     Route::post('/album/real_delete/{id}',['as' => 'dashboard.real_delete.index', 'uses' => 'AlbumController@real_delete']);//彻底删除
     Route::get('/album/update_info',['as'=>'dashboard.album.update_info','uses'=>'AlbumController@uploadAlbum']);
     Route::post('/album/update_info',['as'=>'dashboard.album.update_info','uses'=>'AlbumController@uploadAlbum']);

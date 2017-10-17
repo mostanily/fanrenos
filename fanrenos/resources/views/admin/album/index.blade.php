@@ -32,36 +32,7 @@
                 <button type="button" class="btn btn-info btn-sm" id="all_select" style="margin-bottom: 5px;">全选</button>
                 <button type="button" class="btn btn-warning btn-sm" onclick="batchDel('album')" style="margin: 0px 0px 5px 5px;">批量删除</button>
             </div>
-            <table id="posts-table" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th data-sortable="false" class="hidden-sm"></th>
-                    <th style="text-align: center;">ID</th>
-                    <th>图片名称</th>
-                    <th>文件类型</th>
-                    <th>图像</th>
-                    <th>更新时间</th>
-                    <th data-sortable="false">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach ($albums as $album)
-                <tr>
-                    <td>{!!$album->select_input!!}</td>
-                    <td style="text-align: center;">{{ $album->id }}</td>
-                    <td>{{ $album->name }}</td>
-                    <td>{{ $album->mime }}</td>
-                    <td><img src="{{ page_image_size($album->name,150,'albums')}}" onclick="preview_image('{{ page_image_size($album->name,1000,'albums') }}')"></td>
-                    <td>{{ $album->updated_at }}</td>
-                    <td>
-                        <a href="javascript:;" data-id="{{$album->id}}" data-toggle="modal" data-target="#modal-delete" class="btn btn-xs btn-danger delBtn">
-                            <i class="fa fa-times-circle"></i> 删除
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-            </table>
+            <table id="normal-table"></table>
         </div>
     </div>
 
@@ -136,44 +107,90 @@
 
 @section('js')
 <script>
-    $(function() {
-        $("#posts-table").DataTable({
-            language: {
-                "sProcessing": "处理中...",
-                "sLengthMenu": "显示 _MENU_ 项结果",
-                "sZeroRecords": "没有匹配结果",
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                "sInfoPostFix": "",
-                "sSearch": "搜索:",
-                "sUrl": "",
-                "sEmptyTable": "表中数据为空",
-                "sLoadingRecords": "载入中...",
-                "sInfoThousands": ",",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "上页",
-                    "sNext": "下页",
-                    "sLast": "末页"
-                },
-                "oAria": {
-                    "sSortAscending": ": 以升序排列此列",
-                    "sSortDescending": ": 以降序排列此列"
-                }
-            },
-            order: [[5, "desc"]]
-        });
+$(function() {
+    initTable();
 
-        $(document).on('click','.delBtn',function(){
-            var id = $(this).attr('data-id');
-            var u = "{{ url('dashboard/album') }}"+'/'+id;
-            $('#modal-delete').find('form').prop('action',u);
-        });
-        $(document).on('click','.upload_album',function(){
-            var u = "{{ url('/dashboard/album/update_info') }}";
-            $('#modal-upload-album').find('form').prop('action',u);
-        });
+    $(document).on('click', '.delBtn', function() {
+        var id = $(this).attr('data-id');
+        var u = "{{ url('dashboard/album') }}" + '/' + id;
+        $('#modal-delete').find('form').prop('action', u);
     });
+    $(document).on('click', '.upload_album', function() {
+        var u = "{{ url('/dashboard/album/update_info') }}";
+        $('#modal-upload-album').find('form').prop('action', u);
+    });
+});
+function initTable() {
+    var requestUrl = "{{url('dashboard/album/index_table')}}";
+    var $table = $('#normal-table');
+    $table.bootstrapTable({
+        url: requestUrl,
+        method: 'get', //请求方式（*）
+        striped: true, //是否显示行间隔色  
+        cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）  
+        pagination: true, //是否显示分页（*）
+        sortOrder: "asc", //排序方式  
+        pageNumber: 1, //初始化加载第一页，默认第一页
+        pageSize: 20, //每页的记录行数（*）
+        pageList: [10, 20, 50, 100], //可供选择的每页的行数（*）  
+        search: true,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+        showColumns: true,     //是否显示所有的列  
+        showRefresh: true,     //是否显示刷新按钮  
+        minimumCountColumns: 2, //最少允许的列数  
+        clickToSelect: true, //是否启用点击选中行  
+        uniqueId: "id", //每一行的唯一标识，一般为主键列  
+        showToggle: true, //是否显示详细视图和列表视图的切换按钮  
+        columns: [{
+            title: '多选框',
+            field: 'select_input',
+            align: 'center',
+            valign: 'middle',
+            formatter: function(value, row, index){
+                return '<label><input class="all_select" type="checkbox" value="'+row.id+'"></label>';
+            }
+        }, {
+            title: 'ID',
+            field: 'id',
+            visible: false,
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '图片名称',
+            field: 'name',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '文件类型',
+            field: 'mime',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '图像',
+            field: 'mime_type',
+            align: 'center',
+            valign: 'middle',
+            formatter: function(value,row,index){
+                return '<img src="'+row.show_img+'" onclick="preview_image(\''+row.full_img+'\')">';
+            }
+        }, {
+            title: '更新时间',
+            field: 'updated_at',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+        }, {
+            title: '操作',
+            field: '#',
+            align: 'center',
+            valign: 'middle',
+            formatter: function(value, row, index) {
+                return '<a href="javascript:;" data-id="'+row.id+'" data-toggle="modal" data-target="#modal-delete" class="btn btn-xs btn-danger delBtn"><i class="fa fa-times-circle"></i> 删除</a>';
+            }
+        }]
+    });
+}
 </script>
 @stop

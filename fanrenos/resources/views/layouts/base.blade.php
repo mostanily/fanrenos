@@ -12,6 +12,7 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
 <meta name="baidu-site-verification" content="fcPchwAded" />
+<meta name="360-site-verification" content="8df417e6325cf461efed9b28d3cd6949" />
 <link rel="icon" type="image/ico" href="{{asset('favicon.ico')}}">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" sizes="192x192" href="{{asset('favicon.ico')}}">

@@ -21,6 +21,9 @@
           <li class="" >
             <a href="{{url('/')}}" title="返回主页" target="_blank"><i class="fa fa-desktop"></i></a>
           </li>
+          <li class="" >
+            <a href="javascript:;" onclick="chcheClear()" title="清除缓存"><i class="fa fa-refresh"></i></a>
+          </li>
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

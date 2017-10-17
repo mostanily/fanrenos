@@ -47,11 +47,15 @@ class ArticleController extends Controller
     public function index()
     {
         $soft = $this->article->withoutGlobalScopes()->onlyTrashed()->count();
+        return view('admin.article.index',['soft'=>$soft]);
+    }
+
+    public function indexTable(){
         $article = $this->article->all();
         foreach ($article as $key => $value) {
-            $article[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
+            $article[$key]->published_at_format = $value->published_at->format('j-M-y g:ia');
         }
-        return view('admin.article.index',['articles'=>$article,'soft'=>$soft]);
+        return response()->json($article->toArray());
     }
 
     /**
@@ -59,8 +63,15 @@ class ArticleController extends Controller
      * @return [type] [description]
      */
     public function recycle_index(){
+        return view('admin.article.recycle_index');
+    }
+
+    public function recycle_indexTable(){
         $article = $this->article->withoutGlobalScopes()->onlyTrashed()->get();
-        return view('admin.article.recycle_index',['articles'=>$article]);
+        foreach ($article as $key => $value) {
+            $article[$key]->published_at_format = $value->published_at->format('j-M-y g:ia');
+        }
+        return response()->json($article->toArray());
     }
 
     /**

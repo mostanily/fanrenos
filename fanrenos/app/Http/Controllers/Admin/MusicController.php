@@ -34,11 +34,12 @@ class MusicController extends Controller
     public function index()
     {
         $soft = $this->music->onlyTrashed()->count();
-        $music = $this->music->all();
-        foreach ($music as $key => $value) {
-            $music[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
-        }
-        return view('admin.music.index',['musics'=>$music,'soft'=>$soft]);
+        return view('admin.music.index',['soft'=>$soft]);
+    }
+
+    public function indexTable(){
+        $music = $this->music->all()->toArray();
+        return response()->json($music);
     }
 
     /**
@@ -46,8 +47,12 @@ class MusicController extends Controller
      * @return [type] [description]
      */
     public function recycle_index(){
-        $music = $this->music->onlyTrashed()->get();
-        return view('admin.music.recycle_index',['musics'=>$music]);
+        return view('admin.music.recycle_index');
+    }
+
+    public function recycle_indexTable(){
+        $music = $this->music->onlyTrashed()->get()->toArray();
+        return response()->json($music);
     }
 
     /**

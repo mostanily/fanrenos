@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Auth;
+use Artisan;
 use App\User;
 use App\Models\Tag;
 use App\Models\Article;
@@ -101,5 +102,15 @@ class AdminController extends Controller
         $this->$model->destroy($id_arr);
 
         return response()->json(['status'=>'success']);
+    }
+
+    /**
+     * 清除缓存
+     * @return [type] [description]
+     */
+    public function cacheClear(){
+        Artisan::call('cache:clear');
+        $response = ['status'=>'success'];
+        return response()->json($response);
     }
 }

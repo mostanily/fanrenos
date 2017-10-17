@@ -13,10 +13,12 @@ html {
     height:100%;
     background:#fff;
 }
+.pagination{margin-left: 20%!important;}
 </style>
 @stop
 
 @section('content')
+{!! $page_album->render() !!}
 <canvas id="canvas">你的浏览器不支持HTML5画布技术，请使用谷歌浏览器。</canvas>
 @stop
 @section('js')
@@ -256,17 +258,23 @@ html {
             {img:"{{ page_image_size($album->name,1000,'albums')}}", x:{{-1000+$k*1000}}, y:0, z:{{$eachNum*500}}, nx:0, nz:1},
         @endforeach
         // east
-        @foreach($albums[1] as $k => $album)
-            {img:"{{ page_image_size($album->name,1000,'albums')}}", x:{{$eachNum*500}}, y:0, z:{{1000-($k-$eachNum)*1000}}, nx:-1, nz:0},
-        @endforeach
+        @if(isset($albums[1]))
+            @foreach($albums[1] as $k => $album)
+                {img:"{{ page_image_size($album->name,1000,'albums')}}", x:{{$eachNum*500}}, y:0, z:{{1000-($k-$eachNum)*1000}}, nx:-1, nz:0},
+            @endforeach
+        @endif
         // south
-        @foreach($albums[2] as $k => $album)
-            {img:"{{ page_image_size($album->name,1000,'albums')}}", x:{{1000-($k-$eachNum*2)*1000}}, y:0, z:{{-$eachNum*500}}, nx:0, nz:-1},
-        @endforeach
+        @if(isset($albums[2]))
+            @foreach($albums[2] as $k => $album)
+                {img:"{{ page_image_size($album->name,1000,'albums')}}", x:{{1000-($k-$eachNum*2)*1000}}, y:0, z:{{-$eachNum*500}}, nx:0, nz:-1},
+            @endforeach
+        @endif
         // west
-        @foreach($albums[3] as $k => $album)
-            {img:"{{ page_image_size($album->name,1000,'albums')}}", x:{{-$eachNum*500}}, y:0, z:{{-1000+($k-$eachNum*3)*1000}}, nx:1, nz:0},
-        @endforeach
+        @if(isset($albums[3]))
+            @foreach($albums[3] as $k => $album)
+                {img:"{{ page_image_size($album->name,1000,'albums')}}", x:{{-$eachNum*500}}, y:0, z:{{-1000+($k-$eachNum*3)*1000}}, nx:1, nz:0},
+            @endforeach
+        @endif
     ],
     structure:[
         {

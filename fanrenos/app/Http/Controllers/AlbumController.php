@@ -15,8 +15,8 @@ class AlbumController extends Controller
      */
     public function index(){
 
-        $data = Cache::remember(getCacheRememberKey(), config('blog.cache_time.default'), function () {
-            $album = Album::all();
+        $data = Cache::remember(getCacheRememberKey(), config('blog.cache_time.extra'), function () {
+            $album = Album::orderBy('name','asc')->paginate(40);
             $count = count($album);
             $chunk = ceil($count/4);
             $new_album = $album->chunk($chunk);
@@ -25,6 +25,7 @@ class AlbumController extends Controller
                 'subtitle' => config('blog.subtitle'),
                 'page_image' => config('blog.page_image'),
                 'meta_description' => config('blog.description'),
+                'page_album' => $album,
                 'albums' => $new_album,
                 'eachNum' => count($new_album[0]),
             ];

@@ -37,11 +37,16 @@ class AlbumController extends Controller
      */
     public function index(){
         $soft = $this->album->onlyTrashed()->count();
-        $albums = $this->album->all();
-        foreach ($albums as $key => $value) {
-            $albums[$key]->select_input = '<label><input class="all_select" type="checkbox" value="'.$value->id.'"></label>';
+        return view('admin.album.index',['soft'=>$soft]);
+    }
+
+    public function indexTable(){
+        $album = $this->album->all();
+        foreach ($album as $key => $value) {
+            $album[$key]->show_img = page_image_size($value->name,150,'albums');
+            $album[$key]->full_img = page_image_size($value->name,1000,'albums');
         }
-        return view('admin.album.index',['albums'=>$albums,'soft'=>$soft]);
+        return response()->json($album->toArray());
     }
 
     /**
@@ -49,8 +54,16 @@ class AlbumController extends Controller
      * @return [type] [description]
      */
     public function recycle_index(){
-        $albums = $this->album->onlyTrashed()->get();
-        return view('admin.album.recycle_index',['albums'=>$albums]);
+        return view('admin.album.recycle_index');
+    }
+
+    public function recycle_indexTable(){
+        $album = $this->album->onlyTrashed()->get();
+        foreach ($album as $key => $value) {
+            $album[$key]->show_img = page_image_size($value->name,150,'albums');
+            $album[$key]->full_img = page_image_size($value->name,1000,'albums');
+        }
+        return response()->json($album->toArray());
     }
 
     /**
