@@ -12,45 +12,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="_token" content="{{ csrf_token() }}"/>
     <link rel="shortcut icon" type="image/ico" href="{{asset('favicon.ico')}}">
-    <link href="{{asset('css/style.min.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Bootstrap 3.3.6 -->
-    {{-- <link rel="stylesheet" href="{{asset('/bootstrap/css/bootstrap.min.css')}}"> --}}
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('/libs/font-awesome/4.5.0/css/font-awesome.min.css')}}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{asset('/libs/ionicons/2.0.1/css/ionicons.min.css')}}">
     <!-- Theme style -->
-    {{-- <link rel="stylesheet" href="{{asset('/dist/css/AdminLTE.min.css')}}"> --}}
     <link href="https://cdn.bootcss.com/admin-lte/2.4.2/css/AdminLTE.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('layui/css/layui.css')}}">
-
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
-    -->
-    <link rel="stylesheet" href="{{asset('/dist/css/skins/skin-blue.min.css')}}">
 
     <!--bootstrap-select-->
     <link href="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.min.css" rel="stylesheet">
-    {{-- <link href="{{asset('plugins/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet"> --}}
 
-
-    <!-- iCheck -->
-    {{-- <link href="{{asset('plugins/iCheck/flat/grey.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/flat/blue.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/flat/yellow.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/flat/purple.css')}}" rel="stylesheet"> --}}
-    <link href="{{asset('plugins/iCheck/flat/red.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/flat/green.css')}}" rel="stylesheet">
-    <link href="{{asset('plugins/iCheck/all.css')}}" rel="stylesheet">
-    <link href="{{asset('css/animate.min.css')}}" rel="stylesheet">
-
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('plugins/jquery-tags-input/jquery.tagsinput.css')}}" /> --}}
     <link href="https://cdn.bootcss.com/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
 
+    <link href="https://cdn.bootcss.com/iCheck/1.0.2/skins/flat/green.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/iCheck/1.0.2/skins/flat/red.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/iCheck/1.0.2/skins/all.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -60,14 +36,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     {{--dataTabels--}}
-    {{-- <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet"> --}}
     <link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
-    {{--loding--}}
-    <link href="{{asset('/dist/css/load/load.css')}}" rel="stylesheet">
-
-    <link href="{{asset('css/upload-img.css')}}" rel="stylesheet">
+    <link href="{{asset('css/dashboard_public.css')}}" rel="stylesheet">
     @yield('css')
+    <style type="text/css">
+        .page-heading{margin: 5px 0px;font-size: 14px;font-weight: 600;}
+        .panel-title{font-size: 16px;}
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -167,7 +143,7 @@ BODY TAG OPTIONS:
             </div>
 
             <div class="page-heading">
-                <ul class="breadcrumb"></ul>
+                <ul class="breadcrumb" style="padding: 3px 0 3px 5px;"></ul>
             </div>
             @yield('content')
                     <!-- Your Page Content Here -->
@@ -260,42 +236,32 @@ BODY TAG OPTIONS:
 
 <!-- jQuery 2.2.3 -->
 <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-{{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> --}}
-<script src="{{asset('/plugins/iCheck/icheck.min.js')}}"></script>
+<script src="https://cdn.bootcss.com/iCheck/1.0.2/icheck.min.js"></script>
 
 <!--bootstrap-select-->
 <script src="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.min.js"></script>
-{{-- <script src="{{asset('/plugins/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script> --}}
-
-{{-- <script src="{{asset('js/jquery.isotope.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/jquery.isotope/3.0.4/isotope.pkgd.min.js"></script>
 
 <!--tags input-->
-{{-- <script src="{{asset('plugins/jquery-tags-input/jquery.tagsinput.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
-<script src="{{asset('js/tagsinput-init.js')}}"></script>
 
-<!-- Bootstrap 3.3.6 -->
-{{-- <script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script> --}}
+<!-- Bootstrap 3.3.7 -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('/dist/js/app.min.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
 
 <!-- bootstrap-table -->
 <!-- Latest compiled and minified JavaScript -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 <!-- Latest compiled and minified Locales -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 
 <!-- dataTables -->
-<script src="{{asset('/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-{{-- <script src="{{asset('/plugins/datatables/dataTables.bootstrap.js')}}"></script> --}}
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
-<script src="{{asset('/plugins/tokenfield/dist/bootstrap-tokenfield.min.js')}}"></script>
-<script src="{{asset('/dist/js/common.js')}}"></script>
-<script src="{{asset('js/content.min.js')}}"></script>
+<script src="https://cdn.bootcss.com/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.min.js"></script>
+<script src="{{asset('/js/dashboard_public.js')}}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
@@ -338,78 +304,10 @@ BODY TAG OPTIONS:
 
 <script type="text/javascript">
 
-    function back_btn(){
-        window.history.back(-1);
-    }
-    function back_index() {
-        window.location.href = "{{url('dashboard')}}";
-    }
-    function changeAddress(str){
-        var ca=str.split("/");
-        $("#city-picker3").attr("value",str);
-        $(".select-item:eq(0)").html(ca[0]);
-        $(".select-item:eq(1)").html(ca[1]);
-        $(".select-item:eq(2)").html(ca[2]);
-    }
-    function myalert(con,sure,url,data){
-        if(sure=='make-sure'){
-            $('.del_sure').attr('url',url);
-            $('.del_sure').attr('data',data);
-            $('.del_sure').show();
-        }else{
-            $('.del_sure').hide();
-        }
-        $('#MyalertModal>.modal-dialog>.modal-content>.modal-body').children('p').html(con);
-        $('#MyalertModal').modal('show');
-    }
-    function mydialog(con){
-        $('.dialog-content').text(con);
-        $('#modal-dialog').modal();
-    }
-    function toJump(url,target){
-        if(target=='_blank'){
-            window.open(url);
-        }else{
-            window.location.href = url;
-        }
-    }
-
     function recoveryDel(handle,id){
         var u = "{{url('dashboard/recovery')}}"+'/'+handle+'/'+id;
         toJump(u);
     }
-
-    function close_myalert(){
-        $('#MyalertModal>.modal-dialog>.modal-content>.modal-body').children('p').html("");
-        $('#MyalertModal').modal('hide');
-    }
-    
-    //首页列表复选框，获取选择项对应的ID
-    function getSelect(){
-        var p = $(".all_select:checked");
-        var b = new Array();
-        for (var i = 0; i < p.length; i++) {
-            b.push(p.eq(i).val());
-        }
-        if(b.length==0){
-            return false;
-        }else{
-            var s = b.toString();
-            return s;
-        }
-    }
-
-    //全选
-    $('#all_select').click(function(event) {
-        var is_checked = $(this).hasClass('is-checked');
-        if(is_checked){
-            $('.all_select').prop('checked',false);
-            $(this).removeClass('is-checked');
-        }else{
-            $('.all_select').prop('checked',true);
-            $(this).addClass('is-checked');
-        }
-    });
     //批量删除(只针对存在软删除的model)
     function batchDel(model){
         var id = getSelect();
@@ -430,17 +328,26 @@ BODY TAG OPTIONS:
         });
     }
 
+    function getMyCss(){
+        $.get("{{url('dashboard/get/css_file')}}",function(msg){
+            if(msg.status=='success'){
+                mydialog('新的CSS文件生成成功！');
+            }
+        });
+    }
+
+    function getMyDashboardCss(){
+        $.get("{{url('dashboard/get/dashboard_css_file')}}",function(msg){
+            if(msg.status=='success'){
+                mydialog('后台新的CSS文件生成成功！');
+            }
+        });
+    }
+
     $('.close-myalert').click(function(){
         $('#MyalertModal>.modal-dialog>.modal-content>.modal-body').children('p').html("");
         $('#MyalertModal').modal('hide');
     });
-
-    // 预览图片
-    function preview_image(path) {
-        $("#preview-image").prop("src", '');
-        $("#preview-image").prop("src", path);
-        $("#modal-image-view").modal("show");
-    }
 
     $('.del_sure').click(function(){
         var url = $(this).attr('url');
@@ -490,62 +397,7 @@ BODY TAG OPTIONS:
                 li_html = '<li><a href="{{url('dashboard')}}" style="color:#333;"><i class="fa fa-home"></i>首页</a></li><li>'+ li_str +'</li><li class="active">'+li_str_c+'</li>';
             }
         }
-
         $('.breadcrumb').append(li_html);
-        /*end*/
-
-        //鼠标双击后变为可编辑状态
-        $(document).on('dblclick','.check_edit_normal',function(){
-            var con = $(this).text().trim();
-            if(!$(this).parent().hasClass('row')){
-                var input = '<input type="text" style="width:99%;" old-info="'+con+'" name="" class="form-control small" value="'+con+'" />';
-                $(this).html("");
-                $(this).append(input);
-                con = $(this).children('input').focus();
-            }
-
-        });
-
-        //上传图片设置(基本通用)
-        $(document).on("click",".add_new_img",function(){
-            var insert='<input type="file" name="upload_images[]" class="form_upload_file">';
-            var thisparent=$(this).parents(".comment_form");
-            var index=thisparent.find(".img_showbox").length;
-            if(thisparent.find(".form_upload_file:eq("+index+")").length==0){
-                thisparent.append(insert);
-            }
-            thisparent.find(".form_upload_file:eq("+index+")").trigger("click");
-        });
-
-        $(document).on("change",".form_upload_file",function(){
-            var preload_position=$(this).parents(".comment_form").find(".upload_img_showbox");
-            var filetype=this.files[0].type.split('/');
-            if(this.files[0].size > 1024*1024*5){
-                $(this).remove();
-                alert("单张图片不能大于5M");
-            }else if(filetype[0]=="image"){
-                var reader = new FileReader();
-                reader.readAsDataURL(this.files[0]);
-                reader.onload = function(e){
-                    var insert='<div class="img_showbox"><img src="'+this.result+'"><span class="del_upload_file">删除</span></div>';
-                    preload_position.append(insert);
-                }
-            }else{
-                $(this).remove();
-                    alert("请上传正确的图片");
-            }
-        });
-
-        $(document).on("click",".del_upload_file",function(){
-            var i=$(this).parents(".img_showbox").index();
-            $(this).parents("form").find(".form_upload_file").eq(i).remove();
-
-            if($(this).parents(".img_showbox").length<6){
-                $(this).parents(".upload_img_showbox").find(".add_new_img").parent('p').show();
-            }
-            $(this).parent().remove();
-        });
-        //end
     });
 </script>
 @yield('js')

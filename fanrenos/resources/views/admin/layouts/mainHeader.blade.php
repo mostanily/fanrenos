@@ -24,6 +24,12 @@
           <li class="" >
             <a href="javascript:;" onclick="chcheClear()" title="清除缓存"><i class="fa fa-refresh"></i></a>
           </li>
+          <li class="" >
+            <a href="javascript:;" onclick="getMyCss()" title="生成前端css资源"><i class="fa fa-file"></i></a>
+          </li>
+          <li class="" >
+            <a href="javascript:;" onclick="getMyDashboardCss()" title="生成后台前端资源"><i class="fa fa-file-o"></i></a>
+          </li>
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

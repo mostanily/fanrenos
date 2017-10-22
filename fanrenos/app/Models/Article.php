@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Article extends Model
 {
     use SoftDeletes;
-
     protected $table = 'articles';
     public $primaryKey = 'id';
 

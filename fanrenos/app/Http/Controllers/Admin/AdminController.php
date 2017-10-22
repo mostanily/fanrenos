@@ -12,6 +12,7 @@ use App\Models\Link;
 use App\Models\Music;
 use App\Models\Album;
 use App\Models\Visitor;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,6 +22,12 @@ class AdminController extends Controller
 {
     public function __construct()
     {
+        if(isWindows()){
+            $this->public_path = public_path();
+        }else{
+            $this->public_path = '/home/mostanily/public_html';
+        }
+
         $this->user = new User;
         $this->article = new Article;
         $this->tag = new Tag;
@@ -29,7 +36,8 @@ class AdminController extends Controller
         $this->music = new Music;
         $this->album = new Album;
         $this->visitor = new Visitor;
-        $this->models = array('user','article','tag','comment','link','music','album');//存在软删除模型
+        $this->category = new Category;
+        $this->models = array('user','article','tag','comment','link','music','album','category');//存在软删除模型
     }
 
     /**
@@ -111,6 +119,79 @@ class AdminController extends Controller
     public function cacheClear(){
         Artisan::call('cache:clear');
         $response = ['status'=>'success'];
+        return response()->json($response);
+    }
+
+    public function getCss()
+    {
+        //前端资源合并
+        header("Content-Type:text/html;charset=UTF-8");
+        $conn         = "";
+        $path_array[] = $this->public_path.'/layui/css/layui.css';
+        $path_array[] = $this->public_path.'/css/style.min.css';
+        $path_array[] = $this->public_path.'/css/amazeui.min.css';
+        $path_array[] = $this->public_path.'/css/app_amaze.min.css';
+        $out_put      = $this->public_path.'/css/public.css';//最终生成的文件名称
+        foreach ($path_array as $path) {
+            if (file_exists($path)) {
+                if ($fp = fopen($path, "a+")) {
+                    //读取文件
+                    $conn .= fread($fp, filesize($path));
+                }
+            }
+        }
+        @file_put_contents($out_put, $conn);
+
+        $response = ['status'=>'success'];
+        
+        return response()->json($response);
+    }
+
+    public function getDashboardCss()
+    {     
+        //前端CSS资源合并
+        header("Content-Type:text/html;charset=UTF-8");
+        $conn         = "";
+        $path_array[] = $this->public_path.'/layui/css/layui.css';
+        $path_array[] = $this->public_path.'/css/style.min.css';
+        $path_array[] = $this->public_path.'/libs/font-awesome/4.5.0/css/font-awesome.min.css';
+        $path_array[] = $this->public_path.'/libs/ionicons/2.0.1/css/ionicons.min.css';
+        $path_array[] = $this->public_path.'/dist/css/skins/skin-blue.min.css';
+        $path_array[] = $this->public_path.'/css/animate.min.css';
+        $path_array[] = $this->public_path.'/dist/css/load/load.css';
+        $path_array[] = $this->public_path.'/css/upload-img.css';
+
+        $out_put      = $this->public_path.'/css/dashboard_public.css';//最终生成的文件名称
+        foreach ($path_array as $path) {
+            if (file_exists($path)) {
+                if ($fp = fopen($path, "a+")) {
+                    //读取文件
+                    $conn .= fread($fp, filesize($path));
+                }
+            }
+        }
+        @file_put_contents($out_put, $conn);
+
+        //js合并
+        $js_conn = '';
+        $js_path_arr[] = $this->public_path.'/tagsinput-init.js';
+        $js_path_arr[] = $this->public_path.'/dist/js/app.min.js';
+        $js_path_arr[] = $this->public_path.'/js/content.min.js';
+        $js_path_arr[] = $this->public_path.'/dist/js/common.min.js';
+
+        $js_out_put    = $this->public_path.'/js/dashboard_public.js';//最终生成的文件名称
+        foreach ($js_path_arr as $p) {
+            if (file_exists($p)) {
+                if ($fp = fopen($p, "a+")) {
+                    //读取文件
+                    $js_conn .= fread($fp, filesize($p));
+                }
+            }
+        }
+        @file_put_contents($js_out_put, $js_conn);
+
+        $response = ['status'=>'success'];
+        
         return response()->json($response);
     }
 }

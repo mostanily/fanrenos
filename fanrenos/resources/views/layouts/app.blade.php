@@ -19,11 +19,8 @@
 <link rel="apple-touch-icon-precomposed" href="{{asset('favicon.ico')}}">
 <meta name="msapplication-TileImage" content="{{asset('favicon.ico')}}">
 <meta name="msapplication-TileColor" content="#0e90d2">
-{{-- <link href="{{asset('css/bootstrap.min.css')}}" rel='stylesheet' type='text/css' /> --}}
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link href="{{asset('css/style.min.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{asset('css/amazeui.min.css')}}">
-<link rel="stylesheet" href="{{asset('css/app_amaze.css')}}">
+<link rel="stylesheet" href="{{asset('css/public.css')}}">
 <style type="text/css">
     .log-footer,.log-footer a{color: #fff;}
     .log-footer a:hover{color: #10D4AF;}
@@ -54,9 +51,6 @@ var _hmt = _hmt || [];
         Copyright © {{ config('blog.author') }} 2017. Made with love <a href="{{url('/')}}">{{config('blog.name')}}</a> 
     </footer>
     <!-- Scripts -->
-    {{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-    <script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/amazeui.min.js')}}"></script> --}}
     <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>

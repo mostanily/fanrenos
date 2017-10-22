@@ -3,10 +3,6 @@
 @section('title','控制面板')
 @section('css')
 <link href="{{asset('css/style_grid.css')}}" rel="stylesheet" type="text/css" media="all" />
-<style type="text/css">
-    .btn-default{background-color: #f4f4f4;color: #444;border-color: #ddd;}
-    .btn-outline{color: inherit;background-color: transparent;}
-</style>
 @endsection
 
 @section('content')

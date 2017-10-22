@@ -8,7 +8,7 @@
         <ul class="am-slides">
             @foreach ($bannerPost as $post)
             <li>
-                <img src="{{page_image($post->page_image,'banner')}}">
+                <img src="{{page_image($post->page_image,'banner')}}" style="height: 510px;">
                 <div class="blog-slider-desc am-slider-desc ">
                     <div class="blog-text-center blog-slider-con">
                         <span><a href="" class="blog-color">Article &nbsp;</a></span>               
@@ -40,7 +40,7 @@
         @foreach ($posts as $post)
             <article class="am-g blog-entry-article">
                 <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                    <img src="{{page_image($post->page_image,'post')}}" alt="" class="am-u-sm-12" onclick="preview_image('{{ page_image($post->page_image,"post") }}')" style="max-height: 210px;">
+                    <img src="{{page_image($post->page_image,'post')}}" alt="" class="am-u-sm-12" onclick="preview_image('{{ page_image($post->page_image,"post") }}')" style="height: 210px;">
                 </div>
                 <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
                     <span>Post By</span>

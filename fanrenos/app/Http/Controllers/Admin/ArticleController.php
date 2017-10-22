@@ -51,7 +51,7 @@ class ArticleController extends Controller
     }
 
     public function indexTable(){
-        $article = $this->article->all();
+        $article = $this->article->orderBy('created_at','desc')->get();
         foreach ($article as $key => $value) {
             $article[$key]->published_at_format = $value->published_at->format('j-M-y g:ia');
         }

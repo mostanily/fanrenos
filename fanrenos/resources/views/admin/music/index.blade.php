@@ -51,7 +51,7 @@
                 <div class="modal-body">
                     <p class="lead">
                         <i class="fa fa-question-circle fa-lg"></i>
-                        你确定要删除该文件么?
+                        你确定要删除该音乐么?
                     </p>
                 </div>
                 <div class="modal-footer">

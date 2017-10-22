@@ -22,30 +22,10 @@
 <link rel="apple-touch-icon-precomposed" href="{{asset('favicon.ico')}}">
 <meta name="msapplication-TileImage" content="{{asset('favicon.ico')}}">
 <meta name="msapplication-TileColor" content="#0e90d2">
-{{-- <link href="{{asset('css/bootstrap.min.css')}}" rel='stylesheet' type='text/css' /> --}}
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{{asset('layui/css/layui.css')}}">
-<link href="{{asset('css/style.min.css')}}" rel="stylesheet">
-{{-- <link rel="stylesheet" href="{{asset('/markdown/styles/monokai-sublime.css')}}"> --}}
 <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css">
-<link rel="stylesheet" href="{{asset('css/amazeui.min.css')}}">
-<link rel="stylesheet" href="{{asset('css/app_amaze.css')}}">
-<!-- //animation-effect -->
-<style type="text/css">
-    @media only screen and (max-width: 640px) {
-        #modal-form>.modal-dialog{margin: 0 auto;margin-top: 50px;max-width: 320px;}
-    }
-</style>
+<link rel="stylesheet" href="{{asset('css/public.css')}}">
 @yield('css')
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?7e53f041994830ce53d57fb718e5d98a";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 </head>
 <body id="blog">
 @include('layouts.mainHeader')
@@ -122,14 +102,10 @@ var _hmt = _hmt || [];
 
 <!-- jQuery 2.2.3 -->
 <!-- Bootstrap 3.3.6 -->
-{{-- <script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-{{-- <script src="{{asset('/bootstrap/js/bootstrap.min.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{{-- <script src="{{asset('/markdown/highlight.pack.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-{{-- <script src="{{asset('js/amazeui.min.js')}}"></script> --}}
 <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
@@ -217,6 +193,14 @@ function toJump(url,target){
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
+})();
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e53f041994830ce53d57fb718e5d98a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
 })();
 </script>
 </body>
