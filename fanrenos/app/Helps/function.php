@@ -419,19 +419,12 @@
     }
 
     /**
-     * 获取分类列表
+     * 获取分类列表（用于下拉菜单）
      * @param  [type] $category [description]
      * @return [type]           [description]
      */
     function getCategory($category,$has_child=false){
-        $result = array();
-        foreach ($category as $value) {
-            if($has_child){
-                $value['article_count'] = count($value['articles']).'篇';
-            }
-            $result[$value['parent_id']][] = $value;
-        }
-
+        $result = getCategoryRecurrence($category,$has_child);
         $new_category = array();
         foreach ($result[0] as $v) {
             $new_category[] = $v;
@@ -443,4 +436,19 @@
             }
         }
         return $new_category;
+    }
+
+    /**
+     * 获取分类列表
+     * @return [type] [description]
+     */
+    function getCategoryRecurrence($category,$has_child=false){
+        $result = array();
+        foreach ($category as $value) {
+            if($has_child){
+                $value['article_count'] = count($value['articles']).'篇';
+            }
+            $result[$value['parent_id']][] = $value;
+        }
+        return $result;
     }

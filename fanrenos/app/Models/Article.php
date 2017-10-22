@@ -3,16 +3,16 @@
 namespace App\Models;
 
 use App\Scopes\DraftScope;
-use Markdown;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Markdown;
 
 class Article extends Model
 {
     use SoftDeletes;
-    protected $table = 'articles';
+    protected $table   = 'articles';
     public $primaryKey = 'id';
 
     /**
@@ -59,16 +59,17 @@ class Article extends Model
      */
     public function category()
     {
-        return $this->belongsTo(Category::class,'category_id','id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     public function tags()
     {
-         return $this->belongsToMany('App\Models\Tag', 'article_tag_pivot','article_id','tag_id');
+        return $this->belongsToMany('App\Models\Tag', 'article_tag_pivot', 'article_id', 'tag_id');
     }
 
-    public function comments(){
-        return $this->hasMany('App\Models\Comment','commentable_id','id');
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment', 'commentable_id', 'id');
     }
 
     /**
@@ -119,14 +120,14 @@ class Article extends Model
 
     /**
      * Set the title and the readable slug.
-     * 
+     *
      * @param string $value
      */
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
 
-        $pinyin = app('pinyin')->get($value,'utf-8');
+        $pinyin = app('pinyin')->get($value, 'utf-8');
 
         $this->setUniqueSlug($pinyin, '');
     }
@@ -137,8 +138,9 @@ class Article extends Model
      * @param $value
      * @param $extra
      */
-    public function setUniqueSlug($value, $extra) {
-        $slug = str_slug($value.'-'.$extra);
+    public function setUniqueSlug($value, $extra)
+    {
+        $slug                     = str_slug($value . '-' . $extra);
         $this->attributes['slug'] = $slug;
     }
 
@@ -154,7 +156,7 @@ class Article extends Model
             'html' => Markdown::convertToHtml($value),
         ];
 
-        $this->attributes['content'] = json_encode($data,320);
+        $this->attributes['content'] = json_encode($data, 320);
     }
 
     /**
@@ -165,9 +167,19 @@ class Article extends Model
      */
     public function url(Tag $tag = null)
     {
-        $url = url('blog/'.$this->slug);
+        $url = url('blog/' . $this->slug);
         if ($tag) {
-          $url .= '?tag='.urlencode($tag->tag);
+            $url .= '?tag=' . urlencode($tag->tag);
+        }
+
+        return $url;
+    }
+
+    public function category_url(Category $cate = null)
+    {
+        $url = url('blog/' . $this->slug);
+        if ($cate) {
+            $url .= '?category=' . urlencode($cate->name);
         }
 
         return $url;
@@ -181,11 +193,11 @@ class Article extends Model
      */
     public function tagLinks($base = '/blog?tag=%TAG%')
     {
-        $tags = $this->tags()->pluck('tag');
+        $tags   = $this->tags()->pluck('tag');
         $return = [];
         foreach ($tags as $tag) {
-          $url = str_replace('%TAG%', urlencode($tag), $base);
-          $return[] = '<a href="'.url($url).'">'.e($tag).'</a>';
+            $url      = str_replace('%TAG%', urlencode($tag), $base);
+            $return[] = '<a href="' . url($url) . '">' . e($tag) . '</a>';
         }
         return $return;
     }
@@ -197,102 +209,102 @@ class Article extends Model
     public function commentList()
     {
         $article_id = $this->id;
-        $ul_s = '<ul class="am-comments-list am-comments-list-flip">';
-        $ul_e = '</ul><hr><p style="text-align: center;"><a href="'.url('/blog/more_comment?blogSlug='.$this->slug).'" target="_blank">点击查看更多评论>></a></p>';
+        $ul_s       = '<ul class="am-comments-list am-comments-list-flip">';
+        $ul_e       = '</ul><hr><p style="text-align: center;"><a href="' . url('/blog/more_comment?blogSlug=' . $this->slug) . '" target="_blank">点击查看更多评论>></a></p>';
         $li_comment = '';
-        $comments = $this->comments()->with(['user','thumbs'])->orderBy('created_at','asc')->limit(10)->get();
-        $return = '还没有任何评论哦！赶快来抢个沙发啦！';
+        $comments   = $this->comments()->with(['user', 'thumbs'])->orderBy('created_at', 'asc')->limit(10)->get();
+        $return     = '还没有任何评论哦！赶快来抢个沙发啦！';
         //当前登陆用户的id
-        if(!Auth::guest()){
+        if (!Auth::guest()) {
             $auth_uid = Auth::user()->id;
         }
-        if(!$comments->isEmpty()){
+        if (!$comments->isEmpty()) {
             foreach ($comments as $key => $comment) {
                 //评论人的信息
-                $author_name = empty($comment->user->nickname) ? $comment->user->name : $comment->user->nickname;
-                $avatar = empty($comment->user->avatar) ? asset('images/default.png') : asset('uploads/avatar/60x60/'.$comment->user->avatar);
-                $time = Carbon::parse($comment->created_at)->timestamp;
-                $date_time = date('Y年m月d日 H:i:s',$time);
-                $content = json_decode($comment->content,true);
+                $author_name     = empty($comment->user->nickname) ? $comment->user->name : $comment->user->nickname;
+                $avatar          = empty($comment->user->avatar) ? asset('images/default.png') : asset('uploads/avatar/60x60/' . $comment->user->avatar);
+                $time            = Carbon::parse($comment->created_at)->timestamp;
+                $date_time       = date('Y年m月d日 H:i:s', $time);
+                $content         = json_decode($comment->content, true);
                 $comment_content = $content['html'];
-                $user_url = auth_user_url($comment->user->name);
+                $user_url        = auth_user_url($comment->user->name);
 
                 $li_class = '';
-                if($key%2!=0){
+                if ($key % 2 != 0) {
                     $li_class = 'am-comment-flip';
                 }
-                $is_has_del = '';
-                $is_has_love = '';
-                $is_has_comment = '';
+                $is_has_del           = '';
+                $is_has_love          = '';
+                $is_has_comment       = '';
                 $unlike_content_class = '';
                 //只有在用户登陆的情况下才会有回复等功能
-                if(!Auth::guest()){
+                if (!Auth::guest()) {
                     //只有在登陆情况下，点赞的信息才有意义
                     //每个评论的点赞信息
-                    $thumbs = $comment->thumbs()->get();
-                    $like_thumb_num = '';
+                    $thumbs           = $comment->thumbs()->get();
+                    $like_thumb_num   = '';
                     $unlike_thumb_num = '';
-                    $like_class = '';
-                    $unlike_class = '';
-                    $like_user = [];
-                    $unlike_user = [];
-                    
+                    $like_class       = '';
+                    $unlike_class     = '';
+                    $like_user        = [];
+                    $unlike_user      = [];
+
                     foreach ($thumbs as $k => $thumb) {
-                        $status = $thumb->status;
+                        $status        = $thumb->status;
                         $thumb_user_id = $thumb->user_id;
-                        if($status==0){
+                        if ($status == 0) {
                             $unlike_user[] = $thumb_user_id;
-                        }else{
+                        } else {
                             $like_user[] = $thumb_user_id;
                         }
                     }
-                    if(count($like_user)>0){
-                        $like_thumb_num = '<big class="like_t" style="margin-left:3px;">'.count($like_user).'</big>';
+                    if (count($like_user) > 0) {
+                        $like_thumb_num = '<big class="like_t" style="margin-left:3px;">' . count($like_user) . '</big>';
                     }
 
-                    if(count($unlike_user)>0){
-                        $unlike_thumb_num = '<big class="unlike_t" style="margin-left:3px;">'.count($unlike_user).'</big>';
+                    if (count($unlike_user) > 0) {
+                        $unlike_thumb_num = '<big class="unlike_t" style="margin-left:3px;">' . count($unlike_user) . '</big>';
                     }
 
-                    if(in_array($auth_uid, $like_user)){
+                    if (in_array($auth_uid, $like_user)) {
                         $like_class = 'am-text-success';
                     }
-                    if(in_array($auth_uid, $unlike_user)){
+                    if (in_array($auth_uid, $unlike_user)) {
                         $unlike_class = 'am-text-danger';
                         //在mydefault.css文件中
                         $unlike_content_class = 'downvoted';
                     }
 
-                    $is_has_comment = '<a class="comment_reply" data-comment="'.$author_name.'" data-comment-name="'.$comment->user->name.'" href="javascript:;" title="回复"><i class="am-icon-mail-reply am-icon-md"></i></a>';
-                    if($comment->user_id==$auth_uid){
-                        $is_has_del = '<a class="comment_del" data-comment="'.$comment->id.'" href="javascript:;" title="删除"><i class="am-icon-trash am-icon-md"></i></a>';
-                    }else{
-                        $is_has_love = '<a class="comment_like" data-comment="'.$comment->id.'" href="javascript:;" title="喜欢"><i class="am-icon-smile-o am-icon-md '.$like_class.'"></i>'.$like_thumb_num.'</a><a class="comment_unlike" data-comment="'.$comment->id.'" href="javascript:;" title="讨厌"><i class="am-icon-frown-o am-icon-md '.$unlike_class.'"></i>'.$unlike_thumb_num.'</a>';
+                    $is_has_comment = '<a class="comment_reply" data-comment="' . $author_name . '" data-comment-name="' . $comment->user->name . '" href="javascript:;" title="回复"><i class="am-icon-mail-reply am-icon-md"></i></a>';
+                    if ($comment->user_id == $auth_uid) {
+                        $is_has_del = '<a class="comment_del" data-comment="' . $comment->id . '" href="javascript:;" title="删除"><i class="am-icon-trash am-icon-md"></i></a>';
+                    } else {
+                        $is_has_love = '<a class="comment_like" data-comment="' . $comment->id . '" href="javascript:;" title="喜欢"><i class="am-icon-smile-o am-icon-md ' . $like_class . '"></i>' . $like_thumb_num . '</a><a class="comment_unlike" data-comment="' . $comment->id . '" href="javascript:;" title="讨厌"><i class="am-icon-frown-o am-icon-md ' . $unlike_class . '"></i>' . $unlike_thumb_num . '</a>';
                     }
                 }
-                
-                $li_comment .= '<li class="am-comment '.$li_class.'">
-                                    <a href="'.$user_url.'"><img alt="'.$author_name.'" src="'.$avatar.'" class="am-comment-avatar" width="48" height="48" />
+
+                $li_comment .= '<li class="am-comment ' . $li_class . '">
+                                    <a href="' . $user_url . '"><img alt="' . $author_name . '" src="' . $avatar . '" class="am-comment-avatar" width="48" height="48" />
                                     </a>
                                     <div class="am-comment-main">
                                         <header class="am-comment-hd">
                                             <div class="am-comment-meta">
                                                 <i class="am-icon-user"></i>
-                                                <a href="'.$user_url.'" class="am-comment-author">'.$author_name.'</a>
-                                                评论于 <time title="'.$date_time.'">'.$comment->created_at.'</time>
-                                                <a href="#reply" class="reply-floor">#'.($key+1).'</a>
+                                                <a href="' . $user_url . '" class="am-comment-author">' . $author_name . '</a>
+                                                评论于 <time title="' . $date_time . '">' . $comment->created_at . '</time>
+                                                <a href="#reply" class="reply-floor">#' . ($key + 1) . '</a>
                                             </div>
                                             <div class="am-comment-actions">
-                                                '.$is_has_love.$is_has_del.$is_has_comment.'
+                                                ' . $is_has_love . $is_has_del . $is_has_comment . '
                                             </div>
                                         </header>
-                                        <div class="am-comment-bd '.$unlike_content_class.'">
-                                            <p>'.$comment_content.'</p>
+                                        <div class="am-comment-bd ' . $unlike_content_class . '">
+                                            <p>' . $comment_content . '</p>
                                         </div>
                                     </div>
                                 </li>';
             }
-            $return = $ul_s.$li_comment.$ul_e;
+            $return = $ul_s . $li_comment . $ul_e;
         }
         return $return;
     }
@@ -306,14 +318,14 @@ class Article extends Model
     public function newerPost(Tag $tag = null)
     {
         $query =
-          static::where('published_at', '>', $this->published_at)
+        static::where('published_at', '>', $this->published_at)
             ->where('published_at', '<=', Carbon::now())
             ->where('is_draft', 0)
             ->orderBy('published_at', 'asc');
         if ($tag) {
-          $query = $query->whereHas('tags', function ($q) use ($tag) {
-            $q->where('tag', '=', $tag->tag);
-          });
+            $query = $query->whereHas('tags', function ($q) use ($tag) {
+                $q->where('tag', '=', $tag->tag);
+            });
         }
 
         return $query->first();
@@ -328,13 +340,13 @@ class Article extends Model
     public function olderPost(Tag $tag = null)
     {
         $query =
-          static::where('published_at', '<', $this->published_at)
+        static::where('published_at', '<', $this->published_at)
             ->where('is_draft', 0)
             ->orderBy('published_at', 'desc');
         if ($tag) {
-          $query = $query->whereHas('tags', function ($q) use ($tag) {
-            $q->where('tag', '=', $tag->tag);
-          });
+            $query = $query->whereHas('tags', function ($q) use ($tag) {
+                $q->where('tag', '=', $tag->tag);
+            });
         }
 
         return $query->first();

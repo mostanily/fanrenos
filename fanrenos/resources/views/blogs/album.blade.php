@@ -245,7 +245,7 @@ html {
         load : function (data) {
             window.addEventListener('load', function () {
                 ge1doot.loadJS(
-                    "js/imageTransform3D.js",
+                    "{{asset('js/imageTransform3D.js')}}",
                     init, data
                 );
             }, false);

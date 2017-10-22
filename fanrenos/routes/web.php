@@ -68,7 +68,25 @@ Route::group(['middleware' => 'auth', 'prefix' => 'setting'], function () {
 Route::get('/search','HomeController@showSearch');
 Route::get('/contact', 'ContactController@showForm');
 Route::post('/contact', 'ContactController@sendContactInfo');
-Route::get('/music', 'MusicController@index');
-Route::get('/album','AlbumController@index');
+
+Route::group(['prefix' => 'php'],function(){
+    Route::get('/{path}','CategoryController@getArticleByCategory');
+});
+Route::group(['prefix' => 'sql'],function(){
+    Route::get('/{path}','CategoryController@getArticleByCategory');
+});
+Route::group(['prefix' => 'system'],function(){
+    Route::get('/{path}','CategoryController@getArticleByCategory');
+});
+Route::group(['prefix' => 'tools'],function(){
+    Route::get('/{path}','CategoryController@getArticleByCategory');
+});
+Route::group(['prefix' => 'life'],function(){
+    Route::get('/{path}','CategoryController@getArticleByCategory');
+});
+Route::group(['prefix' => 'fashion'],function(){
+    Route::get('/music','MusicController@index');
+    Route::get('/album','AlbumController@index');
+});
 
 Route::get('/blog/{slug}', 'HomeController@showPost');

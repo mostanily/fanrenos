@@ -5,6 +5,7 @@ namespace App\Providers;
 use DB;
 use App\Models\Article;
 use App\Models\Link;
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         \Carbon\Carbon::setLocale('zh');
         
-        view()->composer(['layouts.about_me'],function($view){
+        view()->composer(['layouts.about_me','layouts.mainHeader'],function($view){
             $allTag = DB::table('tags')
                     ->leftJoin('article_tag_pivot as ap','ap.tag_id','=','tags.id')
                     ->selectRaw('tags.id,tags.tag,count(ap.article_id) as a_num')
@@ -32,11 +33,14 @@ class AppServiceProvider extends ServiceProvider
 
             $links = Link::orderBy('created_at','asc')->get();
 
+            $category = getCategoryRecurrence(Category::where('id','<>',1)->get()->toArray(),false);
+
             $view_data = [
                 'allTag' => $allTag,
                 'latestArticle' => $latest_articles,
                 'hotArticle' => $hot_articles,
                 'links' => $links,
+                'category' => $category,
             ];
 
             $view->with($view_data);

@@ -7,8 +7,21 @@
     <ul class="am-nav am-nav-pills am-topbar-nav nav navbar-nav">
         <li><a>{{ config('blog.name') }}</a></li>
         <li class="{{active_class(if_uri(['/','blog']),'am-active')}}"><a href="{{url('/')}}">首页</a></li>
-        <li class="{{active_class(if_uri('music'),'am-active')}}"><a href="{{url('music')}}">音乐欣赏</a></li>
-        <li class="{{active_class(if_uri('album'),'am-active')}}"><a href="{{url('album')}}">相册壁纸</a></li>
+        @foreach($category[0] as $v)
+            <?php $new_name = $v['path'].'/*';?>
+            <li class="am-dropdown {{active_class(if_uri_pattern($new_name),'am-active')}}" data-am-dropdown>
+                <a class="am-dropdown-toggle" href="javascript:;" data-am-dropdown-toggle>
+                    {{$v['name']}}<span class="am-icon-caret-down"></span>
+                </a>
+                @if(isset($category[$v['id']]))
+                    <ul class="am-dropdown-content">
+                        @foreach($category[$v['id']] as $vv)
+                            <li class="{{active_class(if_uri($v['path'].'/'.$vv['path']),'am-active')}}"><a href="{{url($v['path'].'/'.$vv['path'])}}">{{$vv['name']}}</a></li>
+                        @endforeach
+                    </ul>
+                @endif
+            </li>
+        @endforeach
         <li class="{{active_class(if_uri('contact'),'am-active')}}"><a href="{{url('contact')}}">联系我</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
