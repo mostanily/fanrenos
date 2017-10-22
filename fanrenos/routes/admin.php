@@ -12,6 +12,8 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
         return redirect('/dashboard/home');
     });
     Route::get('/clear/cache','AdminController@cacheClear');
+    Route::get('/get/css_file','AdminController@getCss');
+    Route::get('/get/dashboard_css_file','AdminController@getDashboardCss');
     Route::get('/home', ['as' => 'dashboard.home', 'uses' => 'AdminController@index']);
     Route::get('/visitor', 'AdminController@getVisitor');
     Route::get('/recovery/{handle}/{id}','AdminController@recycle_normal');//恢复被软删除的信息
@@ -76,7 +78,13 @@ Route::group(['middleware' => ['auth:admin', 'menu']], function () {
     Route::post('/album/update_info',['as'=>'dashboard.album.update_info','uses'=>'AlbumController@uploadAlbum']);
     Route::resource('album', 'AlbumController', ['names' => ['destroy'=>'dashboard.album.destroy']]);
 
+    //分类管理
+    Route::get('/category/index', ['as' => 'dashboard.category.index', 'uses' => 'CategoryController@index']);
+    Route::get('/category/recycle/index', ['as' => 'dashboard.category_recycle.index', 'uses' => 'CategoryController@recycle_index']);//回收站
+    Route::get('/category/index_table','CategoryController@indexTable');
+    Route::get('/category/recycle_index_table','CategoryController@recycle_indexTable');
+    Route::post('/category/real_delete/{id}',['as' => 'dashboard.real_delete.index', 'uses' => 'CategoryController@real_delete']);//彻底删除
+    Route::resource('category', 'CategoryController', ['names' => ['edit'=>'dashboard.category.edit','update' => 'dashboard.category.edit','create'=>'dashboard.category.create', 'store' => 'dashboard.category.create','destroy'=>'dashboard.category.destroy']]);
+
     Route::get('/file/index', ['as' => 'dashboard.file.index', 'uses' => 'AdminController@index']);
-    Route::get('/category/index', ['as' => 'dashboard.category.index', 'uses' => 'AdminController@index']);
-    Route::get('/category/create', ['as' => 'dashboard.category.create', 'uses' => 'AdminController@index']);
 });

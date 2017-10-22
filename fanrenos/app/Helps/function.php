@@ -417,3 +417,30 @@
             return "未知";
         } 
     }
+
+    /**
+     * 获取分类列表
+     * @param  [type] $category [description]
+     * @return [type]           [description]
+     */
+    function getCategory($category,$has_child=false){
+        $result = array();
+        foreach ($category as $value) {
+            if($has_child){
+                $value['article_count'] = count($value['articles']).'篇';
+            }
+            $result[$value['parent_id']][] = $value;
+        }
+
+        $new_category = array();
+        foreach ($result[0] as $v) {
+            $new_category[] = $v;
+            if(isset($result[$v['id']])){
+                foreach ($result[$v['id']] as $vv) {
+                    $vv['name'] = '┕┈┈'.$vv['name'];
+                    $new_category[] = $vv;
+                }
+            }
+        }
+        return $new_category;
+    }

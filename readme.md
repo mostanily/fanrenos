@@ -31,6 +31,8 @@ database目录下的`test.sql`文件（￣︶￣）↗。
 
 相册模块完成（进行页面添加或通过ftp上传并更新时，尽量别一次性操作太多文件）。（2017-10-6）
 
+后端分类模块完成（2017-10-22）
+
 更新下音乐模块部分
 
 [网页音乐播放教程之getid3类音频解析](http://www.fanrenos.com/blog/wang-ye-yin-le-bo-fang-jiao-cheng-zhi-getid3-lei-yin-pin-jie-xi)。
