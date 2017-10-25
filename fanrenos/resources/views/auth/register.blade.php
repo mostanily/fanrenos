@@ -23,9 +23,6 @@
         <dd class="pwd_icon">
             <input type="password" placeholder="确认密码" name="password_confirmation" data-equal-to="#log-password" class="login_txtbx" data-validation-message="请确认密码一致" required="" />
         </dd>
-        <dd class="rem_icon">
-            <label style="cursor: pointer;"><input type="checkbox" name="remember" checked="checked" class="login_remember" />&nbsp;&nbsp;记&nbsp;住&nbsp;我</label>
-        </dd>
         <dd>
             <input type="submit" value="立即注册" class="submit_btn" />
         </dd>
