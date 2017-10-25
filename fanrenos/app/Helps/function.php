@@ -41,6 +41,7 @@
      */
     function page_image($value = null,$is_index_def=null,$extar=null){
         if (empty($value)) {
+            $is_index_def = trim($is_index_def);
             if($is_index_def=='post'){
                 $value = config('blog.index_post_def_image');
             }else if($is_index_def=='banner'){
@@ -426,15 +427,18 @@
     function getCategory($category,$has_child=false){
         $result = getCategoryRecurrence($category,$has_child);
         $new_category = array();
-        foreach ($result[0] as $v) {
-            $new_category[] = $v;
-            if(isset($result[$v['id']])){
-                foreach ($result[$v['id']] as $vv) {
-                    $vv['name'] = '┕┈┈'.$vv['name'];
-                    $new_category[] = $vv;
+        if(isset($result[0])){
+            foreach ($result[0] as $v) {
+                $new_category[] = $v;
+                if(isset($result[$v['id']])){
+                    foreach ($result[$v['id']] as $vv) {
+                        $vv['name'] = '┕┈┈'.$vv['name'];
+                        $new_category[] = $vv;
+                    }
                 }
             }
         }
+        
         return $new_category;
     }
 

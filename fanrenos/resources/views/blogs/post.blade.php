@@ -119,7 +119,6 @@
 @stop
 
 @section('js')
-{{-- <script type="text/javascript" src="{{ asset('/plugins/layer/layer.min.js') }}"></script> --}}
 <script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
 <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/sinaFaceAndEffec.js')}}"></script>

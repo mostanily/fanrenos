@@ -18,7 +18,7 @@
     .iconfont{color: #d1d1d1;}
     .iconfont:hover{color: #d8a868;}
     .iconfont{position: absolute;right: 3px;bottom: 6px;}
-    .lre-main-box{min-height: 400px;position: fixed;top: 10%;right: 20px;}
+    .lre-main-box{min-height: 400px;position: fixed;top: 10%;right: 75px;}
     .playerBox{height: 100px;position: fixed;left: 0px;bottom: 50px;}
     #musicTitle{font-size: 15px;font-weight: bold;margin-top: 40px;text-align: center;}
     #musicTitle p{font-size: 13px;text-align: center;margin: 1px 0px;}

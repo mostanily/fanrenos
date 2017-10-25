@@ -1,47 +1,41 @@
 @extends('layouts.app')
 @section('title','注册')
-@section('header')
-<button type="button" class="am-btn am-btn-default am-radius log-button" onclick="toJump('{{url("login")}}')">登录</button>
-@stop
-
 @section('content')
-<div class="log"> 
-    <div class="am-g">
-        <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
-            <h1 class="log-title am-animation-slide-top">{{ config('blog.name') }}</h1>
-            <br>
-            <form class="am-form" role="form" method="POST" action="{{ url('/register') }}">
-                {{ csrf_field() }}
-                <div class="am-input-group am-radius am-animation-slide-left">       
-                    <input type="text" name="name" class="am-radius" data-validation-message="用户名" placeholder="用户名，不支持中文" title="支持英文及数字，3到15个字符" pattern="^[0-9a-zA_Z]{3,15}$" required/>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>
-                </div>
-                <br>
-                <div class="am-input-group am-radius am-animation-slide-left">       
-                    <input type="email" name="email" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱请放心填写，不会公布也不会有广告" required/>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-envelope am-icon-sm am-icon-fw"></i></span>
-                </div>
-                <br>
-                <div class="am-input-group am-radius am-animation-slide-left">       
-                    <input type="text" name="website" class="am-radius" data-validation-message="没有可以不填" placeholder="能够留下您的网站更好(*￣︶￣)，请带http前缀"/>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-globe am-icon-sm am-icon-fw"></i></span>
-                </div>
-                <br>
-                <div class="am-input-group am-animation-slide-left log-animation-delay">       
-                    <input type="password" name="password" id="log-password" class="am-form-field am-radius log-input" placeholder="密码" minlength="11" required>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
-                </div>
-                <br>   
-                <div class="am-input-group am-animation-slide-left log-animation-delay-a">       
-                    <input type="password" name="password_confirmation" data-equal-to="#log-password" class="am-form-field am-radius log-input" placeholder="确认密码" data-validation-message="请确认密码一致" required>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
-                </div>
-                <br>
-                <button type="submit" class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b">注 册</button>
-                <br>
-            </form>
-        </div>
-    </div>
-</div>
-
+<dl class="admin_login">
+    <dt>
+        <strong>注册</strong>
+        <em>Management System</em>
+    </dt>
+    <form class="am-form" role="form" method="POST" action="{{ url('/register') }}">
+        {{ csrf_field() }}
+        <dd class="user_icon">
+            <input type="text" placeholder="用户名，不支持中文" name="name" class="login_txtbx" title="支持英文及数字，3到15个字符" pattern="^[0-9a-zA_Z]{3,15}$" required="" />
+        </dd>
+        <dd class="email_icon">
+            <input type="email" placeholder="邮箱，用作登陆" name="email" class="login_txtbx" required="" />
+        </dd>
+        <dd class="web_icon">
+            <input type="text" placeholder="留下您的网站更好，带http前缀" name="website" data-validation-message="没有可以不填" class="login_txtbx" />
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="密码" name="password" id="log-password" class="login_txtbx" required="" />
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="确认密码" name="password_confirmation" data-equal-to="#log-password" class="login_txtbx" data-validation-message="请确认密码一致" required="" />
+        </dd>
+        <dd class="rem_icon">
+            <label style="cursor: pointer;"><input type="checkbox" name="remember" checked="checked" class="login_remember" />&nbsp;&nbsp;记&nbsp;住&nbsp;我</label>
+        </dd>
+        <dd>
+            <input type="submit" value="立即注册" class="submit_btn" />
+        </dd>
+        <dd>
+            <p>已经拥有账号？点击 <a href="{{url('/login')}}">登陆</a></p>
+        </dd>
+    </form>
+    <dd>
+        <p>Copyright © {{ config('blog.author') }} 2017. Made with love</p>
+        <p><a href="{{url('/')}}">{{config('blog.name')}}</a></p>
+    </dd>
+</dl>
 @endsection

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2017-10-22 17:39:54
+-- Generation Time: 2017-10-25 15:37:02
 -- 服务器版本： 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `testfanrne`
+-- Database: `testblog`
 --
 
 -- --------------------------------------------------------
@@ -75,6 +75,13 @@ CREATE TABLE `articles` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- 转存表中的数据 `articles`
+--
+
+INSERT INTO `articles` (`id`, `category_id`, `slug`, `title`, `subtitle`, `content`, `page_image`, `meta_description`, `is_original`, `is_draft`, `view_count`, `published_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 3, 'qing-qu-dian-shang-zhan-zhuan-qian-fang-fa-lun', '情趣电商站赚钱方法论', '对话春水堂，情趣电商站着把钱赚了的方法论 | iSeed，情趣电商还有出路么', '{"raw":"### 当春水堂不再只是卖成人用品 ###\\r\\n\\r\\n * ——虽然蔺德刚更喜欢用“性玩具”来指代这个词——那么它到底是想成为什么？\\r\\n\\r\\n * 此前，“春叔”对腾讯科技说，春水堂未来是希望“成为两性以及情侣关系的私人管家”。在接受爱范儿的采访时，他阐述更加清晰的进一步定位，春水堂“未来将从成人用品电商，转型为性健康产业的生态型公司。未来将介入到咨询领域，破除性观念上的认知和知识上的障碍，还可能会延展到药品领域等等。","html":"<h3>当春水堂不再只是卖成人用品</h3>\\n<ul>\\n<li>\\n<p>——虽然蔺德刚更喜欢用“性玩具”来指代这个词——那么它到底是想成为什么？</p>\\n</li>\\n<li>\\n<p>此前，“春叔”对腾讯科技说，春水堂未来是希望“成为两性以及情侣关系的私人管家”。在接受爱范儿的采访时，他阐述更加清晰的进一步定位，春水堂“未来将从成人用品电商，转型为性健康产业的生态型公司。未来将介入到咨询领域，破除性观念上的认知和知识上的障碍，还可能会延展到药品领域等等。</p>\\n</li>\\n</ul>\\n"}', NULL, '情趣电商', 1, 0, 1, '2017-08-29 17:21:00', '2017-08-29 16:31:17', '2017-10-17 14:33:08', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +93,14 @@ CREATE TABLE `article_tag_pivot` (
   `article_id` int(10) UNSIGNED NOT NULL,
   `tag_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `article_tag_pivot`
+--
+
+INSERT INTO `article_tag_pivot` (`id`, `article_id`, `tag_id`) VALUES
+(1, 1, 1),
+(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -104,6 +119,15 @@ CREATE TABLE `categories` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 转存表中的数据 `categories`
+--
+
+INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `image_url`, `path`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 0, '默认分类', '默认分类，不在前端显示，用于收留被删除分类，其下属文章的临时关联分类对象。', NULL, NULL, '2017-10-23 05:30:00', '2017-10-23 05:30:00', NULL),
+(2, 0, 'PHP', 'PHP分类', NULL, 'php', '2017-10-23 05:42:52', '2017-10-23 05:42:52', NULL),
+(3, 2, 'Laravel', 'Laravel框架分类内容', NULL, 'laravel', '2017-10-23 05:51:26', '2017-10-23 05:51:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -270,6 +294,14 @@ CREATE TABLE `tags` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- 转存表中的数据 `tags`
+--
+
+INSERT INTO `tags` (`id`, `tag`, `title`, `meta_description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Laravel', 'Laravel框架', 'Laravel框架标签', '2017-08-29 13:43:39', '2017-08-29 13:43:39', NULL),
+(2, 'PHP', 'PHP标签', '关于PHP相关的博客', '2017-08-29 13:45:32', '2017-08-29 13:45:32', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -435,17 +467,17 @@ ALTER TABLE `albums`
 -- 使用表AUTO_INCREMENT `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 使用表AUTO_INCREMENT `article_tag_pivot`
 --
 ALTER TABLE `article_tag_pivot`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- 使用表AUTO_INCREMENT `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- 使用表AUTO_INCREMENT `comments`
 --
@@ -480,7 +512,7 @@ ALTER TABLE `musics`
 -- 使用表AUTO_INCREMENT `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- 使用表AUTO_INCREMENT `users`
 --

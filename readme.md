@@ -19,13 +19,30 @@
 ヽ(￣ω￣(￣ω￣〃)ゝ义气
 
 先说下数据库的问题，我这边就没有用laravel自带的数据库迁移功能，直接打包了个sql文件，在项目根目录
-database目录下的`test.sql`文件（￣︶￣）↗。
+database目录下的`testblog.sql`文件（￣︶￣）↗。
 
 数据库数据都被我清空掉了，后端管理员账号，因为关了注册功能，所以想要登陆的，可以找到`app\Http\Controllers\Admin\Auth\AuthController`文件，里面有个被我注释掉的注册方法，取消注释，再添加个注册路由，就可以注册成功了。或者你用前端注册功能，注册一个账号，然后把账号信息复制到数据库admins表中也行(^し^)。
 
-目前存在的问题，后端的 分类管理及文件管理 因为还没想好怎么弄，所以这两个模块还没开发。
+目前存在的问题，后端的 文件管理 因为还没想好怎么弄，所以这个模块还没开发。
+
+### 使用
+
+1. 打包下载后，直接解压到自己的本地环境中
+
+2. 在项目根目录，执行`composer install`命令
+
+3. vendor安装完成后，执行`php artisan key:generate`命令
+
+4. 将datebase目录下的sql文件导入到自己的数据库中
+
+5. windows系统下，执行`copy .env.example .env`命令，Linux系统执行`cp .env.example .env`命令
+
+6. 配置好数据库，完成。
 
 ### 更新
+
+分类模块完成（2017-10-25）
+
 相册预览
 ![相册预览](http://www.fanrenos.com/images/blog_album.gif)
 

@@ -1,4 +1,33 @@
-<!DOCTYPE html>
+@extends('admin.layouts.app')
+@section('title','用户登录 | 后台管理')
+@section('content')
+<dl class="admin_login">
+    <dt>
+        <strong>后台管理-登陆</strong>
+        <em>Management System</em>
+    </dt>
+    <form class="am-form" role="form" method="POST" action="{{ url('/dashboard/login') }}">
+        {{ csrf_field() }}
+        <dd class="email_icon">
+            <input type="email" placeholder="登录邮箱名" name="email" class="login_txtbx" required="" />
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="密码" name="password" class="login_txtbx" required="" />
+        </dd>
+        <dd class="rem_icon">
+            <label style="cursor: pointer;"><input type="checkbox" name="remember" checked="checked" class="login_remember" />&nbsp;&nbsp;记&nbsp;住&nbsp;我</label>
+        </dd>
+        <dd>
+            <input type="submit" value="立即登陆" class="submit_btn" />
+        </dd>
+    </form>
+    <dd>
+        <p>Copyright © {{ config('blog.author') }} 2017. Made with love</p>
+        <p><a href="{{url('/')}}">{{config('blog.name')}}</a></p>
+    </dd>
+</dl>
+@endsection
+{{-- <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -82,4 +111,4 @@
     });
 </script>
 </body>
-</html>
+</html> --}}

@@ -27,10 +27,6 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 //处理markdown图片上传
 Route::post('/uploads/markdown_image','MarkdownController@uploads');
 
-Route::get('/home', function(){
-    return redirect('/');
-});
-
 Route::get('/','HomeController@index');
 Route::get('/experience','HomeController@showPersonerExperience');
 

@@ -15,17 +15,19 @@
 <meta name="360-site-verification" content="8df417e6325cf461efed9b28d3cd6949" />
 <link rel="icon" type="image/ico" href="{{asset('favicon.ico')}}">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="{{asset('favicon.ico')}}">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-<link rel="apple-touch-icon-precomposed" href="{{asset('favicon.ico')}}">
-<meta name="msapplication-TileImage" content="{{asset('favicon.ico')}}">
+<link rel="apple-touch-icon-precomposed" href="{{asset('images/app-icon72x72@2x.png')}}">
+<meta name="msapplication-TileImage" content="{{asset('images/app-icon72x72@2x.png')}}">
 <meta name="msapplication-TileColor" content="#0e90d2">
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css">
 <link rel="stylesheet" href="{{asset('css/public.css')}}">
 @yield('css')
+<style type="text/css">
+    body{background:#fcf9f9;opacity: 0.93;}
+</style>
 </head>
 <body id="blog">
 @include('layouts.mainHeader')
@@ -114,25 +116,6 @@
 <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-$(function(){
-    //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
-    $(function () {
-        $(window).scroll(function(){
-            if ($(window).scrollTop()>100){
-                $("#back-to-top").fadeIn(1500);
-            }
-            else
-            {
-                $("#back-to-top").fadeOut(1500);
-            }
-        });
-        //当点击跳转链接后，回到页面顶部位置
-        $("#back-to-top").click(function(){
-            $('body,html').animate({scrollTop:0},1000);
-            return false;
-        });
-    });
-});
 
 $('#modal-image-view').css({"min-width":"50%","left": "40%","top":"20%"});
 
@@ -155,6 +138,30 @@ $('.del_sure').click(function(){
         }
     });
 });
+
+$('#demo-full-page').on('click', function () {
+    if ($.AMUI.fullscreen.enabled) {
+        $.AMUI.fullscreen.request();
+    }
+});
+
+$(document).ready(function(){
+
+    $(".side ul li").hover(function(){
+        $(this).find(".sidebox").stop().animate({"width":"124px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#ae1c1c"})    
+    },function(){
+        $(this).find(".sidebox").stop().animate({"width":"54px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#000"})   
+    });
+    
+});
+function goBottom(){
+    var $w = $(window);
+    $w.smoothScroll({position: $(document).height() - $w.height()});
+}
+function goTop(){
+    $('html,body').animate({'scrollTop':0},600);
+}
+
 function myalert(con,sure,url,data){
     if(sure=='make-sure'){
         $('#url').val(url);
@@ -181,27 +188,27 @@ function toJump(url,target){
 }
 </script>
 @yield('js')
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+<script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
 
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?7e53f041994830ce53d57fb718e5d98a";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7e53f041994830ce53d57fb718e5d98a";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
 </script>
 </body>
 </html>

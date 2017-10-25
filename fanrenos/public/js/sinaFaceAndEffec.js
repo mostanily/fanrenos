@@ -93,10 +93,10 @@ function AnalyticEmotion(s) {
 				event.stopPropagation();
 			});
 			$('#emotions').html('<div style="float:right"><a href="javascript:void(0);" id="prev">&laquo;</a><a href="javascript:void(0);" id="next">&raquo;</a></div><div class="categorys"></div><div class="container"></div>');
-			$('#emotions #prev').click(function(){
+			$(document).on('click','#emotions #prev',function(){
 				showCategorys(cat_page - 1);
 			});
-			$('#emotions #next').click(function(){
+			$(document).on('click','#emotions #next',function(){
 				showCategorys(cat_page + 1);
 			});
 			showCategorys();

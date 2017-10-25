@@ -93,7 +93,7 @@ class AuthController extends Controller
     //             return back()->with('error', '注册失败！')->withInput();
     //         }
     //     }
-    //     return view('admin.register');
+    //     return view('admin.auth.register');
     // }
     // protected function validateRegister(array $data)
     // {

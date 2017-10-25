@@ -1,82 +1,32 @@
-@extends('layouts.app')
-
+@extends('admin.layouts.app')
+@section('title','用户注册 | 后台管理')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('admin/register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<dl class="admin_login">
+    <dt>
+        <strong>后台管理-注册</strong>
+        <em>Management System</em>
+    </dt>
+    <form class="am-form" role="form" method="POST" action="{{ url('/dashboard/register') }}">
+        {{ csrf_field() }}
+        <dd class="user_icon">
+            <input type="text" placeholder="用户名" name="name" class="login_txtbx" required="" />
+        </dd>
+        <dd class="email_icon">
+            <input type="email" placeholder="登录邮箱名" name="email" class="login_txtbx" required="" />
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="密码" name="password" class="login_txtbx" required="" />
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="确认密码" name="password_confirmation" class="login_txtbx" required="" />
+        </dd>
+        <dd>
+            <input type="submit" value="立即注册" class="submit_btn" />
+        </dd>
+    </form>
+    <dd>
+        <p>Copyright © {{ config('blog.author') }} 2017. Made with love</p>
+        <p><a href="{{url('/')}}">{{config('blog.name')}}</a></p>
+    </dd>
+</dl>
 @endsection
