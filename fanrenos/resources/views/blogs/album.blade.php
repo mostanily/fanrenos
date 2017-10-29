@@ -13,7 +13,7 @@ html {
     height:100%;
     background:#fff;
 }
-.pagination{margin-left: 20%!important;}
+.pagination{margin:0px 0px 0px 20%!important;}
 </style>
 @stop
 

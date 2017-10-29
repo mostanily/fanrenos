@@ -20,6 +20,7 @@ $(function() {
 		songPrev = mPath + '/' + e.attr("data-prev");//上一首路径
 		songNext = mPath + '/' + e.attr("data-next");//下一首路径
 		songNextName = e.attr("data-next");//下一首音乐名称
+		songNowName = e.attr("data_path");//当前一首音乐名称
 		songTitle = e.prev('.b-title').children('.b-name').attr('title');
 		songArtist = e.prev('.b-title').children('.b-art').attr('title');
 		songAlbum = e.prev('.b-title').children('.b-alb').attr('title');
@@ -114,7 +115,7 @@ $(function() {
 		});
 		e.css("background-color","#f5f5f5");
 		e.children('i').css({
-			"background":'url("css/images/T1X4JEFq8qXXXaYEA_-11-12.gif") no-repeat',
+			"background":'url("http://www.fanrenos.com/css/images/T1X4JEFq8qXXXaYEA_-11-12.gif") no-repeat',
 			"color":"transparent",
 			"width":"15px",
 			"height":"22px",
@@ -252,16 +253,21 @@ function updateProgress(ev) {
 }
 //播放
 function audioPlay(ev) {
-	$(".iplay").css("background", 'url("./css/images/T1oHFEFwGeXXXYdLba-18-18.gif") 0 0');
+	$('.player_music[data_path="' + songNowName + '"]').children('i').css({
+		"background":'url("http://www.fanrenos.com/css/images/T1X4JEFq8qXXXaYEA_-11-12.gif") no-repeat',
+		"width":"15px",
+		"height":"22px",
+	});
 	$(".playBtn").css("background-position", "0 -30px");
 	$(".playBtn").attr("isplay", "1");
 }
 //暂停
 function audioPause(ev) {
-	$(".iplay").css("background", "");
-	$(".start em").css({
-		"background":'url("css/images/pause.png") no-repeat 50% 50%',
-		"color":"transparent"
+	$('.player_music[data_path="' + songNowName + '"]').children('i').css({
+		"background":'url("http://www.fanrenos.com/css/images/pause.png") no-repeat 50% 50%',
+		"color":"transparent",
+		"width":"15px",
+		"height":"22px",
 	});
 }
 //自动播放
