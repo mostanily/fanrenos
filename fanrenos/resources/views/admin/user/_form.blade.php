@@ -11,6 +11,18 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-md-3 control-label">用户标签</label>
+    <div class="col-md-5">
+        <select class="form-control m-bot15 selectpicker" name="user_tags[]" multiple="multiple">
+            @foreach (config('blog.user_tag') as $k => $v)
+                <option @if (in_array($k, $user_tags)) selected="selected" @endif value="{{ $k }}">
+                    {{ $v }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="form-group">
     <label class="col-md-3 control-label">网站地址</label>
     <div class="col-md-5">
         <input type="text" class="form-control" name="website" value="{{{ $website or 'http://'}}}" autofocus>

@@ -54,7 +54,7 @@ class UserController extends Controller
         foreach ($this->fields as $field => $default) {
             $data[$field] = old($field, $default);
         }
-
+        $data['user_tags'] = array();
         return view('admin.user.create', $data);
     }
 
@@ -73,6 +73,7 @@ class UserController extends Controller
                 $this->user->$field = $request->get($field);
             }
         }
+        $this->user->role_tag = empty($request->get('user_tags')) ? NULL : implode(',', $request->get('user_tags'));
         $this->user->confirm_code = str_random(64);
         $this->user->status = 1;
         $this->user->email_notify_enabled = 'no';
@@ -96,6 +97,7 @@ class UserController extends Controller
             $data[$field] = old($field, $Users->$field);
         }
         $data['id'] = (int)$id;
+        $data['user_tags'] = explode(',',$Users->role_tag);
 
         return view('admin.user.edit', $data);
     }
@@ -120,6 +122,7 @@ class UserController extends Controller
                 }
             }
         }
+        $Users->role_tag = empty($request->get('user_tags')) ? NULL : implode(',', $request->get('user_tags'));
         $Users->save();
 
         return redirect('/dashboard/user/index')->withSuccess('修改成功！');

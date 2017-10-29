@@ -137,6 +137,7 @@ class CommentController extends Controller
                     }
                 }
                 $content = json_decode($comment->content,true);
+                $comments[$key]->role_tag = user_tag($comment->user->role_tag,1);
                 $comments[$key]->comment_content = $content['html'];
                 $comments[$key]->li_class = $li_class;
                 $comments[$key]->author_name = $author_name;

@@ -290,7 +290,7 @@ class Article extends Model
                                         <header class="am-comment-hd">
                                             <div class="am-comment-meta">
                                                 <i class="am-icon-user"></i>
-                                                <a href="' . $user_url . '" class="am-comment-author">' . $author_name . '</a>
+                                                <a href="' . $user_url . '" class="am-comment-author">' . $author_name . user_tag($comment->user->role_tag,1).'</a>
                                                 评论于 <time title="' . $date_time . '">' . $comment->created_at . '</time>
                                                 <a href="#reply" class="reply-floor">#' . ($key + 1) . '</a>
                                             </div>

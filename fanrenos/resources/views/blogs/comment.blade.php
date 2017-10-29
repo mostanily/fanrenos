@@ -43,7 +43,7 @@
                             <header class="am-comment-hd">
                                 <div class="am-comment-meta">
                                     <i class="am-icon-user"></i>
-                                    <a href="{{$comment->user_url}}" class="am-comment-author">{{$comment->author_name}}</a>
+                                    <a href="{{$comment->user_url}}" class="am-comment-author">{!!$comment->author_name.$comment->role_tag!!}</a>
                                     评论于 <time title="{{$comment->date_time}}">{{$comment->created_at}}</time>
                                     <a href="#reply" class="reply-floor">#{{($k+1)}}</a>
                                 </div>

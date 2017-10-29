@@ -23,7 +23,7 @@
             <div class="am-g">
                 <div class="am-u-md-9">
                     <div class="img-container avatar-view">
-                        <img id="image" alt="选择要上传的文件">
+                        <img id="image" alt="选择要上传的文件" src="" />
                     </div>
                 </div>
                 <div class="am-u-md-3">
@@ -34,7 +34,7 @@
             </div>
             <div class="am-g docs-buttons">
                 <fieldset>
-                    <legend>头像剪裁（请使用Google或火狐浏览器，其他浏览器可能不支持！）<br>上传过程中可能会因为服务器问题而失败，请刷新页面多试几次。</legend>
+                    <legend>头像剪裁（请使用Google或火狐浏览器，其他浏览器可能不支持！）<br>上传过程中可能会因为服务器问题而失败，请刷新页面多试几次，且图片大小尽量别超过2M</legend>
                     <div class="am-form-group am-form-file">
                         <button type="button" class="am-btn am-btn-primary am-btn-sm inputButton">
                             <i class="am-icon-cloud-upload"></i> 选择要上传的文件
@@ -108,7 +108,7 @@ $(function(){
         var data = $this.data();
         var u = "{{url('user/profile/avatar')}}";
         var result = $image.cropper(data.method, data.option, data.secondOption);
-        if(result.length==1){
+        if($('#image').attr('src')=='' || $('#image').attr('src')=='undefined'){
             myalert('没有选择任何图片！');
             return false;
         }

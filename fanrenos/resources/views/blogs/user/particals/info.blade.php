@@ -8,6 +8,7 @@
                 <div class="col-sm-5 content">
                     <div class="header">
                         {{ $user->nickname or $user->name }}
+                        {!!user_tag($user->role_tag)!!}
                     </div>
                     <div class="description">
                         {{ $user->description or lang('Nothing') }}

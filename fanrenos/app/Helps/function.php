@@ -37,6 +37,32 @@
     }
 
     /**
+     * 返回用户的角色标签名称
+     * @param  [type] $role_tag [description]
+     * @return [type]           [description]
+     */
+    function user_tag($role_tag,$count=0){
+        $roles = '';
+        if(!empty($role_tag)){
+            $role_tag_id = explode(',',$role_tag);
+            foreach ($role_tag_id as $key => $value) {
+                if($count==0){
+                    if($value != ''){
+                        $roles .= '<span class="btn btn-sm btn-primary role_user" >'.config('blog.user_tag.'.$value).'</span>';
+                    }
+                }else{
+                    if($key<$count){
+                        if($value != ''){
+                            $roles .= '<span class="btn btn-sm btn-primary role_user" >'.config('blog.user_tag.'.$value).'</span>';
+                        }
+                    }
+                }
+            }
+        }
+        return $roles;
+    }
+
+    /**
      * Return img url for headers
      */
     function page_image($value = null,$is_index_def=null,$extar=null){

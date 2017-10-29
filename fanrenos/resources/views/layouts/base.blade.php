@@ -27,6 +27,7 @@
 @yield('css')
 <style type="text/css">
     body{background:#fcf9f9;opacity: 0.93;}
+    .role_user{margin-left: 5px;height: 19px;padding: 0 5px;background-color: #34495e;border-color: #597289;}
 </style>
 </head>
 <body id="blog">
@@ -109,6 +110,7 @@
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script type="text/javascript" src="{{asset('js/bootsnav.js')}}"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>

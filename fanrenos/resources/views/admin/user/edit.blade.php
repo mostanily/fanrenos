@@ -1,6 +1,13 @@
 @extends('admin.layouts.base')
 
-@section('title','控制面板')
+@section('title','编辑用户')
+@section('css')
+    <link href="{{asset('/assets/pickadate/themes/default.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/pickadate/themes/default.date.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/pickadate/themes/default.time.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/selectize/css/selectize.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/selectize/css/selectize.bootstrap3.css')}}" rel="stylesheet">
+@stop
 
 @section('content')
     <div class="main animsition">
@@ -46,7 +53,9 @@
         </div>
     </div>
 @stop
-
 @section('js')
-
+<script src="{{asset('/assets/pickadate/picker.js')}}"></script>
+<script src="{{asset('/assets/pickadate/picker.date.js')}}"></script>
+<script src="{{asset('/assets/pickadate/picker.time.js')}}"></script>
+<script src="{{asset('/assets/selectize/js/selectize.min.js')}}"></script>
 @stop
